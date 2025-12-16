@@ -193,13 +193,8 @@ header {
   transition: transform 0.2s ease;
 }
 
-.item:hover {
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
-  transform: translateY(-2px);
-}
-
 .item img {
-  width: 100%;
+  width: 100px;
   aspect-ratio: 1 / 1;
   object-fit: cover;
   display: block;
@@ -229,6 +224,7 @@ header {
 .info {
   color: #0099ff;
   font-size: 14px;
+  font-family: 'khala mid';
 }
 
 .contact-btn {
@@ -309,21 +305,221 @@ header {
   opacity: 1;
 }
 
+.text-welcome{
+  text-align: center;
+  font-size: 90px;
+  font-family: 'Khala mid';
+  letter-spacing: 0.3px;
+  color: rgb(0, 110, 255);
+}
+.panel img{
+  width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Responsive */
 @media (max-width: 768px) {
-  .search-box input {
-    width: 120px;
-  }
+  /* Header */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
 
-  .box {
-    grid-template-columns: 1fr;
-    gap: 12px;
-    padding: 12px;
-  }
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-  .home-images img,
-  .service-images img {
-    width: 100%;
-    height: auto;
-  }
+.header-left img {
+  height: 35px;
+}
+
+.search-box {
+  position: relative;
+}
+
+.search-box .search-icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  pointer-events: none; /* មិនរារាំងការចុច */
+}
+
+.search-box input {
+  padding: 9px 12px 9px 36px; /* បន្ថែម space ខាងឆ្វេង */
+  border-radius: 20px;
+  border: none;
+  font-size: 14px;
+  width: 40px;
+  color: #65686c;
+  background-color: #f0f2f5;
+  outline: none;
+}
+
+.header-center {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.tool-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding-left: 20px;
+  padding-right: 30px;
+  height: 50px;
+}
+.tool-btn:hover {
+  background-color: #f2f2f2;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+  border-radius: 5px;
+}
+
+.tool-btn img {
+  width: 28px;
+  height: 28px;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.tool-btn.active img {
+  filter: brightness(0) saturate(100%) invert(32%) sepia(90%) saturate(600%) hue-rotate(190deg) brightness(105%) contrast(95%);
+}
+
+.header-right .icon-setting {
+  width: 24px;
+  height: 24px;
+  background: url('setting.png') no-repeat center center;
+  background-size: contain;
+  cursor: pointer;
+}
+
+/* Panels */
+.panel-container {
+  max-width: 1180px;
+  margin: 80px auto 20px;
+  padding: 0 16px;
+}
+
+.panel {
+  display: none;
+  opacity: 0;
+  transform: translateX(30px); /* ចាប់ផ្តើមពីស្តាំ */
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.panel.active {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.banner-top {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.banner-top video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.banner-top img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Home Panel */
+.home-content {
+  text-align: center;
+}
+.home-content h2{
+  font-size: 20px;
+}
+
+.home-images {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.home-images img {
+  width: 280px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Store Panel */
+.box {
+  display: grid;
+  grid-template-columns: 1fr; /* ១ ជួរ = ១ item */
+  gap: 12px;
+  padding: 16px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.text-welcome{
+  text-align: center;
+  font-size: 30px;
+  font-family: 'Khala mid';
+  letter-spacing: 0.3px;
+  color: rgb(0, 110, 255);
+}
+
+.item {
+  background-color: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.item img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+.panel img{
+  width: 100%;
+}
+
 }
