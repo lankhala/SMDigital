@@ -1,13 +1,17 @@
 @font-face {
-  font-family: 'Khala Regular';
+  font-family: 'Khala Regular Khmer';
   src: url('Krasar\ Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'Khala Mid';
-  src: url('SFPRODISPLAYMEDIUM.OTF') format('truetype');
-  font-weight: 200;
+  src: url('SF-Pro-Text-Bold.otf') format('truetype');
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Khala Regular';
+  src: url('SF-Pro-Text-Regular.otf') format('truetype');
   font-style: normal;
 }
 
@@ -30,7 +34,8 @@ header {
   left: 0;
   width: 100%;
   height: 50px;
-  background-color: #ffffff;
+  background-color: #ffffffd9;
+  backdrop-filter: blur(30px);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -117,9 +122,8 @@ header {
 
 /* Panels */
 .panel-container {
-  max-width: 1180px;
-  margin: 80px auto 20px;
-  padding: 0 16px;
+  max-width: 100%;
+  margin-top: 45px;
 }
 
 .panel {
@@ -214,6 +218,7 @@ header {
 
 .info p {
   font-size: 12px;
+  font-family: 'Khala Regular Khmer';
   color: #666;
   margin: 0 0 5px;
 }
@@ -248,21 +253,6 @@ header {
   margin-top: 20px;
   text-align: center;
 }
-
-.service-images {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.service-images img {
-  width: 280px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
 .tool-btn {
   background: none;
   border: none;
@@ -315,6 +305,117 @@ header {
 .panel img{
   width: 100%;
 }
+
+
+
+
+
+/* =========================
+   HOME TAB1 (VIDEO BG + OVERLAY CONTENT)
+   Keep video original aspect (no crop)
+   ========================= */
+
+/* container */
+#home .tab1{
+  width: 100%;
+  height: 650px;           /* ✅ fix height */
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  background: #ff0000;
+}
+
+/* video keeps original ratio */
+#home .tab1-bg{
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: none;
+  /* move video lower a bit */
+  transform: translateY(0px);   /* ✅ កែ 10px/30px/40px តាមចិត្ត */
+}
+
+/* dark overlay layer */
+#home .tab1::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 1;
+}
+
+/* content above video */
+#home .hero{
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 70px 16px 30px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* title */
+#home .hero h1{
+  margin: 0 0 12px;
+  font-family: 'Khala Mid', sans-serif;
+  font-size: 50px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+/* subtitle */
+#home .hero p{
+  margin: 0 0 22px;
+  font-size: clamp(16px, 2vw, 22px);
+  font-family: 'Khala Regular';
+  color: rgba(255,255,255,0.92);
+}
+
+/* button */
+#home .hero-btn{
+  border: none;
+  cursor: pointer;
+  background-color: #0071e3;
+  color: #fff;
+  height: 46px;
+  padding: 0 26px;
+  border-radius: 999px;
+  font-family: 'Khala Regular', sans-serif;
+  font-size: 16px;
+}
+
+#home .hero-btn:hover{
+  filter: brightness(0.95);
+}
+
+/* media image */
+#home .hero-media{
+  margin-top: 34px;
+  display: flex;
+  justify-content: center;
+}
+
+#home .hero-media img{
+  width: min(980px, 95%);
+  height: auto;
+  display: block;
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -395,7 +496,7 @@ header {
   background: none;
   border: none;
   cursor: pointer;
-  padding-left: 20px;
+  padding-left: 30px;
   padding-right: 30px;
   height: 50px;
 }
@@ -428,7 +529,7 @@ header {
 
 /* Panels */
 .panel-container {
-  max-width: 1180px;
+  max-width: 100%;
   margin: 80px auto 20px;
   padding: 0 16px;
 }
@@ -521,5 +622,71 @@ header {
 .panel img{
   width: 100%;
 }
+
+/* Fix height smaller on phone */
+  #home .tab1{
+    border-radius: 10px;
+    width: 100%;
+    height: 500px;                /* ✅ phone height (កែ 380-480px) */
+  }
+
+  /* keep video centered + slightly lower */
+  #home .tab1-bg{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;           /* ✅ fill full area (may crop edges) */
+    object-position: center 70%;
+  }
+
+  /* content spacing */
+  #home .hero{
+     padding: 56px 14px 18px;
+  }
+
+  /* text sizes */
+  #home .hero h1{
+    font-size: clamp(28px, 7.5vw, 38px);
+    line-height: 1.12;
+  }
+
+  #home .hero p{
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+
+  /* button */
+  #home .hero-btn{
+    height: 42px;
+    padding: 0 18px;
+    font-size: 14px;
+  }
+
+  /* image under button */
+  #home .hero-media{
+    margin-top: 18px;
+  }
+
+  #home .hero-media img{
+    width: min(320px, 92%);
+  }
+}
+
+@media (max-width: 420px){
+
+  #home .tab1{
+    height: 360px;                 /* ✅ extra small phones */
+  }
+
+  #home .hero{
+    padding: 46px 12px 14px;
+  }
+
+  #home .hero h1{
+    font-size: 26px;
+  }
+
+  #home .hero-media img{
+    width: min(280px, 92%);
+  }
 
 }

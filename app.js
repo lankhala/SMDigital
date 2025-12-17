@@ -1,13 +1,14 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
+  // =========================
+  // PANEL SWITCHING (Home / Store / Service)
+  // =========================
   const buttons = document.querySelectorAll(".tool-btn");
   const panels = document.querySelectorAll(".panel");
   const overlay = document.getElementById("overlay");
 
   function showPanel(panelId) {
-    // បង្ហាញ overlay
-    overlay.classList.add("active");
+    if (overlay) overlay.classList.add("active");
 
-    // បន្ទាប់ពី overlay fade-in (500ms) → ប្តូរផ្ទាំង
     setTimeout(() => {
       panels.forEach((panel) => {
         panel.classList.toggle("active", panel.id === panelId);
@@ -17,51 +18,64 @@ document.addEventListener("DOMContentLoaded", function () {
         btn.classList.toggle("active", btn.dataset.panel === panelId);
       });
 
-      // fade-out overlay
-      overlay.classList.remove("active");
+      if (overlay) overlay.classList.remove("active");
     }, 200);
   }
 
   buttons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      showPanel(btn.dataset.panel);
-    });
+    btn.addEventListener("click", () => showPanel(btn.dataset.panel));
   });
 
   // Default: show Home
   showPanel("home");
-});
 
+  // =========================
+  // DETERRент: reduce easy download/save options
+  // (Cannot block 100% on browser, but make it harder)
+  // =========================
 
-//មិនអាចទាញយកបាន
-// JS: បិទ drag & drop រូបភាព
-document.addEventListener("dragstart", function (e) {
-  e.preventDefault();
-});
+  // Block drag & drop (images/videos)
+  document.addEventListener("dragstart", (e) => e.preventDefault());
 
-// JS: បិទ right-click លើរូបភាព
-document.querySelectorAll("img").forEach(img => {
-  img.addEventListener("contextmenu", e => e.preventDefault());
-});
-// JS: បិទ context menu (Right-click)
-document.addEventListener("contextmenu", function (e) {
-  e.preventDefault();
-});
+  // Block right-click (global)
+  document.addEventListener("contextmenu", (e) => e.preventDefault());
 
+  // Block right-click specifically on images/videos (extra)
+  document.querySelectorAll("img, video").forEach((el) => {
+    el.addEventListener("contextmenu", (e) => e.preventDefault());
+  });
 
+  // Block common save/view-source/devtools shortcuts (deterrent only)
+  document.addEventListener("keydown", (e) => {
+    const k = (e.key || "").toLowerCase();
 
-
-
-
-
-
-// Smooth scroll to target panel
-document.querySelectorAll(".scroll-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const targetId = btn.dataset.target;
-    const targetPanel = document.getElementById(targetId);
-    if (targetPanel) {
-      targetPanel.scrollIntoView({ behavior: "smooth" });
+    // Ctrl/Cmd + S/U/P
+    if ((e.ctrlKey || e.metaKey) && (k === "s" || k === "u" || k === "p")) {
+      e.preventDefault();
+      return;
     }
+
+    // F12
+    if (e.key === "F12") {
+      e.preventDefault();
+      return;
+    }
+
+    // Ctrl/Cmd + Shift + I/J/C
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (k === "i" || k === "j" || k === "c")) {
+      e.preventDefault();
+      return;
+    }
+  });
+
+  // =========================
+  // Smooth scroll (if you use .scroll-btn anywhere)
+  // =========================
+  document.querySelectorAll(".scroll-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const targetId = btn.dataset.target;
+      const targetPanel = document.getElementById(targetId);
+      if (targetPanel) targetPanel.scrollIntoView({ behavior: "smooth" });
+    });
   });
 });

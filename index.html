@@ -36,26 +36,60 @@
     </div>
   </header>
 
-  <!-- Panels -->
-  <div class="panel-container">
-    <!-- Panel 1: Home -->
-    <div class="panel" id="home">
-      <center class="text-welcome">
-        <h2>Welcome to SM Digital</h2>
-      </center>
-    </div>
-</div>
-
-
-
-    <div class="panel-container">
+<div class="panel-container">
   <div id="overlay"></div>
+
+  
+  <!-- Panel 1: Home -->
+  <div class="panel" id="home">
+    <div class="tab1">
+      <video class="tab1-bg"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          controlslist="nodownload noplaybackrate noremoteplayback"
+          disablepictureinpicture
+          oncontextmenu="return false">
+        <source src="tab1.mp4" type="video/mp4">
+      </video>
+
+      <section class="hero">
+        <h1>Happy new year.</h1>
+        <p>There’s still time to make their holiday one of a kind.</p>
+
+        <button class="hero-btn" onclick="document.querySelector('[data-panel=store]').click()">
+          Shop gifts
+        </button>
+      </section>
+    </div>
+  </div>
+
     <!-- Panel 2: Store -->
     <div class="panel" id="store">
       <div class="banner-top">
         <!-- <img src="service-banner.jpg" alt="Store Banner" /> -->
       </div>
       <div class="box">
+        <div class="item">
+          <img src="p9.jpg" alt="Microsoft Office 365">
+          <div class="info">
+            <h3>CapCut Pro</h3>
+            <p>SM Digital <span>|</span> គម្រោងមួយខែ</p>
+            <span>$5.00</span>
+          </div>
+        </div>
+
+        <div class="item">
+          <img src="p7.jpg" alt="Adobe Creative">
+          <div class="info">
+            <h3>Adobe Creative</h3>
+            <p>SM Digital <span>|</span> គម្រោង៣ខែ</p>
+            <span>$10.00</span>
+          </div>
+        </div>
+
         <div class="item">
           <img src="p1.jpg" alt="Canva Pro Premium">
           <div class="info">
@@ -64,6 +98,7 @@
             <span>$5.00</span>
           </div>
         </div>
+
         <div class="item">
           <img src="p2.jpg" alt="ChatGPT Plus">
           <div class="info">
@@ -72,6 +107,7 @@
             <span>$4.99</span>
           </div>
         </div>
+
         <div class="item">
           <img src="p3.jpg" alt="Windows 11 Pro">
           <div class="info">
@@ -80,6 +116,7 @@
             <span>$5.00</span>
           </div>
         </div>
+
         <div class="item">
           <img src="p5.jpg" alt="Netflix Premium">
           <div class="info">
@@ -88,14 +125,16 @@
             <span>$3.00</span>
           </div>
         </div>
+
         <div class="item">
           <img src="p4.jpg" alt="Google Drive 2TB">
           <div class="info">
             <h3>Google Drive 2TB</h3>
             <p>SM Digital <span>|</span> គម្រោងប្រចាំខែ</p>
-            <span>$4.99</span>
+            <span>$5.00</span>
           </div>
         </div>
+
         <div class="item">
           <img src="p6.jpg" alt="YouTube Premium">
           <div class="info">
@@ -104,14 +143,7 @@
             <span>$20.00</span>
           </div>
         </div>
-        <div class="item">
-          <img src="p7.jpg" alt="Adobe Creative">
-          <div class="info">
-            <h3>Adobe Creative</h3>
-            <p>SM Digital <span>|</span> គម្រោង៣ខែ</p>
-            <span>$9.99</span>
-          </div>
-        </div>
+        
         <div class="item">
           <img src="p8.jpg" alt="Microsoft Office 365">
           <div class="info">
@@ -120,6 +152,8 @@
             <span>$20.00</span>
           </div>
         </div>
+        
+
       </div>
       <div class="contact-btn">
         <a href="https://t.me/smservicekh">ទំនាក់ទំនង</a>
@@ -127,19 +161,12 @@
     </div>
 
     <!-- Panel 3: Service -->
-    <div class="panel" id="service">
-      <div class="banner-top">
-        
-      </div>
-      <div class="service-content">
-        <h2 style="color: rgb(0, 102, 255);">Design Service</h2>
-        <p>យើងកំពុងធ្វើបច្ចុប្បន្នភាពលើមុខងារនេះ...</p>
-        <div class="service-images">
-          <!-- <img src="service1.jpg" alt="Service Image 1" />
-          <img src="service2.jpg" alt="Service Image 2" /> -->
-        </div>
-      </div>
+<div class="panel" id="service">
+  <div class="service-content">
+    <center>កំពុងអាប់ដេត...</center>
     </div>
+  </div>
+
   </div>
   <!-- External JS -->
   <script src="app.js"></script>
