@@ -5,13 +5,22 @@
   font-style: normal;
 }
 @font-face {
-  font-family: 'Khala Mid';
+  font-family: 'Khala Bold';
   src: url('SF-Pro-Text-Bold.otf') format('truetype');
   font-style: normal;
 }
 @font-face {
   font-family: 'Khala Regular';
   src: url('SF-Pro-Text-Regular.otf') format('truetype');
+}
+@font-face {
+  font-family: 'Khala Mid Khmer';
+  src: url('KantumruyPro-Medium.ttf') format('truetype');
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Khala Mid';
+  src: url('SF-Pro-Text-Medium.otf') format('truetype');
   font-style: normal;
 }
 
@@ -23,7 +32,7 @@ body::-webkit-scrollbar {
 body {
   margin: 0;
   font-family: 'Khala Regular', sans-serif;
-  background-color: #f0f2f5;
+  background-color: #F4F4F4;
   user-select: none;
 }
 
@@ -119,6 +128,9 @@ header {
   background-size: contain;
   cursor: pointer;
 }
+.header-right.active img{
+  filter: brightness(0.95);
+}
 
 /* Panels */
 .panel-container {
@@ -184,14 +196,14 @@ header {
 .box {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  gap: 8px;
   padding: 16px;
-  max-width: 1180px;
+  max-width: 980px;
   margin: 0 auto;
 }
 
 .item {
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 7px;
   overflow: hidden;
   transition: transform 0.2s ease;
@@ -238,14 +250,14 @@ header {
   border-radius: 50px;
   text-align: center;
   margin: 20px auto;
-  max-width: 200px;
+  max-width: 100px;
 }
 
 .contact-btn a {
   color: #fff;
   text-decoration: none;
   font-size: 14px;
-  font-family: 'Khala Mid', sans-serif;
+  font-family: 'Khala Mid Khmer', sans-serif;
 }
 
 /* Service Panel */
@@ -284,7 +296,7 @@ header {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-color: #ffffff; /* ពណ៌ស */
+  background-color: #e4e4e4; /* ពណ៌ស */
   opacity: 0;
   pointer-events: none; /* មិនរារាំង click */
   transition: opacity 0.5s ease;
@@ -317,13 +329,16 @@ header {
 
 /* container */
 #home .tab1{
-  width: 100%;
-  height: 650px;           /* ✅ fix height */
+  max-width: 1000px;
+  height: 210px;           /* ✅ fix height */
   margin: 0 auto;
   position: relative;
   overflow: hidden;
   padding: 0;
-  background: #00aaff;
+  border: none;
+  margin-top: 50px;
+  border-radius: 0px;
+  background: linear-gradient(#00b3ff,#c3efff);
 }
 
 /* video keeps original ratio */
@@ -341,7 +356,6 @@ header {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.35);
   z-index: 1;
 }
 
@@ -356,7 +370,6 @@ header {
   justify-content: center;
   align-items: center;
 
-  padding: 70px 16px 30px;
   box-sizing: border-box;
   text-align: center;
 }
@@ -364,31 +377,28 @@ header {
 /* title */
 #home .hero h1{
   margin: 0 0 12px;
-  font-family: 'Khala Mid', sans-serif;
   font-size: 50px;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  color: #fff;
+  color: #ffffff;
 }
 
 /* subtitle */
 #home .hero p{
   margin: 0 0 22px;
   font-size: clamp(16px, 2vw, 22px);
-  font-family: 'Khala Regular';
-  color: rgba(255,255,255,0.92);
+  font-family: 'Khala Regular Khmer';
+  color: rgba(255, 255, 255, 0.92);
 }
 
 /* button */
 #home .hero-btn{
   border: none;
   cursor: pointer;
-  background-color: #0071e3;
-  color: #fff;
-  height: 46px;
-  padding: 0 26px;
+  background-color: #0071E3;
+  color: #ffffff;
+  height: 40px;
+  padding: 0 25px;
   border-radius: 999px;
-  font-family: 'Khala Regular', sans-serif;
+  font-family: 'Khala Regular Khmer', sans-serif;
   font-size: 16px;
 }
 
@@ -417,276 +427,294 @@ header {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Responsive */
-@media (max-width: 768px) {
-  /* Header */
-header {
+.menu-icon{
+  width: 20px;
+  margin-right: 35px;
+}
+#sideMenu {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  background-color: #ffffff;
+  top: 50px;          /* ✅ ដាក់ក្រោម header */
+  right: -260px;
+  width: 260px;
+  height: calc(100% - 50px); /* ✅ កាត់ចេញកម្ពស់ header */
+  background-color:#ffffff ;
+  box-shadow: -5px 0 20px rgba(255, 255, 255, 0.167);
+  transition: right 0.2s ease;
+  z-index: 3000;
+  padding-top: 20px;  /* ប្តូរឲ្យ spacing ស្អាត */
+  color: #767676;
+}
+
+#sideMenu.active {
+  right: 0;
+}
+
+#sideMenu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#sideMenu li {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-  z-index: 1000;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.header-left img {
-  height: 35px;
-}
-
-.search-box {
-  position: relative;
-}
-
-.search-box .search-icon {
-  position: absolute;
-  top: 50%;
-  left: 12px;
-  transform: translateY(-50%);
-  width: 16px;
-  height: 16px;
-  pointer-events: none; /* មិនរារាំងការចុច */
-}
-
-.search-box input {
-  padding: 9px 12px 9px 36px; /* បន្ថែម space ខាងឆ្វេង */
-  border-radius: 20px;
-  border: none;
-  font-size: 14px;
-  width: 40px;
-  color: #65686c;
-  background-color: #f0f2f5;
-  outline: none;
-}
-
-.header-center {
-  display: flex;
-  align-items: center;
-  margin-left: 10px;
-}
-
-.tool-btn {
-  background: none;
-  border: none;
+  gap: 14px;
+  padding: 14px 20px;
   cursor: pointer;
-  padding-left: 30px;
-  padding-right: 30px;
-  height: 50px;
-}
-.tool-btn:hover {
-  background-color: #f2f2f2;
-  border: none;
-  cursor: pointer;
-  transition: 0.2s;
-  border-radius: 5px;
+  font-size: 15px;
+  color: var(--text);
 }
 
-.tool-btn img {
-  width: 28px;
-  height: 28px;
-  filter: grayscale(100%);
-  transition: filter 0.3s ease;
+#sideMenu li:hover {
+  background: rgba(162, 162, 162, 0.146);
 }
 
-.tool-btn.active img {
-  filter: brightness(0) saturate(100%) invert(32%) sepia(90%) saturate(600%) hue-rotate(190deg) brightness(105%) contrast(95%);
+#sideMenu img {
+  width: 22px;
 }
 
-.header-right .icon-setting {
-  width: 24px;
-  height: 24px;
-  background: url('setting.png') no-repeat center center;
-  background-size: contain;
-  cursor: pointer;
-}
 
-/* Panels */
-.panel-container {
-  max-width: 100%;
-  margin: 80px auto 20px;
-  padding: 0 16px;
-}
 
-.panel {
-  display: none;
-  opacity: 0;
-  transform: translateX(30px); /* ចាប់ផ្តើមពីស្តាំ */
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
 
-.panel.active {
-  display: block;
-  opacity: 1;
-  transform: translateX(0);
-}
 
-.banner-top {
-  width: 100%;
-  overflow: hidden;
-  border-radius: 10px;
-}
 
-.banner-top video {
-  width: 100%;
-  height: auto;
-  display: block;
-}
 
-.banner-top img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
 
-/* Home Panel */
-.home-content {
-  text-align: center;
-}
-.home-content h2{
-  font-size: 20px;
-}
-
-.home-images {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.home-images img {
-  width: 280px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-/* Store Panel */
-.box {
+.extra-row {
   display: grid;
-  grid-template-columns: 1fr; /* ១ ជួរ = ១ item */
-  gap: 12px;
-  padding: 16px;
-  max-width: 1180px;
-  margin: 0 auto;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+  max-width: 1000px;
+  margin: 5px auto;
 }
 
-.text-welcome{
+.extra-box {
+  border-radius: 0px;
+  padding: 0px;
   text-align: center;
-  font-size: 20px;
-  font-family: 'Khala mid';
-  letter-spacing: 0.3px;
-  color: rgb(0, 110, 255);
+  height: 400px; /* ✅ same size as SM Digital Collection row */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.item {
-  background-color: #fff;
-  border-radius: 15px;
-  overflow: hidden;
-  transition: transform 0.2s ease;
+/* ផ្ទាំងខាងក្រោយផ្សេងគ្នា */
+.extra-box.box1 {
+  background-image: url(home1.png);
+  background-size: cover;
 }
 
-.item img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  display: block;
-}
-.panel img{
-  width: 100%;
+.extra-box.box2 {
+  background-image: url(home2.png);
+  background-size: cover;
 }
 
-/* Fix height smaller on phone */
-  #home .tab1{
-    border-radius: 10px;
-    width: 100%;
-    height: 500px;                /* ✅ phone height (កែ 380-480px) */
-  }
-
-  /* keep video centered + slightly lower */
-  #home .tab1-bg{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;           /* ✅ fill full area (may crop edges) */
-    object-position: center 70%;
-  }
-
-  /* content spacing */
-  #home .hero{
-     padding: 56px 14px 18px;
-  }
-
-  /* text sizes */
-  #home .hero h1{
-    font-size: clamp(28px, 7.5vw, 38px);
-    line-height: 1.12;
-  }
-
-  #home .hero p{
-    font-size: 13px;
-    margin-bottom: 16px;
-  }
-
-  /* button */
-  #home .hero-btn{
-    height: 42px;
-    padding: 0 18px;
-    font-size: 14px;
-  }
-
-  /* image under button */
-  #home .hero-media{
-    margin-top: 18px;
-  }
-
-  #home .hero-media img{
-    width: min(320px, 92%);
-  }
+.extra-box.box3 {
+  background-image: url(home3.png);
+  background-size: cover;
 }
 
-@media (max-width: 420px){
+.extra-box.box4 {
+  background-image: url(home4.png);
+  background-size: cover;
+}
 
-  #home .tab1{
-    height: 360px;                 /* ✅ extra small phones */
+.extra-box h2 {
+  font-family: 'Khala Mid';
+  margin-top: 0px;       /* ✅ រក្សាទុកដដែល */
+  font-size: 24px;
+  color: #373737;
+}
+
+.extra-box p {
+  font-family: 'Khala Regular';
+  font-size: 14px;
+  color: rgba(94, 94, 94, 0.9);
+  margin-top: -10px;      /* ✅ លើក p ឡើងជិត h2 */
+  margin-bottom: 8px;     /* spacing តិចៗក្រោម p */
+}
+
+.extra-box .hero-btn {
+  background-color: rgba(255,255,255,0.2);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: 'Khala Regular Khmer';
+  font-size: 14px;
+  padding: 8px 20px;
+  margin-top: -0px;       /* ✅ លើក button ឡើងជិត p */
+  margin-bottom: 230px;    /* ❌ កុំប្រើ 300px, ប្រើតិចៗ */
+  background-color: #0071E3;
+}
+
+.extra-box .hero-btn:hover {
+  filter: brightness(0.95);
+}
+
+
+
+
+
+
+
+#panelOverlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: #e1e1e1; /* ពណ៌ស */
+  opacity: 0;
+  pointer-events: none; /* មិនរារាំង click */
+  transition: opacity 0.4s ease;
+  z-index: 2000; /* លើគ្រប់ content */
+}
+
+#panelOverlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   PHONE RESPONSIVE DESIGN
+   ========================= */
+@media (max-width: 480px) {
+
+  /* Header */
+  header {
+    height: 46px;
+    padding: 0 10px;
   }
 
-  #home .hero{
-    padding: 46px 12px 14px;
+  .header-left img {
+    height: 28px;
   }
 
-  #home .hero h1{
+  .header-center {
+    margin-left: 0;
+    gap: 8px;
+  }
+
+  .tool-btn {
+    padding: 0 12px;
+  }
+
+  .tool-btn img {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* Panel container */
+  .panel-container {
+    margin-top: 55px;
+    padding: 0 10px;
+  }
+
+  /* Home Panel */
+  #home .hero h1 {
     font-size: 26px;
+    line-height: 1.2;
   }
 
-  #home .hero-media img{
-    width: min(280px, 92%);
+  #home .hero p {
+    font-size: 13px;
+    margin-bottom: 14px;
   }
 
+  #home1 .hero-btn {
+    font-size: 14px;
+    padding: 8px 16px;
+    height: 38px;
+    margin-bottom: 190px;
+  }
+
+  .home-images img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+  }
+
+  /* Store Panel */
+  .box {
+    grid-template-columns: 1fr; /* 1 item per row */
+    gap: 14px;
+    padding: 12px;
+  }
+
+  .item {
+    border-radius: 10px;
+  }
+
+  .item img {
+    width: 100%;
+    height: auto;
+  }
+
+  .info h3 {
+    font-size: 15px;
+  }
+
+  .info p {
+    font-size: 12px;
+  }
+
+  .info span {
+    font-size: 13px;
+  }
+
+  /* Extra Boxes */
+  .extra-row {
+    grid-template-columns: 1fr; /* stack vertically */
+    gap: 12px;
+  }
+
+  .extra-box {
+    height: auto;
+    min-height: 280px;
+    padding: 20px 10px;
+  }
+
+  .extra-box h2 {
+    font-size: 18px;
+  }
+
+  .extra-box p {
+    font-size: 13px;
+  }
+
+  .extra-box .hero-btn {
+    font-size: 13px;
+    padding: 8px 14px;
+    margin-bottom: 20px;
+  }
+
+  /* Side Menu */
+  #sideMenu {
+    width: 220px;
+  }
+
+  #sideMenu li {
+    font-size: 14px;
+    padding: 12px 16px;
+  }
+
+  #sideMenu img {
+    width: 20px;
+  }
 }

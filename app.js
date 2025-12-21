@@ -4,23 +4,23 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   const buttons = document.querySelectorAll(".tool-btn");
   const panels = document.querySelectorAll(".panel");
-  const overlay = document.getElementById("overlay");
+  const panelOverlay = document.getElementById("panelOverlay"); // ✅ rename
 
-  function showPanel(panelId) {
-    if (overlay) overlay.classList.add("active");
+function showPanel(panelId) {
+  if (panelOverlay) panelOverlay.classList.add("active");
 
-    setTimeout(() => {
-      panels.forEach((panel) => {
-        panel.classList.toggle("active", panel.id === panelId);
-      });
+  setTimeout(() => {
+    panels.forEach((panel) => {
+      panel.classList.toggle("active", panel.id === panelId);
+    });
 
-      buttons.forEach((btn) => {
-        btn.classList.toggle("active", btn.dataset.panel === panelId);
-      });
+    buttons.forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.panel === panelId);
+    });
 
-      if (overlay) overlay.classList.remove("active");
-    }, 200);
-  }
+    if (panelOverlay) panelOverlay.classList.remove("active");
+  }, 150); // ✅ delay 300ms ដើម្បីឲ្យ overlay fade-in/out មើលបាន
+}
 
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => showPanel(btn.dataset.panel));
@@ -30,38 +30,24 @@ document.addEventListener("DOMContentLoaded", () => {
   showPanel("home");
 
   // =========================
-  // DETERRент: reduce easy download/save options
-  // (Cannot block 100% on browser, but make it harder)
+  // DETERRent
   // =========================
-
-  // Block drag & drop (images/videos)
   document.addEventListener("dragstart", (e) => e.preventDefault());
-
-  // Block right-click (global)
   document.addEventListener("contextmenu", (e) => e.preventDefault());
-
-  // Block right-click specifically on images/videos (extra)
   document.querySelectorAll("img, video").forEach((el) => {
     el.addEventListener("contextmenu", (e) => e.preventDefault());
   });
 
-  // Block common save/view-source/devtools shortcuts (deterrent only)
   document.addEventListener("keydown", (e) => {
     const k = (e.key || "").toLowerCase();
-
-    // Ctrl/Cmd + S/U/P
     if ((e.ctrlKey || e.metaKey) && (k === "s" || k === "u" || k === "p")) {
       e.preventDefault();
       return;
     }
-
-    // F12
     if (e.key === "F12") {
       e.preventDefault();
       return;
     }
-
-    // Ctrl/Cmd + Shift + I/J/C
     if ((e.ctrlKey || e.metaKey) && e.shiftKey && (k === "i" || k === "j" || k === "c")) {
       e.preventDefault();
       return;
@@ -69,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // =========================
-  // Smooth scroll (if you use .scroll-btn anywhere)
+  // Smooth scroll
   // =========================
   document.querySelectorAll(".scroll-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -77,5 +63,37 @@ document.addEventListener("DOMContentLoaded", () => {
       const targetPanel = document.getElementById(targetId);
       if (targetPanel) targetPanel.scrollIntoView({ behavior: "smooth" });
     });
+  });
+
+  // ==========================
+  // SLIDE MENU LOGIC
+  // ==========================
+  const menuBtn = document.getElementById("menuBtn");
+  const sideMenu = document.getElementById("sideMenu");
+  const menuOverlay = document.getElementById("menuOverlay");
+
+  function toggleMenu() {
+    sideMenu.classList.toggle("active");
+    menuOverlay.classList.toggle("active");
+  }
+
+  menuBtn.addEventListener("click", toggleMenu);
+  menuOverlay.addEventListener("click", toggleMenu);
+
+  // ==========================
+  // DARK / LIGHT MODE
+  // ==========================
+  const toggleMode = document.getElementById("toggleMode");
+
+  if (localStorage.getItem("mode") === "dark") {
+    document.body.classList.add("dark");
+  }
+
+  toggleMode.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    localStorage.setItem(
+      "mode",
+      document.body.classList.contains("dark") ? "dark" : "light"
+    );
   });
 });

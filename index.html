@@ -10,31 +10,51 @@
 <body>
 
   <!-- Header -->
-  <header>
-    <div class="header-left">
-      <img src="logo.png" alt="Logo" />
+<header>
+  <div class="header-left">
+    <img src="logo.png" alt="Logo" />
+  </div>
 
-      <!-- <div class="search-box">
-        <img src="search-icon.png" alt="Search" class="search-icon">
-        <input type="text" placeholder="ស្វែងរកក្នុង SM Digital" />
-      </div> -->
+  <div class="header-center">
+    <button class="tool-btn active" data-panel="home">
+      <img src="home.png" />
+    </button>
+    <button class="tool-btn" data-panel="store">
+      <img src="store.png" />
+    </button>
+    <button class="tool-btn" data-panel="service">
+      <img src="service.png" />
+    </button>
+  </div>
 
-    </div>
-    <div class="header-center">
-      <button class="tool-btn active" data-panel="home">
-        <img src="home.png" alt="Home" />
-      </button>
-      <button class="tool-btn" data-panel="store">
-        <img src="store.png" alt="Store" />
-      </button>
-      <button class="tool-btn" data-panel="service">
-        <img src="service.png" alt="Service" />
-      </button>
-    </div>
-    <div class="header-right">
-      <div class="icon-setting"></div>
-    </div>
-  </header>
+  <!-- HEADER RIGHT MENU ICON -->
+  <div class="header-right">
+    <img src="menuicon.png" id="menuBtn" class="menu-icon" />
+  </div>
+</header>
+
+<div id="panelOverlay"></div> <!-- overlay សម្រាប់ panel switching -->
+<div id="menuOverlay"></div>  <!-- overlay សម្រាប់ sideMenu -->
+
+<!-- SLIDE MENU -->
+<div id="sideMenu">
+  <ul>
+    <li>
+      <img src="product-icon.png">
+      <span>License</span>
+    </li>
+
+    <li id="toggleMode">
+      <img src="product-icon.png">
+      <span>Service</span>
+    </li>
+    
+    <li>
+      <img src="product-icon.png">
+      <span>Store</span>
+    </li>
+  </ul>
+</div>
 
 <div class="panel-container">
   <div id="overlay"></div>
@@ -43,28 +63,59 @@
   <!-- Panel 1: Home -->
   <div class="panel" id="home">
     <div class="tab1">
-      <video class="tab1-bg"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          controlslist="nodownload noplaybackrate noremoteplayback"
-          disablepictureinpicture
-          oncontextmenu="return false">
-        <source src="tab1.mp4" type="video/mp4">
-      </video>
-
       <section class="hero">
-        <h1>Happy new year.</h1>
-        <p>There’s still time to make their holiday one of a kind.</p>
+        <h1>SM Digital Collection</h1>
+        <p>ចំណេញចុងឆ្នាំនេះជាមួយការបញ្ចុះតម្លៃរហូតដល់ 70%</p>
 
         <button class="hero-btn" onclick="document.querySelector('[data-panel=store]').click()">
-          Shop gifts
+          Shop
         </button>
       </section>
     </div>
+
+        <!-- Extra Row under SM Digital Collection -->
+    <div class="extra-row" id="home1">
+      <div class="extra-box box1">
+        <h2>Programer IT-Step</h2>
+        <p>Simple practical coding for future developers.</p>
+        <button class="hero-btn" onclick="window.location.href='https://t.me/developerkh'">
+          Join Now
+        </button>
+      </div>
+
+      <div class="extra-box box2">
+        <h2>PNG Stock</h2>
+        <p>Clean PNG assets, ready to use</p>
+        <button class="hero-btn" onclick="window.location.href='https://t.me/khmerpng'">
+          Join Now
+        </button>
+      </div>
+      
+      <div class="extra-box box3">
+        <h2>SM Digital</h2>
+        <p>Get your pro feature license with SM Digital nows.</p>
+        <button class="hero-btn" onclick="window.location.href='https://t.me/smdigitalkh'">
+          Join Now
+        </button>
+      </div>
+
+      <div class="extra-box box4">
+        <h2>Khmer Software</h2>
+        <p>Get software for your laptop for free and hight security.</p>
+        <button class="hero-btn" onclick="window.location.href='https://t.me/khmer_software'">
+          Join Now
+        </button>
+      </div>
+    </div>
+
+
+
   </div>
+
+
+
+
+
 
     <!-- Panel 2: Store -->
     <div class="panel" id="store">
