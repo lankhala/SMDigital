@@ -5,205 +5,114 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SM Digital</title>
   <link rel="stylesheet" href="style.css" />
-  <title><img src="logo.png" alt=""></title>
+  <!-- Add the logo as favicon -->
+  <link rel="icon" href="headlogo.png" type="image/png" />
 </head>
 <body>
 
   <!-- Header -->
-<header>
+  <header>
   <div class="header-left">
     <img src="logo.png" alt="Logo" />
   </div>
 
   <div class="header-center">
-    <button class="tool-btn active" data-panel="home">
-      <img src="home.png" />
-    </button>
     <button class="tool-btn" data-panel="store">
       <img src="store.png" />
+    </button>
+    <button class="tool-btn" data-panel="home">
+      <img src="home.png" />
     </button>
     <button class="tool-btn" data-panel="service">
       <img src="service.png" />
     </button>
   </div>
 
-  <!-- HEADER RIGHT MENU ICON -->
-  <div class="header-right">
-    <img src="menuicon.png" id="menuBtn" class="menu-icon" />
-  </div>
+  <!-- ✅ Dark Mode Toggle Button -->
+  <div class="header-right"> <img id="toggleMode" class="mode-btn" src="darkmode.png" alt="Toggle Mode" /> </div>
 </header>
 
-<div id="panelOverlay"></div> <!-- overlay សម្រាប់ panel switching -->
-<div id="menuOverlay"></div>  <!-- overlay សម្រាប់ sideMenu -->
 
-<!-- SLIDE MENU -->
-<div id="sideMenu">
-  <ul>
-    <li>
-      <img src="product-icon.png">
-      <span>License</span>
-    </li>
+  <div id="panelOverlay"></div>
 
-    <li id="toggleMode">
-      <img src="product-icon.png">
-      <span>Service</span>
-    </li>
-    
-    <li>
-      <img src="product-icon.png">
-      <span>Store</span>
-    </li>
-  </ul>
-</div>
+  <div class="panel-container">
+    <div id="overlay"></div>
 
-<div class="panel-container">
-  <div id="overlay"></div>
-
-  
-  <!-- Panel 1: Home -->
-  <div class="panel" id="home">
-    <div class="tab1">
-      <section class="hero">
-        <h1>SM Digital Collection</h1>
-        <p>ចំណេញចុងឆ្នាំនេះជាមួយការបញ្ចុះតម្លៃរហូតដល់ 70%</p>
-
-        <button class="hero-btn" onclick="document.querySelector('[data-panel=store]').click()">
-          Shop
-        </button>
-      </section>
-    </div>
-
-        <!-- Extra Row under SM Digital Collection -->
-    <div class="extra-row" id="home1">
-      <div class="extra-box box1">
-        <h2>Programer IT-Step</h2>
-        <p>Simple practical coding for future developers.</p>
-        <button class="hero-btn" onclick="window.location.href='https://t.me/developerkh'">
-          Join Now
-        </button>
-      </div>
-
-      <div class="extra-box box2">
-        <h2>PNG Stock</h2>
-        <p>Clean PNG assets, ready to use</p>
-        <button class="hero-btn" onclick="window.location.href='https://t.me/khmerpng'">
-          Join Now
-        </button>
-      </div>
-      
-      <div class="extra-box box3">
-        <h2>SM Digital</h2>
-        <p>Get your pro feature license with SM Digital nows.</p>
-        <button class="hero-btn" onclick="window.location.href='https://t.me/smdigitalkh'">
-          Join Now
-        </button>
-      </div>
-
-      <div class="extra-box box4">
-        <h2>Khmer Software</h2>
-        <p>Get software for your laptop for free and hight security.</p>
-        <button class="hero-btn" onclick="window.location.href='https://t.me/khmer_software'">
-          Join Now
-        </button>
-      </div>
-    </div>
-
-
-
-  </div>
-
-
-
-
-
-
-    <!-- Panel 2: Store -->
+    <!-- Panel 1: Store (default first) -->
     <div class="panel" id="store">
-      <div class="banner-top">
-        <!-- <img src="service-banner.jpg" alt="Store Banner" /> -->
-      </div>
+      <div class="banner-top"></div>
       <div class="box">
         <div class="item">
-          <img src="p9.jpg" alt="Microsoft Office 365">
-          <div class="info">
-            <h3>CapCut Pro</h3>
-            <p>SM Digital <span>|</span> គម្រោងមួយខែ</p>
-            <span>$5.00</span>
-          </div>
-        </div>
+  <img src="p9.jpg" alt="CapCut Pro">
+  <div class="info">
+    <h3>CapCut Pro</h3>
+    <p><span>$5.00</span> | គម្រោងមួយខែ</p>
+  </div>
+</div>
 
-        <div class="item">
-          <img src="p7.jpg" alt="Adobe Creative">
-          <div class="info">
-            <h3>Adobe Creative</h3>
-            <p>SM Digital <span>|</span> គម្រោង៣ខែ</p>
-            <span>$10.00</span>
-          </div>
-        </div>
+<div class="item">
+  <img src="p7.jpg" alt="Adobe Creative">
+  <div class="info">
+    <h3>Adobe Creative</h3>
+    <p><span>$10.00</span> | គម្រោង៣ខែ</p>
+  </div>
+</div>
 
-        <div class="item">
-          <img src="p1.jpg" alt="Canva Pro Premium">
-          <div class="info">
-            <h3>Canva Pro Premium</h3>
-            <p>SM Digital <span>|</span> គម្រោងមួយឆ្នាំ</p>
-            <span>$5.00</span>
-          </div>
-        </div>
+<div class="item">
+  <img src="p1.jpg" alt="Canva Pro Premium">
+  <div class="info">
+    <h3>Canva Pro Premium</h3>
+    <p><span>$5.00</span> | គម្រោងមួយឆ្នាំ</p>
+  </div>
+</div>
 
-        <div class="item">
-          <img src="p2.jpg" alt="ChatGPT Plus">
-          <div class="info">
-            <h3>ChatGPT Plus</h3>
-            <p>SM Digital <span>|</span> គម្រោងមួយខែ</p>
-            <span>$4.99</span>
-          </div>
-        </div>
+<div class="item">
+  <img src="p2.jpg" alt="ChatGPT Plus">
+  <div class="info">
+    <h3>ChatGPT Plus</h3>
+    <p><span>$4.99</span> | គម្រោងមួយខែ</p>
+  </div>
+</div>
 
-        <div class="item">
-          <img src="p3.jpg" alt="Windows 11 Pro">
-          <div class="info">
-            <h3>Windows 11 Pro</h3>
-            <p>SM Digital <span>|</span> គម្រោងមួយជីវិត</p>
-            <span>$5.00</span>
-          </div>
-        </div>
+<div class="item">
+  <img src="p3.jpg" alt="Windows 11 Pro">
+  <div class="info">
+    <h3>Windows 11 Pro</h3>
+    <p><span>$5.00</span> | គម្រោងមួយជីវិត</p>
+  </div>
+</div>
 
-        <div class="item">
-          <img src="p5.jpg" alt="Netflix Premium">
-          <div class="info">
-            <h3>Netflix Premium</h3>
-            <p>SM Digital <span>|</span> គម្រោងប្រចាំខែ</p>
-            <span>$3.00</span>
-          </div>
-        </div>
+<div class="item">
+  <img src="p5.jpg" alt="Netflix Premium">
+  <div class="info">
+    <h3>Netflix Premium</h3>
+    <p><span>$3.00</span> | គម្រោងប្រចាំខែ</p>
+  </div>
+</div>
 
-        <div class="item">
-          <img src="p4.jpg" alt="Google Drive 2TB">
-          <div class="info">
-            <h3>Google Drive 2TB</h3>
-            <p>SM Digital <span>|</span> គម្រោងប្រចាំខែ</p>
-            <span>$5.00</span>
-          </div>
-        </div>
+<div class="item">
+  <img src="p4.jpg" alt="Google Drive 2TB">
+  <div class="info">
+    <h3>Google Drive 2TB</h3>
+    <p><span>$5.00</span> | គម្រោងប្រចាំខែ</p>
+  </div>
+</div>
 
-        <div class="item">
-          <img src="p6.jpg" alt="YouTube Premium">
-          <div class="info">
-            <h3>YouTube Premium</h3>
-            <p>SM Digital <span>|</span> គម្រោងមួយឆ្នាំ</p>
-            <span>$20.00</span>
-          </div>
-        </div>
-        
-        <div class="item">
-          <img src="p8.jpg" alt="Microsoft Office 365">
-          <div class="info">
-            <h3>Microsoft Office 365</h3>
-            <p>SM Digital <span>|</span> គម្រោងមួយឆ្នាំ</p>
-            <span>$20.00</span>
-          </div>
-        </div>
-        
+<div class="item">
+  <img src="p6.jpg" alt="YouTube Premium">
+  <div class="info">
+    <h3>YouTube Premium</h3>
+    <p><span>$20.00</span> | គម្រោងមួយឆ្នាំ</p>
+  </div>
+</div>
+
+<div class="item">
+  <img src="p8.jpg" alt="Microsoft Office 365">
+  <div class="info">
+    <h3>Microsoft Office 365</h3>
+    <p><span>$20.00</span> | គម្រោងមួយឆ្នាំ</p>
+  </div>
+</div>
 
       </div>
       <div class="contact-btn">
@@ -211,16 +120,59 @@
       </div>
     </div>
 
+    <!-- Panel 2: Home -->
+    <div class="panel" id="home">
+      <div class="tab1">
+        <section class="hero">
+          <h1>SM Digital Collection</h1>
+          <p>ចំណេញចុងឆ្នាំនេះជាមួយការបញ្ចុះតម្លៃរហូតដល់ 70%</p>
+          <button class="hero-btn" onclick="document.querySelector('[data-panel=store]').click()">
+            Shop
+          </button>
+        </section>
+      </div>
+
+      <div class="extra-row" id="home1">
+        <div class="extra-box box1">
+          <h2>Programer IT-Step</h2>
+          <p>Simple practical coding for future developers.</p>
+          <button class="hero-btn" onclick="window.location.href='https://t.me/developerkh'">
+            Join Now
+          </button>
+        </div>
+        <div class="extra-box box2">
+          <h2>PNG Stock</h2>
+          <p>Clean PNG assets, ready to use</p>
+          <button class="hero-btn" onclick="window.location.href='https://t.me/khmerpng'">
+            Join Now
+          </button>
+        </div>
+        <div class="extra-box box3">
+          <h2>SM Digital</h2>
+          <p>Get your pro feature license with SM Digital nows.</p>
+          <button class="hero-btn" onclick="window.location.href='https://t.me/smdigitalkh'">
+            Join Now
+          </button>
+        </div>
+        <div class="extra-box box4">
+          <h2>Khmer Software</h2>
+          <p>Get software for your laptop for free and hight security.</p>
+          <button class="hero-btn" onclick="window.location.href='https://t.me/khmer_software'">
+            Join Now
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Panel 3: Service -->
-<div class="panel" id="service">
-  <div class="service-content">
-    <center>កំពុងអាប់ដេត...</center>
+    <div class="panel" id="service">
+      <div class="service-content">
+        <center>កំពុងអាប់ដេត...</center>
+      </div>
     </div>
   </div>
 
-  </div>
   <!-- External JS -->
   <script src="app.js"></script>
-  
 </body>
 </html>
