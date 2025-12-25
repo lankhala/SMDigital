@@ -65,3 +65,55 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Banner auto-slide infinite forward
+  const track = document.querySelector("#service .banner-track");
+  const banners = document.querySelectorAll("#service .banner-track img");
+  let index = 0;
+  const total = banners.length;
+
+  function showBanner(i) {
+    track.style.transform = `translateX(-${i * 100}%)`;
+  }
+
+  setInterval(() => {
+    index++;
+    showBanner(index);
+
+    // ✅ when reaching the last clone, reset to original without flashing
+    if (index >= total - 3) {
+      setTimeout(() => {
+        track.style.transition = "none"; // disable animation
+        index = 0;
+        showBanner(index);
+        // re-enable animation
+        setTimeout(() => {
+          track.style.transition = "transform 0.6s ease";
+        }, 50);
+      }, 600);
+    }
+  }, 5000);
+
+  // ✅ allow manual swipe on touch devices
+  let startX = 0;
+  track.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+  track.addEventListener("touchend", (e) => {
+    const endX = e.changedTouches[0].clientX;
+    if (endX < startX - 50) {
+      index = (index + 1) % total;
+    } else if (endX > startX + 50) {
+      index = (index - 1 + total) % total;
+    }
+    showBanner(index);
+  });
+});
+
