@@ -71,49 +71,60 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
 document.addEventListener("DOMContentLoaded", () => {
-  // Banner auto-slide infinite forward
-  const track = document.querySelector("#service .banner-track");
-  const banners = document.querySelectorAll("#service .banner-track img");
-  let index = 0;
-  const total = banners.length;
+  const banner = document.querySelector(".service-banner");
+  const track = banner.querySelector(".banner-track");
+  const dots = document.querySelectorAll(".banner-indicators .dot");
+  const banners = track.querySelectorAll("img");
 
-  function showBanner(i) {
-    track.style.transform = `translateX(-${i * 100}%)`;
+  // ✅ update indicators
+  function updateDots(i) {
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle("active", idx === i % banners.length);
+    });
   }
 
-  setInterval(() => {
-    index++;
-    showBanner(index);
+  // ✅ detect scroll position and update dots
+  banner.addEventListener("scroll", () => {
+    const width = banner.clientWidth;
+    const index = Math.round(banner.scrollLeft / width);
+    updateDots(index);
+  });
 
-    // ✅ when reaching the last clone, reset to original without flashing
-    if (index >= total - 3) {
-      setTimeout(() => {
-        track.style.transition = "none"; // disable animation
-        index = 0;
-        showBanner(index);
-        // re-enable animation
-        setTimeout(() => {
-          track.style.transition = "transform 0.6s ease";
-        }, 50);
-      }, 600);
-    }
-  }, 5000);
+  // ✅ click dots to navigate
+  dots.forEach((dot, idx) => {
+    dot.addEventListener("click", () => {
+      banner.scrollTo({
+        left: idx * banner.clientWidth,
+        behavior: "smooth"
+      });
+    });
+  });
 
-  // ✅ allow manual swipe on touch devices
+  // ✅ swipe gesture (one image per swipe, loop)
   let startX = 0;
-  track.addEventListener("touchstart", (e) => {
+  banner.addEventListener("touchstart", (e) => {
     startX = e.touches[0].clientX;
   });
-  track.addEventListener("touchend", (e) => {
+
+  banner.addEventListener("touchend", (e) => {
     const endX = e.changedTouches[0].clientX;
+    const width = banner.clientWidth;
+    let index = Math.round(banner.scrollLeft / width);
+
     if (endX < startX - 50) {
-      index = (index + 1) % total;
+      // forward one
+      index = (index + 1) % banners.length;
     } else if (endX > startX + 50) {
-      index = (index - 1 + total) % total;
+      // backward one
+      index = (index - 1 + banners.length) % banners.length;
     }
-    showBanner(index);
+
+    banner.scrollTo({
+      left: index * width,
+      behavior: "smooth"
+    });
+    updateDots(index);
   });
 });
 

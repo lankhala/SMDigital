@@ -439,27 +439,55 @@ body.dark .service-box {
 }
 
 /* Dark mode override */ body.dark #panelOverlay { background-color: #2e2e2e; /* ✅ darker overlay */ transition: opacity 0.4s ease; /* ✅ keep smooth timing */}
-
+/* =========================
+   Tab3: Service Panel
+   ========================= */
 /* Banner Carousel */
 .service-banner {
-  max-width: 1100px;   /* ✅ fixed width desktop */
+  max-width: 1100px;
   width: 100%;
-  overflow: hidden;
-  margin: 60px auto 20px; /* ✅ push down below header (header=50px, add ~20px gap) */
+  overflow-x: auto;              /* ✅ allow manual scroll */
+  scroll-snap-type: x mandatory; /* ✅ snap one image per swipe */
+  -webkit-overflow-scrolling: touch; /* ✅ smooth on iOS */
+  margin: 60px auto 0;
   border-radius: 8px;
-  position: relative;
+}
+
+.service-banner::-webkit-scrollbar {
+  display: none; /* ✅ hide scrollbar */
 }
 
 .service-banner .banner-track {
   display: flex;
-  transition: transform 0.6s ease;
 }
 
 .service-banner img {
-  width: 100%;
-  height: 100%;        /* ✅ fill the banner height */
   flex: 0 0 100%;
-  object-fit: cover;   /* ✅ crop nicely */
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  scroll-snap-align: start;      /* ✅ snap each image */
+}
+
+/* Indicators */
+.banner-indicators {
+  max-width: 1100px;
+  margin: 10px auto 20px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.banner-indicators .dot {
+  width: 9.5px;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.banner-indicators .dot.active {
+  background-color: #0071E3;
 }
 
 
@@ -478,7 +506,6 @@ body.dark .service-box {
   border-radius: 8px;
   text-align: center;
   box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
   aspect-ratio: 1 / 1;        /* ✅ always square */
   display: flex;
   flex-direction: column;
@@ -491,11 +518,10 @@ body.dark .service-box {
   height: 60px;
   object-fit: contain;
   margin-bottom: 8px;
-  transition: 0.3s;
 }
 
 .service-box p {
-  font-size: 18px;
+  font-size: 19px;
   font-family: 'Khala Mid Khmer', sans-serif;
   margin: 0;
   color: #333;
@@ -512,11 +538,11 @@ body.dark .service-box p {
 /* Responsive for phone */
 @media (max-width: 480px) {
   .service-banner {
-    max-width: 100%; /* ✅ full width on phone */
+    max-width: 99%;
+    margin: 60px auto 15px;
   }
-  .service-banner img {
-    width: 100%;
-    height: auto;
+  .banner-indicators {
+    max-width: 99%;
   }
   .service-grid {
     grid-template-columns: repeat(3, 1fr); /* ✅ 2 columns on phone */
@@ -527,9 +553,21 @@ body.dark .service-box p {
     height: 50px;
   }
   .service-box p {
-    font-size: 13px;
+    font-family: 'Khala Mid Khmer', sans-serif;
+    font-size: 17px;
   }
+  .banner-indicators .dot {
+  width: 5px;
+  height: 4.1px;
+  background-color: #ccc;
+  border-radius: 50px;
+  transition: background-color 0.3s;
 }
+}
+
+
+
+
 
 
 
