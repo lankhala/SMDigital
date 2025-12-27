@@ -19,101 +19,52 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (panelOverlay) panelOverlay.classList.remove("active");
-    }, 150); // delay for overlay fade-in/out
+
+      // ✅ Save last panel + scroll position
+      localStorage.setItem("lastPanel", panelId);
+      localStorage.setItem("lastScroll", window.scrollY);
+    }, 150);
   }
 
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => showPanel(btn.dataset.panel));
   });
 
-  // ✅ Default: show Store first
-  showPanel("store");
+  // ✅ Restore last panel + scroll position
+  const lastPanel = localStorage.getItem("lastPanel");
+  const lastScroll = localStorage.getItem("lastScroll");
 
-  // =========================
-  // Smooth scroll
-  // =========================
-  document.querySelectorAll(".scroll-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const targetId = btn.dataset.target;
-      const targetPanel = document.getElementById(targetId);
-      if (targetPanel) targetPanel.scrollIntoView({ behavior: "smooth" });
-    });
-  });
-
-  // ==========================
-  // DARK / LIGHT MODE TOGGLE (with PNG icons + smooth transition)
-  // ==========================
-  const toggleMode = document.getElementById("toggleMode");
-
-  // Add smooth transition for background and color
-  document.body.style.transition = "background-color 0.4s ease, color 0.4s ease";
-
-  // Load saved mode
-  if (localStorage.getItem("mode") === "dark") {
-    document.body.classList.add("dark");
-    if (toggleMode) toggleMode.src = "lightmode.png"; // show light icon when dark mode is active
-  } else {
-    if (toggleMode) toggleMode.src = "darkmode.png"; // show dark icon when light mode is active
-  }
-
-  if (toggleMode) {
-    toggleMode.addEventListener("click", () => {
-      document.body.classList.toggle("dark");
-      const isDark = document.body.classList.contains("dark");
-      localStorage.setItem("mode", isDark ? "dark" : "light");
-      toggleMode.src = isDark ? "lightmode.png" : "darkmode.png";
-    });
-  }
-});
-
-
-
-
-
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  // Banner auto-slide infinite forward
-  const track = document.querySelector("#service .banner-track");
-  const banners = document.querySelectorAll("#service .banner-track img");
-  let index = 0;
-  const total = banners.length;
-
-  function showBanner(i) {
-    track.style.transform = `translateX(-${i * 100}%)`;
-  }
-
-  setInterval(() => {
-    index++;
-    showBanner(index);
-
-    // ✅ when reaching the last clone, reset to original without flashing
-    if (index >= total - 3) {
+  if (lastPanel) {
+    showPanel(lastPanel);
+    if (lastScroll) {
       setTimeout(() => {
-        track.style.transition = "none"; // disable animation
-        index = 0;
-        showBanner(index);
-        // re-enable animation
-        setTimeout(() => {
-          track.style.transition = "transform 0.6s ease";
-        }, 50);
-      }, 600);
+        window.scrollTo(0, parseInt(lastScroll, 10));
+      }, 200);
     }
-  }, 8000);
+  } else {
+    showPanel("store");
+  }
 
-  // ✅ allow manual swipe on touch devices
-  let startX = 0;
-  track.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
-  });
-  track.addEventListener("touchend", (e) => {
-    const endX = e.changedTouches[0].clientX;
-    if (endX < startX - 50) {
-      index = (index + 1) % total;
-    } else if (endX > startX + 50) {
-      index = (index - 1 + total) % total;
-    }
-    showBanner(index);
-  });
+  // ==========================
+  // AUTO MODE BASED ON TIME
+  // ==========================
+  const now = new Date();
+  const hour = now.getHours();
+
+  // Example logic: 6am–18pm = light, otherwise dark
+  if (hour >= 6 && hour < 18) {
+    document.body.classList.remove("dark"); // daytime → light mode
+  } else {
+    document.body.classList.add("dark");    // nighttime → dark mode
+  }
+
+  // ==========================
+  // TAB3: Random Banner
+  // ==========================
+  const bannerImg = document.getElementById("randomBanner");
+  if (bannerImg) {
+    const bannerList = ["banner1.jpg", "banner2.jpg", "banner3.jpg"];
+    const randomIndex = Math.floor(Math.random() * bannerList.length);
+    bannerImg.src = bannerList[randomIndex];
+  }
 });
-
