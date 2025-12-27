@@ -44,7 +44,7 @@ header {
   width: 100%;
   height: 50px;
   background-color: #ffffffd9;
-  backdrop-filter: blur(40px);
+  backdrop-filter: blur(100px);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -142,25 +142,7 @@ header {
   display: block;
 }
 
-/* Home Panel */
-.home-content {
-  text-align: center;
-}
-.home-content h2 {
-  font-size: 20px;
-}
-.home-images {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-.home-images img {
-  width: 280px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 8px;
-}
+
 
 /* Store Panel */
 .box {
@@ -255,119 +237,11 @@ header {
   width: 100%;
 }
 
-/* Home Tab1 */
-#home .tab1 {
-  max-width: 1100px;
-  height: 210px;
-  margin: 0 auto;
-  position: relative;
-  overflow: hidden;
-  margin-top: 60px;
-  background: linear-gradient(#00b3ff,#c3efff);
-}
-#home .tab1-bg {
-  width: 100%;
-  height: auto;
-  display: block;
-  pointer-events: none;
-}
-#home .tab1::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-#home .hero {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-#home .hero h1 {
-  margin: 0 0 12px;
-  font-size: 50px;
-  color: #ffffff;
-}
-#home .hero p {
-  margin: 0 0 22px;
-  font-size: clamp(16px, 2vw, 22px);
-  font-family: 'Khala Regular Khmer';
-  color: rgba(255, 255, 255, 0.92);
-}
-#home .hero-btn {
-  border: none;
-  cursor: pointer;
-  background-color: #0071E3;
-  color: #ffffff;
-  height: 40px;
-  padding: 0 25px;
-  border-radius: 999px;
-  font-family: 'Khala Regular Khmer', sans-serif;
-  font-size: 16px;
-}
-#home .hero-btn:hover {
-  filter: brightness(0.95);
-}
-
-/* Extra Boxes */
-.extra-row {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 5px;
-  max-width: 1100px;
-  margin: 5px auto;
-}
-.extra-box {
-  border-radius: 0px;
-  padding: 0px;
-  text-align: center;
-  height: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.extra-box.box1 { background-image: url(home1.png); background-size: cover; }
-.extra-box.box2 { background-image: url(home2.png); background-size: cover; }
-.extra-box.box3 { background-image: url(home3.png); background-size: cover; }
-.extra-box.box4 { background-image: url(home4.png); background-size: cover; }
-.extra-box.box5 { background-image: url(home5.png); background-size: cover; }
 
 
-.extra-box h2 {
-  font-family: 'Khala Mid';
-  margin-top: 0px;
-  font-size: 24px;
-  color: #373737;
-}
 
-.extra-box p {
-  font-family: 'Khala Regular';
-  font-size: 14px;
-  color: rgba(94, 94, 94, 0.9);
-  margin-top: -10px;
-  margin-bottom: 8px;
-}
 
-.extra-box .hero-btn {
-  background-color: #0071E3;
-  color: #fff;
-  border: none;
-  border-radius: 999px;
-  cursor: pointer;
-  font-family: 'Khala Regular Khmer';
-  font-size: 14px;
-  padding: 8px 20px;
-  margin-bottom: 230px;
-}
 
-.extra-box .hero-btn:hover {
-  filter: brightness(0.95);
-}
 
 #panelOverlay {
   position: fixed;
@@ -388,13 +262,6 @@ header {
 
 
 
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-right: 2%;
-}
-
 .mode-btn { cursor: pointer; height: 28px; transition: filter 0.3s ease; }
 .mode-btn:hover { filter: brightness(0.85); }
 
@@ -406,7 +273,7 @@ body.dark {
 }
 
 body.dark header {
-  background-color: #1f1f1fdd;
+  background-color: #1f1f1f;
   box-shadow: 0 1px 4px rgba(0,0,0,0.6);
   transition: 0.3s;
 }
@@ -458,7 +325,7 @@ body.dark .service-box {
 
 .last-works {
   max-width: 1100px;
-  margin: 30px auto;
+  margin: 10px auto;
   padding: 0 10px;
 }
 
@@ -508,10 +375,6 @@ body.dark .service-box {
    PHONE RESPONSIVE DESIGN
    ========================= */
 @media (max-width: 480px) {
-  #home .tab1 {
-    background: linear-gradient(#0199ff,#e6e6e6);
-    width: 100%;
-  }
 
   header {
     height: 50px;
@@ -539,29 +402,6 @@ body.dark .service-box {
   .panel-container {
     margin-top: 55px;
     padding: 0 10px;
-  }
-
-  #home .hero h1 {
-    font-size: 26px;
-    line-height: 1.2;
-  }
-
-  #home .hero p {
-    font-size: 13px;
-    margin-bottom: 14px;
-  }
-
-  #home1 .hero-btn {
-    font-size: 14px;
-    padding: 8px 16px;
-    height: 38px;
-    margin-bottom: 190px;
-  }
-
-  .home-images img {
-    width: 100%;
-    height: auto;
-    border-radius: 6px;
   }
 
   .box {
@@ -623,8 +463,4 @@ body.dark .service-box {
     padding: 8px 14px;
     margin-bottom: 20px;
   }
-
-  .header-right {
-  margin-right: 5%;
-}
 }
