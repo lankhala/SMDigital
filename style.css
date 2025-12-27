@@ -420,7 +420,7 @@ body.dark .service-box {
 
   .item img {
     width: 100%;
-    height: 180px;        /* ✅ fix image height bigger */
+    height: auto;        /* ✅ fix image height bigger */
     object-fit: cover;    /* ✅ crop nicely */
     display: block;
   }
