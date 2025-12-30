@@ -33,7 +33,7 @@ body::-webkit-scrollbar {
 body {
   margin: 0;
   font-family: 'Khala Regular', sans-serif;
-  background-color: #F4F4F4;
+  background-color: #ebebeb;
 }
 
 /* Header */
@@ -43,8 +43,8 @@ header {
   left: 0;
   width: 100%;
   height: 50px;
-  background-color: #ffffffd9;
-  backdrop-filter: blur(100px);
+  background-color: #ffffffe5;
+  backdrop-filter: blur(50px);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -154,7 +154,7 @@ header {
   margin: 0 auto;
 }
 .item {
-  background-color: #ffffff;
+  background-color: #ffffffec;
   border-radius: 7px;
   overflow: hidden;
   transition: transform 0.2s ease;
@@ -368,6 +368,41 @@ body.dark .service-box {
 
 
 
+/* Floating Icon */
+.floating-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 45px;
+  height: 45px;
+  background-color: #0d9ae0; /* Telegram blue */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 3000; /* stays above panels */
+  transition: 0.4s;
+}
+
+.floating-icon img {
+  width: 28px;
+  height: 28px;
+  filter: brightness(0) invert(1); /* white icon look */
+}
+
+.floating-icon:hover {
+  background-color: #0d9ae0bc; /* Telegram blue */
+  transition: 0.4s;
+}
+@media (max-width: 480px) {
+  .floating-icon{
+    bottom: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+  }
+}
 
 
 
@@ -395,8 +430,8 @@ body.dark .service-box {
   }
 
   .tool-btn img {
-    width: 25px;
-    height: 25px;
+    width: 28px;
+    height: 28px;
   }
 
   .panel-container {
@@ -437,6 +472,7 @@ body.dark .service-box {
     font-size: 13px;
     font-weight: 500;
     font-family: 'Khala Mid';
+    color: #007bff;
   }
 
   .extra-row {
@@ -463,4 +499,102 @@ body.dark .service-box {
     padding: 8px 14px;
     margin-bottom: 20px;
   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Product detail overlay inside store */
+.product-detail {
+  display: none;
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+  animation: fadeIn 0.4s ease;
+}
+
+/* Always show back button top-left, floating circle */
+.product-detail .back-btn {
+  position: fixed;
+  top: 70px; /* below header */
+  left: 20px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #1877f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  border: none;
+  cursor: pointer;
+}
+.product-detail .back-btn img {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1);
+}
+
+.detail-content {
+  text-align: center;
+}
+.detail-content img {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.detail-text h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+.detail-text p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #444;
+}
+
+/* Action buttons at bottom */
+.detail-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+.detail-actions button {
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+.back-btn-inline {
+  background: #ccc;
+}
+.buy-btn {
+  background: #1877f2;
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .product-detail {
+    max-width: 100%;
+    padding: 10px;
+  }
+  .detail-text h2 { font-size: 18px; }
+  .detail-text p { font-size: 14px; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
 }

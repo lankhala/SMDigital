@@ -68,3 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
     bannerImg.src = bannerList[randomIndex];
   }
 });
+
+
+
+
+
