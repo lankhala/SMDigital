@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // ✅ Save last panel + scroll position
       localStorage.setItem("lastPanel", panelId);
       localStorage.setItem("lastScroll", window.scrollY);
-    }, 150);
+    }, 180);
   }
 
   buttons.forEach((btn) => {
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================
   const bannerImg = document.getElementById("randomBanner");
   if (bannerImg) {
-    const bannerList = ["banner1.jpg", "banner2.jpg", "banner3.jpg"];
+    const bannerList = ["banner/banner1.jpg", "banner/banner2.jpg", "banner/banner3.jpg"];
     const randomIndex = Math.floor(Math.random() * bannerList.length);
     bannerImg.src = bannerList[randomIndex];
   }
@@ -80,16 +80,16 @@ document.addEventListener("DOMContentLoaded", () => {
     "plan": "1 ខែ",
     "warranty": "2 សប្តាហ៍",
     "type": "Personal Account",
-    "cover": "p10.jpg",
+    "cover": "Product/p10.jpg",
     "benefits": [
       "ទទួលបានសញ្ញាសម្គាល់ខៀវ",
       "គណនីមានសុវត្ថិភាពខ្ពស់",
       "បង្កើនគណនីឲ្យទាក់ទាញជាងមុន",
       "គណនីរបស់អ្នករឹងមាំ និងទទួលស្គាល់ពី Meta"
     ],
-    "gallery": [
-      "imgtab1/fbv.webp"
-    ]
+    // "gallery": [
+    //   "imgtab1/fbv.webp"
+    // ]
   },
   "capcut_pro": {
     "name_km": "CapCut Pro",
@@ -99,16 +99,13 @@ document.addEventListener("DOMContentLoaded", () => {
     "plan": "1 ខែ",
     "warranty": "មួយខែពេញ",
     "type": "Share Account",
-    "cover": "p9.jpg",
+    "cover": "Product/p9.jpg",
     "benefits": [
       "Template និង Effect ពិសេស (Pro)",
       "Export វីដេអូគ្មាន Watermark",
       "គាំទ្រ 4K / HD Quality",
       "Transition ស្អាត និង Smooth"
     ],
-    "gallery": [
-      "imgtab1/capcut2.webp"
-    ]
   },
   "adobe_creative": {
     "name_km": "Adobe Creative",
@@ -118,16 +115,13 @@ document.addEventListener("DOMContentLoaded", () => {
     "plan": "4 ខែ",
     "warranty": "2 សប្តាហ៍",
     "type": "Personal Account",
-    "cover": "p7.jpg",
+    "cover": "Product/p7.jpg",
     "benefits": [
       "Photoshop រួមទាំងកម្មវិធីចាំបាច់សម្រាប់ Designer 20+",
       "Ai Credit រួមទាំង Adobe Fonts និង Stock",
       "Cloud Storage 100GB",
       "ដំណើការរហូតដល់២កុំព្យូទ័រ ក្នុងពេលតែមួយ"
     ],
-    "gallery": [
-      "imgtab1/adobe2.webp"
-    ]
   },
   "canva_pro": {
     "name_km": "Canva Pro",
@@ -137,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "plan": "1 ឆ្នាំ",
     "warranty": "1 ខែ",
     "type": "Personal Account",
-    "cover": "p1.jpg",
+    "cover": "Product/p1.jpg",
     "benefits": [
       "Canva Pro Gmail ផ្ទាល់ខ្លួន",
       "ទាំងមុខងារ Education Plan",
@@ -146,9 +140,6 @@ document.addEventListener("DOMContentLoaded", () => {
       "ប្រើពុម្ពអក្សរខ្មែរច្រើនជាង 500+",
       "គម្រូមកស្រាប់រាប់លាន។"
     ],
-    "gallery": [
-      "imgtab1/canva.webp"
-    ]
   },
   "chatgpt_plus": {
     "name_km": "ChatGPT Plus",
@@ -158,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "plan": "1 ខែ",
     "warranty": "7 ថ្ងៃ",
     "type": "Share Account",
-    "cover": "p2.jpg",
+    "cover": "Product/p2.jpg",
     "benefits": [
       "share account ប្រើមួយឧបករណ៍",
       "អាចប្រើមុខងារទាំងអស់ក្នុង Plus",
@@ -167,9 +158,6 @@ document.addEventListener("DOMContentLoaded", () => {
       "ល្បឿនធ្វើការលឿនជាងធម្មតា x3ដង",
       "ប្រើលើទូរស័ព្ទ ឬកុំព្យូទ័រ(ជាជម្រើស)"
     ],
-    "gallery": [
-      "imgtab1/chatgpt.webp"
-    ]
   },
   "windows_11_pro": {
     "name_km": "Windows 11 Pro",
@@ -179,15 +167,12 @@ document.addEventListener("DOMContentLoaded", () => {
     "plan": "Lifetime",
     "warranty": "1 ខែ",
     "type": "License Key",
-    "cover": "p3.jpg",
+    "cover": "Product/p3.jpg",
     "benefits": [
       "Activate Windows 11 Pro ស្របច្បាប់",
       "ប្រើ Pro Features ពេញលេញ",
       "Support បើមានបញ្ហា activate"
     ],
-    "gallery": [
-      "imgtab1/win11pro.webp"
-    ]
   },
   "netflix_premium": {
     "name_km": "Netflix Premium",
@@ -197,34 +182,28 @@ document.addEventListener("DOMContentLoaded", () => {
     "plan": "Monthly",
     "warranty": "1 ខែ",
     "type": "Share Account",
-    "cover": "p5.jpg",
+    "cover": "Product/p5.jpg",
     "benefits": [
       "មើល Movies/Series គុណភាព HD/4K",
       "ប្រើបានលើទូរស័ព្ទ/TV/PC",
       "Support តាម Telegram"
     ],
-    "gallery": [
-      "imgtab1/nf2.webp"
-    ]
   },
   "google_drive_2tb": {
-    "name_km": "Google Drive 2TB",
+    "name_km": "Gemini Ai +2TB",
     "price": "$5.00",
     "access": "1 Account",
     "connect": "60 នាទី+",
     "plan": "Monthly",
     "warranty": "7 ថ្ងៃ",
     "type": "Personal Account",
-    "cover": "p4.jpg",
+    "cover": "Product/p4.jpg",
     "benefits": [
       "Storage 2TB សម្រាប់ Backup ឯកសារ",
       "ប្រើលើគណនី Gmail ផ្ទាល់ខ្លួន",
       "គាំទ្រ Google Photos និង Google Docs",
-      "ធនធាន Gemini Pro មកពី Google"
+      "Ai ជំនាន់ថ្មីលំដាប់កំពូលរបស់ Google"
     ],
-    "gallery": [
-      "imgtab1/gdrive2.webp"
-    ]
   },
   "youtube_premium": {
     "name_km": "YouTube Premium",
@@ -234,15 +213,12 @@ document.addEventListener("DOMContentLoaded", () => {
     "plan": "1 ឆ្នាំ",
     "warranty": "1 ឆ្នាំ",
     "type": "Share Account",
-    "cover": "p6.jpg",
+    "cover": "Product/p6.jpg",
     "benefits": [
       "មើលគ្មាន Ads",
       "Background Play និង Download",
       "YouTube Music Premium"
     ],
-    "gallery": [
-      "imgtab1/ytpremium2.webp"
-    ]
   },
   "microsoft_office": {
     "name_km": "Microsoft Office 365",
@@ -252,14 +228,11 @@ document.addEventListener("DOMContentLoaded", () => {
     "plan": "1 ឆ្នាំ",
     "warranty": "1 ឆ្នាំ",
     "type": "Offcial Account",
-    "cover": "p8.jpg",
+    "cover": "Product/p8.jpg",
     "benefits": [
       "Word / Excel / PowerPoint",
       "សម្រាប់ការងារក្រុមហ៊ុន និងសាលា",
     ],
-    "gallery": [
-      "imgtab1/msoffice2.webp"
-    ]
   }
 };
 
