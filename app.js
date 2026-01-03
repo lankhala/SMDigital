@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "connect": "60 នាទី+",
     "plan": "1 ខែ",
     "warranty": "2 សប្តាហ៍",
-    "type": "Personal Account",
+    "type": "គណនីផ្ទាល់ខ្លួន",
     "cover": "p10.jpg",
     "benefits": [
       "ទទួលបានសញ្ញាសម្គាល់ខៀវ",
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "connect": "5-10 នាទី+",
     "plan": "1 ខែ",
     "warranty": "មួយខែពេញ",
-    "type": "Share Account",
+    "type": "គណនីផ្តល់ជូន",
     "cover": "p9.jpg",
     "benefits": [
       "Template និង Effect ពិសេស (Pro)",
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "connect": "10-20 នាទី+",
     "plan": "4 ខែ",
     "warranty": "2 សប្តាហ៍",
-    "type": "Personal Account",
+    "type": "គណនីផ្ទាល់ខ្លួន",
     "cover": "p7.jpg",
     "benefits": [
       "Photoshop រួមទាំងកម្មវិធីចាំបាច់សម្រាប់ Designer 20+",
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "connect": "1 នាទី+",
     "plan": "1 ឆ្នាំ",
     "warranty": "1 ខែ",
-    "type": "Personal Account",
+    "type": "គណនីផ្ទាល់ខ្លួន  ",
     "cover": "p1.jpg",
     "benefits": [
       "Canva Pro Gmail ផ្ទាល់ខ្លួន",
@@ -148,10 +148,10 @@ document.addEventListener("DOMContentLoaded", () => {
     "connect": "5-10 នាទី+",
     "plan": "1 ខែ",
     "warranty": "7 ថ្ងៃ",
-    "type": "Share Account",
+    "type": "គណនីផ្តល់ជូន",
     "cover": "p2.jpg",
     "benefits": [
-      "share account ប្រើមួយឧបករណ៍",
+      "គណនីផ្តល់ជូន ប្រើមួយឧបករណ៍",
       "អាចប្រើមុខងារទាំងអស់ក្នុង Plus",
       "Ai GPTs គ្រប់ Model",
       "GPT-5 (thinking, fast, auto)",
@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "connect": "5-10 នាទី+",
     "plan": "Monthly",
     "warranty": "1 ខែ",
-    "type": "Share Account",
+    "type": "គណនីផ្តល់ជូន",
     "cover": "p5.jpg",
     "benefits": [
       "មើល Movies/Series គុណភាព HD/4K",
@@ -196,7 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "connect": "60 នាទី+",
     "plan": "Monthly",
     "warranty": "7 ថ្ងៃ",
-    "type": "Personal Account",
+    "type": "គណនីផ្ទាល់ខ្លួន",
     "cover": "p4.jpg",
     "benefits": [
       "Storage 2TB សម្រាប់ Backup ឯកសារ",
@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "connect": "5-10 នាទី+",
     "plan": "1 ឆ្នាំ",
     "warranty": "1 ឆ្នាំ",
-    "type": "Share Account",
+    "type": "គណនីផ្តល់ជូន",
     "cover": "p6.jpg",
     "benefits": [
       "មើលគ្មាន Ads",
@@ -257,7 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     pmContent.innerHTML = `
       <img class="cover" src="${p.cover}" alt="${p.name_km}">
-      <h3>1. អំពីកម្មវិធី</h3>
+      <p>1. អំពីកម្មវិធី</p>
 
       <table class="simple-info-table">
         <tr><td>ឈ្មោះកម្មវិធី</td><td>${p.name_km}</td></tr>
@@ -269,7 +269,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <tr><td>ប្រភេទ</td><td>${p.type}</td></tr>
       </table>
 
-      <h3>2. អត្ថប្រយោជន៍</h3>
+      <p>2. អត្ថប្រយោជន៍</p>
       <ul class="fix-list">
         ${benefits}
       </ul>

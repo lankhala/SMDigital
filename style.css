@@ -28,6 +28,11 @@
   src: url('KantumruyPro-Bold.ttf') format('truetype');
   font-style: normal;
 }
+@font-face {
+  font-family: 'Khala SemiBold Khmer';
+  src: url('KantumruyPro-SemiBold.ttf') format('truetype');
+  font-style: normal;
+}
 
 /* Hide scrollbar */
 body::-webkit-scrollbar {
@@ -911,21 +916,17 @@ body.sheet-open{ overflow: hidden; }
   display: block;
   margin: 8px auto 14px;
 }
-.content-store h3{
-  margin: 16px 0 10px;
-  font-family: 'Khala Mid Khmer', system-ui, sans-serif;
-  font-size: 18px;
-  color: #343434;
-  text-align: left;
-}
+
 .content-store p{
-  color: #8d8d8d;
-  font-size: 16px;
+  color: #e6e6e6;
+  font-size: 17px;
   line-height: 1.8;
   margin: 0 0 12px;
   text-align: left;
   word-break: break-word;
   overflow-wrap: break-word;
+  margin-top: 10px;
+  font-family: 'Khala SemiBold Khmer', sans-serif;
 }
 
 /* table (2 columns, 600px max) */
@@ -993,9 +994,9 @@ body.sheet-open{ overflow: hidden; }
 /* dark mode */
 body.dark .pm-dialog{ background: #1f1f1f; color: #eee; }
 body.dark .pm-close{
-  background: rgba(31,31,31,0.90);
+  background: rgb(48, 48, 48);
   color: #eee;
-  border-color: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.12);
 }
 body.dark .simple-info-table{
   background: #1f1f1f;
