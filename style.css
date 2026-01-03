@@ -190,20 +190,6 @@ header {
   font-size: 14px;
   font-family: 'Khala Mid';
 }
-.contact-btn {
-  padding: 8px 12px;
-  background-color: #0091ff;
-  border-radius: 50px;
-  text-align: center;
-  margin: 20px auto;
-  max-width: 100px;
-}
-.contact-btn a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 14px;
-  font-family: 'Khala Mid Khmer', sans-serif;
-}
 
 /* Service Panel */
 .service-content {
