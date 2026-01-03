@@ -918,7 +918,7 @@ body.sheet-open{ overflow: hidden; }
 }
 
 .content-store p{
-  color: #e6e6e6;
+  color: #383838;
   font-size: 17px;
   line-height: 1.8;
   margin: 0 0 12px;
@@ -927,6 +927,9 @@ body.sheet-open{ overflow: hidden; }
   overflow-wrap: break-word;
   margin-top: 10px;
   font-family: 'Khala SemiBold Khmer', sans-serif;
+}
+body.dark .content-store p{
+  color: #e6e6e6;
 }
 
 /* table (2 columns, 600px max) */
