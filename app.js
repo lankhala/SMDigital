@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================
   const bannerImg = document.getElementById("randomBanner");
   if (bannerImg) {
-    const bannerList = ["banner/banner1.jpg", "banner/banner2.jpg", "banner/banner3.jpg"];
+    const bannerList = ["banner1.jpg", "banner2.jpg", "banner3.jpg"];
     const randomIndex = Math.floor(Math.random() * bannerList.length);
     bannerImg.src = bannerList[randomIndex];
   }
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "plan": "1 ខែ",
     "warranty": "2 សប្តាហ៍",
     "type": "Personal Account",
-    "cover": "Product/p10.jpg",
+    "cover": "p10.jpg",
     "benefits": [
       "ទទួលបានសញ្ញាសម្គាល់ខៀវ",
       "គណនីមានសុវត្ថិភាពខ្ពស់",
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "plan": "1 ខែ",
     "warranty": "មួយខែពេញ",
     "type": "Share Account",
-    "cover": "Product/p9.jpg",
+    "cover": "p9.jpg",
     "benefits": [
       "Template និង Effect ពិសេស (Pro)",
       "Export វីដេអូគ្មាន Watermark",
@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "plan": "4 ខែ",
     "warranty": "2 សប្តាហ៍",
     "type": "Personal Account",
-    "cover": "Product/p7.jpg",
+    "cover": "p7.jpg",
     "benefits": [
       "Photoshop រួមទាំងកម្មវិធីចាំបាច់សម្រាប់ Designer 20+",
       "Ai Credit រួមទាំង Adobe Fonts និង Stock",
@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "plan": "1 ឆ្នាំ",
     "warranty": "1 ខែ",
     "type": "Personal Account",
-    "cover": "Product/p1.jpg",
+    "cover": "p1.jpg",
     "benefits": [
       "Canva Pro Gmail ផ្ទាល់ខ្លួន",
       "ទាំងមុខងារ Education Plan",
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "plan": "1 ខែ",
     "warranty": "7 ថ្ងៃ",
     "type": "Share Account",
-    "cover": "Product/p2.jpg",
+    "cover": "p2.jpg",
     "benefits": [
       "share account ប្រើមួយឧបករណ៍",
       "អាចប្រើមុខងារទាំងអស់ក្នុង Plus",
@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "plan": "Lifetime",
     "warranty": "1 ខែ",
     "type": "License Key",
-    "cover": "Product/p3.jpg",
+    "cover": "p3.jpg",
     "benefits": [
       "Activate Windows 11 Pro ស្របច្បាប់",
       "ប្រើ Pro Features ពេញលេញ",
@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "plan": "Monthly",
     "warranty": "1 ខែ",
     "type": "Share Account",
-    "cover": "Product/p5.jpg",
+    "cover": "p5.jpg",
     "benefits": [
       "មើល Movies/Series គុណភាព HD/4K",
       "ប្រើបានលើទូរស័ព្ទ/TV/PC",
@@ -197,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "plan": "Monthly",
     "warranty": "7 ថ្ងៃ",
     "type": "Personal Account",
-    "cover": "Product/p4.jpg",
+    "cover": "p4.jpg",
     "benefits": [
       "Storage 2TB សម្រាប់ Backup ឯកសារ",
       "ប្រើលើគណនី Gmail ផ្ទាល់ខ្លួន",
@@ -213,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "plan": "1 ឆ្នាំ",
     "warranty": "1 ឆ្នាំ",
     "type": "Share Account",
-    "cover": "Product/p6.jpg",
+    "cover": "p6.jpg",
     "benefits": [
       "មើលគ្មាន Ads",
       "Background Play និង Download",
@@ -228,7 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "plan": "1 ឆ្នាំ",
     "warranty": "1 ឆ្នាំ",
     "type": "Offcial Account",
-    "cover": "Product/p8.jpg",
+    "cover": "p8.jpg",
     "benefits": [
       "Word / Excel / PowerPoint",
       "សម្រាប់ការងារក្រុមហ៊ុន និងសាលា",
