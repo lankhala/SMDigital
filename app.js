@@ -191,11 +191,11 @@ document.addEventListener("DOMContentLoaded", () => {
   },
   "google_drive_2tb": {
     "name_km": "Gemini Ai +2TB",
-    "price": "$5.00",
-    "access": "1 Account",
+    "price": "$9.00",
+    "access": "3 Devices",
     "connect": "60 នាទី+",
-    "plan": "Monthly",
-    "warranty": "7 ថ្ងៃ",
+    "plan": "1 ឆ្នាំ",
+    "warranty": "90 ថ្ងៃ",
     "type": "គណនីផ្ទាល់ខ្លួន",
     "cover": "p4.jpg",
     "benefits": [
