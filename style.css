@@ -1042,13 +1042,14 @@ body.dark ::-webkit-scrollbar-thumb:hover {
 .text-tab3 p{
   margin: 16px 0 10px;
   font-family: 'Khala bold Khmer', system-ui, sans-serif;
-  font-size: 18px;
+  font-size: 28px;
   text-align: center;
-
-  background: linear-gradient(90deg, #0a5fcd, #d000ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #00bbff;
 }
+@media (max-width: 480px){
+  .text-tab3 p{
+    font-size: 19px;
+  }}
 
 
 /*តារាងតម្លៃ*/
