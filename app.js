@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // ✅ Save last panel + scroll position
       localStorage.setItem("lastPanel", panelId);
       localStorage.setItem("lastScroll", window.scrollY);
-    }, 180);
+    }, 0);
   }
 
   buttons.forEach((btn) => {
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (lastScroll) {
       setTimeout(() => {
         window.scrollTo(0, parseInt(lastScroll, 10));
-      }, 200);
+      }, 100);
     }
   } else {
     showPanel("store");
@@ -52,11 +52,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const hour = now.getHours();
 
   // Example logic: 6am–18pm = light, otherwise dark
-  if (hour >= 6 && hour < 18) {
-    document.body.classList.remove("dark"); // daytime → light mode
-  } else {
-    document.body.classList.add("dark");    // nighttime → dark mode
-  }
+  // if (hour >= 6 && hour < 18) {
+  //   document.body.classList.remove("dark"); // daytime → light mode
+  // } else {
+  //   document.body.classList.add("dark");    // nighttime → dark mode
+  // }
 
   // ==========================
   // TAB3: Random Banner
@@ -69,172 +69,263 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ==========================
+  // HOME: hero + image upload (PNG with transparent background)
+  // ==========================
+  function initHomeHero() {
+    const uploadInput = document.getElementById("homeUpload");
+    const bgPicker = document.getElementById("homeBgPicker");
+    const thumbs = document.getElementById("homeThumbs");
+    const heroPreview = document.getElementById("heroPreview");
+    const heroImage = document.getElementById("heroImage");
+    const heroFileName = document.getElementById("heroFileName");
+
+    if (!uploadInput || !thumbs || !heroPreview || !heroImage) return;
+
+    // Set initial background color
+    if (bgPicker) {
+      heroPreview.style.backgroundColor = bgPicker.value || "#f5f5f7";
+      bgPicker.addEventListener("input", (e) => {
+        heroPreview.style.backgroundColor = e.target.value;
+      });
+    }
+
+    // Helper: set hero image from URL and update caption
+    function setHero(url, name) {
+      heroImage.src = url || "";
+      heroFileName.textContent = name || "(មិនទាន់ជ្រើសរើស)";
+    }
+
+    // Handle selected files (multiple)
+    uploadInput.addEventListener("change", (e) => {
+      const files = Array.from(e.target.files || []);
+      thumbs.innerHTML = "";
+
+      if (!files.length) {
+        setHero("", "");
+        return;
+      }
+
+      files.forEach((file, idx) => {
+        // Accept only PNG for transparent backgrounds as requested
+        if (!file.type || !file.type.includes("png")) {
+          const warn = document.createElement("div");
+          warn.className = "thumb warn";
+          warn.textContent = `Skipped non-PNG: ${file.name}`;
+          thumbs.appendChild(warn);
+          return;
+        }
+
+        const url = URL.createObjectURL(file);
+        const t = document.createElement("button");
+        t.type = "button";
+        t.className = "thumb";
+        t.setAttribute("aria-label", file.name);
+
+        const img = document.createElement("img");
+        img.src = url;
+        img.alt = file.name;
+
+        t.appendChild(img);
+        thumbs.appendChild(t);
+
+        // Click thumbnail to set hero
+        t.addEventListener("click", () => {
+          setHero(url, file.name);
+        });
+
+        // Auto-select first image
+        if (idx === 0) {
+          setHero(url, file.name);
+        }
+
+        // Revoke object URL when image is unloaded (cleanup)
+        img.addEventListener("load", () => {
+          // keep URL until user navigates away; optionally revoke later
+        });
+      });
+    });
+
+    // If someone clicks a thumbnail that was created earlier (future-proof)
+    thumbs.addEventListener("click", (e) => {
+      const btn = e.target.closest(".thumb");
+      if (!btn) return;
+      const img = btn.querySelector("img");
+      if (img) {
+        setHero(img.src, img.alt || "");
+      }
+    });
+  }
+
+  // Initialize home hero right away (panel may be hidden initially)
+  initHomeHero();
+
+  // ==========================
   // PRODUCT SHEET (Same layout, different data)
   // ==========================
   const PRODUCTS = {
-  "facebook_verify": {
-    "name_km": "Facebook Verify",
-    "price": "$4.99",
-    "access": "1 Account/Page",
-    "connect": "60 នាទី+",
-    "plan": "1 ខែ",
-    "warranty": "2 សប្តាហ៍",
-    "type": "គណនីផ្ទាល់ខ្លួន",
-    "cover": "p10.jpg",
-    "benefits": [
-      "ទទួលបានសញ្ញាសម្គាល់ខៀវ",
-      "គណនីមានសុវត្ថិភាពខ្ពស់",
-      "បង្កើនគណនីឲ្យទាក់ទាញជាងមុន",
-      "គណនីរបស់អ្នករឹងមាំ និងទទួលស្គាល់ពី Meta"
-    ],
-    // "gallery": [
-    //   "imgtab1/fbv.webp"
-    // ]
-  },
-  "capcut_pro": {
-    "name_km": "CapCut Pro",
-    "price": "$5.00",
-    "access": "1 ឧបករណ៍",
-    "connect": "5-10 នាទី+",
-    "plan": "1 ខែ",
-    "warranty": "មួយខែពេញ",
-    "type": "គណនីផ្តល់ជូន",
-    "cover": "p9.jpg",
-    "benefits": [
-      "Template និង Effect ពិសេស (Pro)",
-      "Export វីដេអូគ្មាន Watermark",
-      "គាំទ្រ 4K / HD Quality",
-      "Transition ស្អាត និង Smooth"
-    ],
-  },
-  "adobe_creative": {
-    "name_km": "Adobe Creative",
-    "price": "$11.00",
-    "access": "2 Devices",
-    "connect": "10-20 នាទី+",
-    "plan": "4 ខែ",
-    "warranty": "2 សប្តាហ៍",
-    "type": "គណនីផ្ទាល់ខ្លួន",
-    "cover": "p7.jpg",
-    "benefits": [
-      "Photoshop រួមទាំងកម្មវិធីចាំបាច់សម្រាប់ Designer 20+",
-      "Ai Credit រួមទាំង Adobe Fonts និង Stock",
-      "Cloud Storage 100GB",
-      "ដំណើការរហូតដល់២កុំព្យូទ័រ ក្នុងពេលតែមួយ"
-    ],
-  },
-  "canva_pro": {
-    "name_km": "Canva Pro",
-    "price": "$5.00",
-    "access": "5 Devices",
-    "connect": "1 នាទី+",
-    "plan": "1 ឆ្នាំ",
-    "warranty": "1 ខែ",
-    "type": "គណនីផ្ទាល់ខ្លួន  ",
-    "cover": "p1.jpg",
-    "benefits": [
-      "Canva Pro Gmail ផ្ទាល់ខ្លួន",
-      "ទាំងមុខងារ Education Plan",
-      "ប្រើក្នុង Pro Affinity Plan",
-      "៥ឧបករណ៍ក្នុងពេលតែមួយ",
-      "ប្រើពុម្ពអក្សរខ្មែរច្រើនជាង 500+",
-      "គម្រូមកស្រាប់រាប់លាន។"
-    ],
-  },
-  "chatgpt_plus": {
-    "name_km": "ChatGPT Plus",
-    "price": "$4.99",
-    "access": "1 Device",
-    "connect": "5-10 នាទី+",
-    "plan": "1 ខែ",
-    "warranty": "7 ថ្ងៃ",
-    "type": "គណនីផ្តល់ជូន",
-    "cover": "p2.jpg",
-    "benefits": [
-      "គណនីផ្តល់ជូន ប្រើមួយឧបករណ៍",
-      "អាចប្រើមុខងារទាំងអស់ក្នុង Plus",
-      "Ai GPTs គ្រប់ Model",
-      "GPT-5 (thinking, fast, auto)",
-      "ល្បឿនធ្វើការលឿនជាងធម្មតា x3ដង",
-      "ប្រើលើទូរស័ព្ទ ឬកុំព្យូទ័រ(ជាជម្រើស)"
-    ],
-  },
-  "windows_11_pro": {
-    "name_km": "Windows 11 Pro",
-    "price": "$5.00",
-    "access": "1 PC",
-    "connect": "10-20 នាទី+",
-    "plan": "Lifetime",
-    "warranty": "1 ខែ",
-    "type": "License Key",
-    "cover": "p3.jpg",
-    "benefits": [
-      "Activate Windows 11 Pro ស្របច្បាប់",
-      "ប្រើ Pro Features ពេញលេញ",
-      "Support បើមានបញ្ហា activate"
-    ],
-  },
-  "netflix_premium": {
-    "name_km": "Netflix Premium",
-    "price": "$3.00",
-    "access": "1 Profile",
-    "connect": "5-10 នាទី+",
-    "plan": "Monthly",
-    "warranty": "1 ខែ",
-    "type": "គណនីផ្តល់ជូន",
-    "cover": "p5.jpg",
-    "benefits": [
-      "មើល Movies/Series គុណភាព HD/4K",
-      "ប្រើបានលើទូរស័ព្ទ/TV/PC",
-      "Support តាម Telegram"
-    ],
-  },
-  "google_drive_2tb": {
-    "name_km": "Gemini Ai +2TB",
-    "price": "$9.00",
-    "access": "3 Devices",
-    "connect": "60 នាទី+",
-    "plan": "1 ឆ្នាំ",
-    "warranty": "90 ថ្ងៃ",
-    "type": "គណនីផ្ទាល់ខ្លួន",
-    "cover": "p4.jpg",
-    "benefits": [
-      "Storage 2TB សម្រាប់ Backup ឯកសារ",
-      "ប្រើលើគណនី Gmail ផ្ទាល់ខ្លួន",
-      "គាំទ្រ Google Photos និង Google Docs",
-      "Ai ជំនាន់ថ្មីលំដាប់កំពូលរបស់ Google"
-    ],
-  },
-  "youtube_premium": {
-    "name_km": "YouTube Premium",
-    "price": "$20.00",
-    "access": "1 Device",
-    "connect": "5-10 នាទី+",
-    "plan": "1 ឆ្នាំ",
-    "warranty": "1 ឆ្នាំ",
-    "type": "គណនីផ្តល់ជូន",
-    "cover": "p6.jpg",
-    "benefits": [
-      "មើលគ្មាន Ads",
-      "Background Play និង Download",
-      "YouTube Music Premium"
-    ],
-  },
-  "microsoft_office": {
-    "name_km": "Microsoft Office 365",
-    "price": "$20.00",
-    "access": "1 Account",
-    "connect": "10-20 នាទី+",
-    "plan": "1 ឆ្នាំ",
-    "warranty": "1 ឆ្នាំ",
-    "type": "Offcial Account",
-    "cover": "p8.jpg",
-    "benefits": [
-      "Word / Excel / PowerPoint",
-      "សម្រាប់ការងារក្រុមហ៊ុន និងសាលា",
-    ],
-  }
-};
+    "facebook_verify": {
+      "name_km": "Facebook Verify",
+      "price": "$4.99",
+      "access": "1 Account/Page",
+      "connect": "60 នាទី+",
+      "plan": "1 ខែ",
+      "warranty": "2 សប្តាហ៍",
+      "type": "គណនីផ្ទាល់ខ្លួន",
+      "cover": "p10.jpg",
+      "benefits": [
+        "ទទួលបានសញ្ញាសម្គាល់ខៀវ",
+        "គណនីមានសុវត្ថិភាពខ្ពស់",
+        "បង្កើនគណនីឲ្យទាក់ទាញជាងមុន",
+        "គណនីរបស់អ្នករឹងមាំ និងទទួលស្គាល់ពី Meta"
+      ],
+      // "gallery": [
+      //   "imgtab1/fbv.webp"
+      // ]
+    },
+    "capcut_pro": {
+      "name_km": "CapCut Pro",
+      "price": "$5.00",
+      "access": "1 ឧបករណ៍",
+      "connect": "5-10 នាទី+",
+      "plan": "1 ខែ",
+      "warranty": "មួយខែពេញ",
+      "type": "គណនីផ្តល់ជូន",
+      "cover": "p9.jpg",
+      "benefits": [
+        "Template និង Effect ពិសេស (Pro)",
+        "Export វីដេអូគ្មាន Watermark",
+        "គាំទ្រ 4K / HD Quality",
+        "Transition ស្អាត និង Smooth"
+      ],
+    },
+    "adobe_creative": {
+      "name_km": "Adobe Creative",
+      "price": "$11.00",
+      "access": "2 Devices",
+      "connect": "10-20 នាទី+",
+      "plan": "4 ខែ",
+      "warranty": "2 សប្តាហ៍",
+      "type": "គណនីផ្ទាល់ខ្លួន",
+      "cover": "p7.jpg",
+      "benefits": [
+        "Photoshop រួមទាំងកម្មវិធីចាំបាច់សម្រាប់ Designer 20+",
+        "Ai Credit រួមទាំង Adobe Fonts និង Stock",
+        "Cloud Storage 100GB",
+        "ដំណើការរហូតដល់២កុំព្យូទ័រ ក្នុងពេលតែមួយ"
+      ],
+    },
+    "canva_pro": {
+      "name_km": "Canva Pro",
+      "price": "$5.00",
+      "access": "5 Devices",
+      "connect": "1 នាទី+",
+      "plan": "1 ឆ្នាំ",
+      "warranty": "1 ខែ",
+      "type": "គណនីផ្ទាល់ខ្លួន  ",
+      "cover": "p1.jpg",
+      "benefits": [
+        "Canva Pro Gmail ផ្ទាល់ខ្លួន",
+        "ទាំងមុខងារ Education Plan",
+        "ប្រើក្នុង Pro Affinity Plan",
+        "៥ឧបករណ៍ក្នុងពេលតែមួយ",
+        "ប្រើពុម្ពអក្សរខ្មែរច្រើនជាង 500+",
+        "គម្រូមកស្រាប់រាប់លាន។"
+      ],
+    },
+    "chatgpt_plus": {
+      "name_km": "ChatGPT Plus",
+      "price": "$4.99",
+      "access": "1 Device",
+      "connect": "5-10 នាទី+",
+      "plan": "1 ខែ",
+      "warranty": "7 ថ្ងៃ",
+      "type": "គណនីផ្តល់ជូន",
+      "cover": "p2.jpg",
+      "benefits": [
+        "គណនីផ្តល់ជូន ប្រើមួយឧបករណ៍",
+        "អាចប្រើមុខងារទាំងអស់ក្នុង Plus",
+        "Ai GPTs គ្រប់ Model",
+        "GPT-5 (thinking, fast, auto)",
+        "ល្បឿនធ្វើការលឿនជាងធម្មតា x3ដង",
+        "ប្រើលើទូរស័ព្ទ ឬកុំព្យូទ័រ(ជាជម្រើស)"
+      ],
+    },
+    "windows_11_pro": {
+      "name_km": "Windows 11 Pro",
+      "price": "$5.00",
+      "access": "1 PC",
+      "connect": "10-20 នាទី+",
+      "plan": "Lifetime",
+      "warranty": "1 ខែ",
+      "type": "License Key",
+      "cover": "p3.jpg",
+      "benefits": [
+        "Activate Windows 11 Pro ស្របច្បាប់",
+        "ប្រើ Pro Features ពេញលេញ",
+        "Support បើមានបញ្ហា activate"
+      ],
+    },
+    "netflix_premium": {
+      "name_km": "Netflix Premium",
+      "price": "$3.00",
+      "access": "1 Profile",
+      "connect": "5-10 នាទី+",
+      "plan": "Monthly",
+      "warranty": "1 ខែ",
+      "type": "គណនីផ្តល់ជូន",
+      "cover": "p5.jpg",
+      "benefits": [
+        "មើល Movies/Series គុណភាព HD/4K",
+        "ប្រើបានលើទូរស័ព្ទ/TV/PC",
+        "Support តាម Telegram"
+      ],
+    },
+    "google_drive_2tb": {
+      "name_km": "Gemini Ai +2TB",
+      "price": "$9.00",
+      "access": "3 Devices",
+      "connect": "60 នាទី+",
+      "plan": "1 ឆ្នាំ",
+      "warranty": "90 ថ្ងៃ",
+      "type": "គណនីផ្ទាល់ខ្លួន",
+      "cover": "p4.jpg",
+      "benefits": [
+        "Storage 2TB សម្រាប់ Backup ឯកសារ",
+        "ប្រើលើគណនី Gmail ផ្ទាល់ខ្លួន",
+        "គាំទ្រ Google Photos និង Google Docs",
+        "Ai ជំនាន់ថ្មីលំដាប់កំពូលរបស់ Google"
+      ],
+    },
+    "youtube_premium": {
+      "name_km": "YouTube Premium",
+      "price": "$20.00",
+      "access": "1 Device",
+      "connect": "5-10 នាទី+",
+      "plan": "1 ឆ្នាំ",
+      "warranty": "1 ឆ្នាំ",
+      "type": "គណនីផ្តល់ជូន",
+      "cover": "p6.jpg",
+      "benefits": [
+        "មើលគ្មាន Ads",
+        "Background Play និង Download",
+        "YouTube Music Premium"
+      ],
+    },
+    "microsoft_office": {
+      "name_km": "Microsoft Office 365",
+      "price": "$20.00",
+      "access": "1 Account",
+      "connect": "10-20 នាទី+",
+      "plan": "1 ឆ្នាំ",
+      "warranty": "1 ឆ្នាំ",
+      "type": "Offcial Account",
+      "cover": "p8.jpg",
+      "benefits": [
+        "Word / Excel / PowerPoint",
+        "សម្រាប់ការងារក្រុមហ៊ុន និងសាលា",
+      ],
+    }
+  };
 
   const productModal = document.getElementById("productModal");
   const pmContent = document.getElementById("pmContent");
@@ -362,7 +453,3 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
-
-
-
-

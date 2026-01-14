@@ -53,8 +53,8 @@ header {
   left: 0;
   width: 100%;
   height: 50px;
-  background-color: #ffffffe5;
-  backdrop-filter: blur(50px);
+  background-color: #ffffffc1;
+  backdrop-filter: blur(20px);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -164,7 +164,7 @@ header {
   margin: 0 auto;
 }
 .item {
-  background-color: #ffffffec;
+  background-color: #e7e7e7ec;
   border-radius: 10px;
   overflow: hidden;
   transition: transform 0.2s ease;
@@ -226,7 +226,7 @@ body.dark .item img {
 }
 
 /* Overlay */
-#overlay {
+/* #overlay {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
@@ -238,7 +238,7 @@ body.dark .item img {
 }
 #overlay.active {
   opacity: 1;
-}
+} */
 
 .text-welcome {
   text-align: center;
@@ -255,7 +255,7 @@ body.dark .item img {
 
 
 
-
+/* 
 
 #panelOverlay {
   position: fixed;
@@ -270,7 +270,7 @@ body.dark .item img {
 #panelOverlay.active {
   opacity: 1;
   pointer-events: auto;
-}
+} */
 
 
 
@@ -362,7 +362,7 @@ body.dark .service-box {
 .works-grid img {
   width: 100%;
   height: auto;         /* natural height */
-  margin-bottom: 5px;  /* spacing between images vertically */
+  margin-bottom: 50px;  /* spacing between images vertically */
   display: block;
   border-radius: 6px;
 }
@@ -370,8 +370,8 @@ body.dark .service-box {
 /* ✅ Responsive for phone */
 @media (max-width: 490px){
   .works-grid {
-    column-count: 2;    /* mobile: 2 columns */
-    column-gap: 8px;
+    column-count: 1;    /* mobile: 2 columns */
+    column-gap: 0px;
   }
   .last-works {
   max-width: 99%;
@@ -379,7 +379,7 @@ body.dark .service-box {
 }
 .works-grid img {
   margin-bottom: 5px;  /* spacing between images vertically */
-  width: 184px;
+  width: 100%;
   height: auto;
 }
 }
@@ -1104,3 +1104,168 @@ body.dark .simple-info-table td:first-child {
 body.dark .simple-info-table td:last-child {
   color: #cfcfcf;
 }
+
+
+
+
+
+
+
+
+/* --- existing stylesheet above unchanged --- */
+
+/* (existing stylesheet unchanged at top) */
+/* ... paste your existing CSS here up to the product-sheet styles ... */
+
+/* --- additions / overrides for home hero --- */
+
+.home-hero {
+  margin-top: 22px;
+  padding: 24px 16px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.home-hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.hero-left {
+  padding: 8px 12px;
+}
+.hero-title {
+  font-family: 'Khala Mid', sans-serif;
+  font-size: 36px;
+  margin: 0 0 8px;
+  color: #111;
+}
+.hero-sub {
+  color: #444;
+  font-size: 16px;
+  margin: 0 0 18px;
+  line-height: 1.5;
+}
+
+.hero-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #111827;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.upload-btn input[type="file"]{
+  display: none;
+}
+
+.color-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid rgba(15,23,42,0.06);
+}
+.color-label input[type="color"]{
+  width: 36px;
+  height: 28px;
+  border: none;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.thumbs {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.thumb {
+  border: 1px solid rgba(15,23,42,0.08);
+  width: 86px;
+  height: 86px;
+  border-radius: 8px;
+  padding: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  cursor: pointer;
+}
+.thumb img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.thumb.warn{
+  width: auto;
+  padding: 8px 10px;
+  font-size: 13px;
+  color: #a00;
+  background: #fff4f4;
+  border-color: #f8d7da;
+}
+
+/* Hero preview (right column) */
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hero-preview{
+  width: 100%;
+  max-width: 560px;
+  height: 420px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(12, 20, 40, 0.08);
+  background-color: #f5f5f7; /* default */
+  position: relative;
+}
+.hero-preview img{
+  max-width: 85%;
+  max-height: 85%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+
+/* caption under hero */
+.hero-caption {
+  margin-top: 12px;
+  color: #333;
+  font-size: 14px;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+  .home-hero-inner { grid-template-columns: 1fr; }
+  .hero-preview { height: 320px; max-width: 100%; }
+  .hero-title { font-size: 28px; }
+}
+
+/* keep rest of your stylesheet below unchanged */
+/* (you already have the rest in your file) */
