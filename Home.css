@@ -1,0 +1,243 @@
+@font-face {
+  font-family: 'Khala Bold';
+  src: url('SF-Pro-Text-Bold.otf') format('true-type');
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Khala Regular';
+  src: url('SF-Pro-Text-Regular.otf') format('true-type');
+  font-style: normal;
+}
+/* =========================== Global Layout & Typography =========================== */
+body {
+  margin: 0;
+  font-family: 'Khala Regular', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #ffffff;
+  color: #111;
+}
+
+/* =========================== Home Promo Layout =========================== */
+.home-promos {
+  max-width: 2000px;       /* expand until 2000px */
+  width: 100%;             /* full width */
+  margin: 40px auto;
+  padding: 0;              /* no side padding → full bleed */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;               /* spacing between sections */
+}
+
+/* Top Promo (Hero full bleed) */
+.promo-top {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;               /* spacing between boxes */
+  padding: 0 8px;         /* keep side padding for lower boxes */
+  display: flex;
+  justify-content: center;
+}
+.promo-top .promo-card {
+  width: 100%;
+  max-width: 2000px;       /* limit hero box to 2000px */
+  padding: 40px 0 20px 0;  /* remove left/right padding */
+}
+
+.promo-top1 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;               /* spacing between boxes */
+  padding: 0 8px;         /* keep side padding for lower boxes */
+  display: flex;
+  justify-content: center;
+}
+.promo-top1 .promo-card {
+  width: 100%;
+  max-width: 2000px;       /* limit hero box to 2000px */
+  padding: 40px 0 20px 0;  /* remove left/right padding */
+}
+
+/* Bottom Row (Fitness+ & MacBook Pro) */
+.promo-bottom {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;               /* spacing between boxes */
+  padding: 0 8px;         /* keep side padding for lower boxes */
+}
+
+/* =========================== Promo Card Styling =========================== */
+.promo-card {
+  position: relative;
+  box-sizing: border-box;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-radius: 0;
+}
+.promo-card h2{
+    font-size: 50px;
+    color: #000;
+    font-family: 'Khala Bold', sans-serif;
+}
+.promo-card p{
+    font-size: 25px;
+    color: #000;
+    font-family: 'Khala Regular', sans-serif;
+}
+.promo-title {
+  font-size: 32px;
+  margin: 0;
+}
+.promo-desc {
+  font-size: 14px;
+  color: rgba(0,0,0,0.65);
+  line-height: 1.5;
+  margin: 10px 0;
+  max-width: 640px;        /* wider content text */
+}
+
+/* =========================== Buttons =========================== */
+.promo-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+.promo-btn {
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  text-decoration: none;
+  border: 1px solid rgba(0,0,0,0.1);
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+.promo-btn.primary {
+  background: #007aff;
+  color: #fff;
+  border: none;
+}
+.promo-btn.ghost {
+  background: transparent;
+  color: #111;
+}
+.promo-btn:hover {
+  opacity: 0.8;
+}
+
+/* =========================== Image Area =========================== */
+.promo-media {
+  margin-top: 20px;
+}
+.promo-media img {
+    margin-top: 20px;
+  max-width: 70%;
+  height: auto;
+  object-fit: contain;
+  background: transparent;
+}
+
+/* =========================== Background Variants =========================== */
+.bg-light1 {
+  /* fallback solid color for very old browsers */
+  background-color: #007aff;
+  background-image: linear-gradient(to bottom, #ADDCEF 0%, #F5F5F7 100%);
+  color: #fff;
+}
+.bg-light { background: #F3F4F6; }
+.bg-dark { background: #000; color: #fff; }
+.bg-dark .promo-desc,
+.bg-dark .promo-btn.ghost { color: #eee; }
+.bg-dark .promo-btn.primary { background: #0b74ff; }
+
+/* =========================== Footer (Dark Mode Default) =========================== */
+.site-footer {
+  background: #000; /* dark mode default */
+  padding: 40px 0;
+  font-size: 14px;
+  color: #ccc;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Top line text */
+.footer-legal {
+  max-width: 1100px;
+  margin: 0 auto 24px;
+  font-size: 13px;
+  color: #aaa;
+  line-height: 1.6;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 12px;
+}
+
+/* Columns */
+.footer-inner {
+  max-width: 1100px;
+  margin: 24px auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.footer-col h4 {
+  margin-bottom: 8px;
+  font-size: 15px;
+  color: #eee;
+}
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer-col li { margin-bottom: 6px; }
+.footer-col li a {
+  color: #aaa;
+  text-decoration: none;
+  display: inline-block;
+  padding: 2px 0;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+.footer-col li a:hover {
+  text-decoration: underline;
+}
+/* Bottom line */
+.footer-bottom {
+  max-width: 1100px;
+  margin: 32px auto 0;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 13px;
+  color: #aaa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-bottom p{color: #aaa;}
+.footer-left { font-weight: 600; }
+.footer-right {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.footer-right a {
+  color: #0b74ff;
+  text-decoration: none;
+}
+.footer-right a:hover { text-decoration: underline; }
+
+/* =========================== Responsive =========================== */
+@media (max-width: 900px) {
+  .promo-bottom { grid-template-columns: 1fr; }
+  .promo-title { font-size: 24px; }
+  .promo-desc { font-size: 13px; }
+  .promo-card { min-height: 360px; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+}
+
+/* =========================== Utility Backgrounds =========================== */
+.bg-card-blue { background: #f0f4ff; }
+.bg-card-gray { background: #f9f9f9; }
+.bg-card-black { background: #000; color: #fff; }
