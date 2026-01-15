@@ -163,25 +163,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // PRODUCT SHEET (Same layout, different data)
   // ==========================
   const PRODUCTS = {
-    "facebook_verify": {
-      "name_km": "Facebook Verify",
-      "price": "$4.99",
-      "access": "1 Account/Page",
-      "connect": "60 នាទី+",
-      "plan": "1 ខែ",
-      "warranty": "2 សប្តាហ៍",
-      "type": "គណនីផ្ទាល់ខ្លួន",
-      "cover": "p10.jpg",
-      "benefits": [
-        "ទទួលបានសញ្ញាសម្គាល់ខៀវ",
-        "គណនីមានសុវត្ថិភាពខ្ពស់",
-        "បង្កើនគណនីឲ្យទាក់ទាញជាងមុន",
-        "គណនីរបស់អ្នករឹងមាំ និងទទួលស្គាល់ពី Meta"
-      ],
-      // "gallery": [
-      //   "imgtab1/fbv.webp"
-      // ]
-    },
     "capcut_pro": {
       "name_km": "CapCut Pro",
       "price": "$5.00",
