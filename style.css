@@ -33,6 +33,11 @@
   src: url('KantumruyPro-SemiBold.ttf') format('truetype');
   font-style: normal;
 }
+@font-face {
+  font-family: 'Khala Battambang';
+  src: url('Khmer\ OS\ Battambang\ Regular.ttf') format('truetype');
+  font-style: normal;
+}
 
 /* Hide scrollbar */
 body::-webkit-scrollbar {
@@ -43,7 +48,7 @@ body::-webkit-scrollbar {
 body {
   margin: 0;
   font-family: 'Khala Regular', sans-serif;
-  background-color: #ebebeb;
+  background-color: #D9D9D9;
 }
 
 /* Header */
@@ -53,7 +58,7 @@ header {
   left: 0;
   width: 100%;
   height: 50px;
-  background-color: #ffffffc1;
+  background-color: #ffffffb1;
   backdrop-filter: blur(20px);
   display: flex;
   align-items: center;
@@ -89,10 +94,8 @@ header {
   padding: 0 25px;           /* ✅ balanced padding */
   position: relative;
 }
-.tool-btn:hover {
-  background-color: #f2f2f2;
-  transition: 0.2s;
-  border-radius: 5px;
+tool-btn:hover {
+   filter: brightness(0) saturate(100%) invert(32%) sepia(90%) saturate(600%) hue-rotate(190deg) brightness(105%) contrast(95%);
 }
 
 .tool-btn img {
@@ -164,7 +167,7 @@ header {
   margin: 0 auto;
 }
 .item {
-  background-color: #e7e7e7ec;
+  background-color: #ffffffec;
   border-radius: 10px;
   overflow: hidden;
   transition: transform 0.2s ease;
@@ -204,7 +207,7 @@ body.dark .item img {
 }
 .info p {
   font-size: 14px;
-  font-family: 'Khala Regular Khmer';
+  font-family: 'Khala battambang';
   color: #666;
   margin: 0 0 5px;
 }
@@ -215,7 +218,7 @@ body.dark .item img {
 .info span{
   color: #0099ff;
   font-size: 14px;
-  font-family: 'Khala Mid khmer';
+  font-family: 'Khala bold';
 }
 
 
@@ -328,7 +331,7 @@ body.dark .service-box {
   border-radius: 8px;
   overflow: hidden;
 }
-.service-banner img {
+service-banner img {
   width: 100%;
   height: auto;
   object-fit: cover;
@@ -1041,10 +1044,10 @@ body.dark ::-webkit-scrollbar-thumb:hover {
 /* Tab3 */
 .text-tab3 p{
   margin: 16px 0 10px;
-  font-family: 'Khala bold Khmer', system-ui, sans-serif;
+  font-family: 'Khala Battambang', sans-serif;
   font-size: 28px;
   text-align: center;
-  color: #00bbff;
+  color: #636363;
 }
 @media (max-width: 480px){
   .text-tab3 p{
@@ -1318,15 +1321,6 @@ body.dark .simple-info-table td:last-child {
   src: url('SF-Pro-Text-Regular.otf') format('true-type');
   font-style: normal;
 }
-/* =========================== Global Layout & Typography =========================== */
-body {
-  margin: 0;
-  font-family: 'Khala Regular', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: #ffffff;
-  color: #111;
-}
 
 /* =========================== Home Promo Layout =========================== */
 .home-promos {
@@ -1343,9 +1337,9 @@ body {
 /* Top Promo (Hero full bleed) */
 .promo-top {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   gap: 8px;               /* spacing between boxes */
-  padding: 0 8px;         /* keep side padding for lower boxes */
+  padding: 0 0px;         /* keep side padding for lower boxes */
   display: flex;
   justify-content: center;
 }
@@ -1551,3 +1545,124 @@ body {
 .bg-card-blue { background: #f0f4ff; }
 .bg-card-gray { background: #f9f9f9; }
 .bg-card-black { background: #000; color: #fff; }
+
+/* ========================
+
+
+=
+   HOME-SPECIFIC: Mobile-only overrides
+   Only targets elements inside the Home panel (#home).
+   This block ensures the home panel shows one product/card per row on phones
+   and adjusts typography for better readability on small screens.
+   It does NOT change the store panel or global .box behavior.
+*/
+@media (max-width: 480px) {
+  /* Make any .box inside the #home panel a single-column layout (1 item per row) */
+  #home .box {
+    grid-template-columns: 1fr !important;
+    gap: 10px;
+    padding: 8px;
+    margin: 0 auto;
+  }
+
+  /* If home has items that reuse .item class, make them taller and images consistent */
+  #home .item {
+    border-radius: 10px;
+    overflow: hidden;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffffec;
+  }
+
+  #home .item img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+  }
+
+  /* Larger, clearer text for home panel */
+  #home .info h3,
+  #home .hp-item .info h3,
+  #home .item .info h3 {
+    font-size: 18px !important;
+    color: #222;
+    line-height: 1.2;
+  }
+
+  #home .info p,
+  #home .hp-item .info p,
+  #home .item .info p {
+    font-size: 14px !important;
+    color: #444;
+  }
+
+  #home .info span,
+  #home .hp-item .info span,
+  #home .item .info span {
+    font-size: 14px !important;
+    font-weight: 600;
+    color: #007bff;
+  }
+
+  /* Adjust promo cards inside home to be more compact and legible on phones */
+  #home .promo-card {
+    padding: 18px;
+    min-height: auto;
+    align-items: flex-start;
+    text-align: left;
+  }
+  #home .promo-card h2,
+  #home .promo-title {
+    font-size: 20px;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  #home .promo-card p,
+  #home .promo-desc {
+    font-size: 14px;
+    margin-bottom: 10px;
+    max-width: 100%;
+  }
+  #home .promo-media img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 12px;
+  }
+
+  /* Hero preview adjustments inside home */
+  #home .home-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  #home .hero-preview {
+    height: 300px;
+    max-width: 100%;
+    border-radius: 14px;
+  }
+  #home .hero-title {
+    font-size: 26px;
+  }
+  #home .hero-sub {
+    font-size: 14px;
+  }
+
+  /* Slightly increase tappable area for buttons in home */
+  #home .promo-btn,
+  #home .btn,
+  #home .upload-btn,
+  #home .btn-store-info {
+    padding: 12px 14px;
+    font-size: 15px;
+  }
+
+  /* Footer text size within home (if present) */
+  #home .footer-legal,
+  #home .footer-bottom p {
+    font-size: 13px;
+  }
+}
+
+/* End of file */
