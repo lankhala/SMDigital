@@ -1,15 +1,18 @@
-/* app.js (original content preserved, with a small appended block near the end to
-   add copy/inspect prevention and the mobile-friendly behavior is controlled via CSS) */
+/* app.js — single top-right mode toggle; home removed behavior preserved.
+   Includes product sheet logic, random banner, persistence for last panel and UI mode,
+   smooth color-transition when toggling theme, and the protection script at the end.
+*/
 
 document.addEventListener("DOMContentLoaded", () => {
-  // =========================
-  // PANEL SWITCHING (Store / Home / Service)
-  // =========================
+  // PANEL SWITCHING (Store / Service)
   const buttons = document.querySelectorAll(".tool-btn");
   const panels = document.querySelectorAll(".panel");
   const panelOverlay = document.getElementById("panelOverlay");
 
   function showPanel(panelId) {
+    if (!panelId) return;
+    if (!document.getElementById(panelId)) return;
+
     if (panelOverlay) panelOverlay.classList.add("active");
 
     setTimeout(() => {
@@ -23,21 +26,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (panelOverlay) panelOverlay.classList.remove("active");
 
-      // ✅ Save last panel + scroll position
       localStorage.setItem("lastPanel", panelId);
       localStorage.setItem("lastScroll", window.scrollY);
     }, 0);
   }
 
+  // Attach click only to buttons that have a data-panel
   buttons.forEach((btn) => {
-    btn.addEventListener("click", () => showPanel(btn.dataset.panel));
+    const panelId = btn.dataset.panel;
+    if (!panelId) return;
+    btn.addEventListener("click", () => showPanel(panelId));
   });
 
-  // ✅ Restore last panel + scroll position
+  // Restore last panel + scroll position
   const lastPanel = localStorage.getItem("lastPanel");
   const lastScroll = localStorage.getItem("lastScroll");
 
-  if (lastPanel) {
+  if (lastPanel && document.getElementById(lastPanel)) {
     showPanel(lastPanel);
     if (lastScroll) {
       setTimeout(() => {
@@ -48,22 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     showPanel("store");
   }
 
-  // ==========================
-  // AUTO MODE BASED ON TIME
-  // ==========================
-  const now = new Date();
-  const hour = now.getHours();
-
-  // Example logic: 6am–18pm = light, otherwise dark
-  // if (hour >= 6 && hour < 18) {
-  //   document.body.classList.remove("dark"); // daytime → light mode
-  // } else {
-  //   document.body.classList.add("dark");    // nighttime → dark mode
-  // }
-
-  // ==========================
-  // TAB3: Random Banner
-  // ==========================
+  // RANDOM BANNER (service)
   const bannerImg = document.getElementById("randomBanner");
   if (bannerImg) {
     const bannerList = ["banner1.jpg", "banner2.jpg", "banner3.jpg"];
@@ -71,100 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     bannerImg.src = bannerList[randomIndex];
   }
 
-  // ==========================
-  // HOME: hero + image upload (PNG with transparent background)
-  // ==========================
-  function initHomeHero() {
-    const uploadInput = document.getElementById("homeUpload");
-    const bgPicker = document.getElementById("homeBgPicker");
-    const thumbs = document.getElementById("homeThumbs");
-    const heroPreview = document.getElementById("heroPreview");
-    const heroImage = document.getElementById("heroImage");
-    const heroFileName = document.getElementById("heroFileName");
-
-    if (!uploadInput || !thumbs || !heroPreview || !heroImage) return;
-
-    // Set initial background color
-    if (bgPicker) {
-      heroPreview.style.backgroundColor = bgPicker.value || "#f5f5f7";
-      bgPicker.addEventListener("input", (e) => {
-        heroPreview.style.backgroundColor = e.target.value;
-      });
-    }
-
-    // Helper: set hero image from URL and update caption
-    function setHero(url, name) {
-      heroImage.src = url || "";
-      heroFileName.textContent = name || "(មិនទាន់ជ្រើសរើស)";
-    }
-
-    // Handle selected files (multiple)
-    uploadInput.addEventListener("change", (e) => {
-      const files = Array.from(e.target.files || []);
-      thumbs.innerHTML = "";
-
-      if (!files.length) {
-        setHero("", "");
-        return;
-      }
-
-      files.forEach((file, idx) => {
-        // Accept only PNG for transparent backgrounds as requested
-        if (!file.type || !file.type.includes("png")) {
-          const warn = document.createElement("div");
-          warn.className = "thumb warn";
-          warn.textContent = `Skipped non-PNG: ${file.name}`;
-          thumbs.appendChild(warn);
-          return;
-        }
-
-        const url = URL.createObjectURL(file);
-        const t = document.createElement("button");
-        t.type = "button";
-        t.className = "thumb";
-        t.setAttribute("aria-label", file.name);
-
-        const img = document.createElement("img");
-        img.src = url;
-        img.alt = file.name;
-
-        t.appendChild(img);
-        thumbs.appendChild(t);
-
-        // Click thumbnail to set hero
-        t.addEventListener("click", () => {
-          setHero(url, file.name);
-        });
-
-        // Auto-select first image
-        if (idx === 0) {
-          setHero(url, file.name);
-        }
-
-        // Revoke object URL when image is unloaded (cleanup)
-        img.addEventListener("load", () => {
-          // keep URL until user navigates away; optionally revoke later
-        });
-      });
-    });
-
-    // If someone clicks a thumbnail that was created earlier (future-proof)
-    thumbs.addEventListener("click", (e) => {
-      const btn = e.target.closest(".thumb");
-      if (!btn) return;
-      const img = btn.querySelector("img");
-      if (img) {
-        setHero(img.src, img.alt || "");
-      }
-    });
-  }
-
-  // Initialize home hero right away (panel may be hidden initially)
-  initHomeHero();
-
-  // ==========================
-  // PRODUCT SHEET (Same layout, different data)
-  // ==========================
+  // PRODUCTS DATA (used by product sheet)
   const PRODUCTS = {
     "capcut_pro": {
       "name_km": "CapCut Pro",
@@ -193,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "cover": "p7.jpg",
       "benefits": [
         "Photoshop រួមទាំងកម្មវិធីចាំបាច់សម្រាប់ Designer 20+",
-        "Ai Credit រួមទាំង Adobe Fonts និង Stock",
+        "Ai Credit រួមទាំងAdobe Fonts និង Stock",
         "Cloud Storage 100GB",
         "ដំណើការរហូតដល់២កុំព្យូទ័រ ក្នុងពេលតែមួយ"
       ],
@@ -205,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "connect": "1 នាទី+",
       "plan": "1 ឆ្នាំ",
       "warranty": "1 ខែ",
-      "type": "គណនីផ្ទាល់ខ្លួន  ",
+      "type": "គណនីផ្ទាល់ខ្លួន",
       "cover": "p1.jpg",
       "benefits": [
         "Canva Pro Gmail ផ្ទាល់ខ្លួន",
@@ -245,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "cover": "p3.jpg",
       "benefits": [
         "Activate Windows 11 Pro ស្របច្បាប់",
-        "ប្រើ Pro Features ពេញលេញ",
+        "ប្រើ Pro Features ពេញចលនា",
         "Support បើមានបញ្ហា activate"
       ],
     },
@@ -311,6 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  // PRODUCT MODAL (sheet)
   const productModal = document.getElementById("productModal");
   const pmContent = document.getElementById("pmContent");
   const storeBox = document.querySelector("#store .box");
@@ -356,7 +254,6 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
 
-    // Buy button action (you can change link later)
     const buyBtn = document.getElementById("pmBuyBtn");
     if (buyBtn) {
       buyBtn.onclick = () => window.open("https://t.me/smservicekh", "_blank", "noopener");
@@ -386,7 +283,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // expose globally so other scripts (home.js) can call if needed
     window.openSheet = openSheet;
 
     function closeSheet() {
@@ -412,14 +308,12 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(finish, 450);
     }
 
-    // Click product card → open
     storeBox.addEventListener("click", (e) => {
       const card = e.target.closest(".item.product-open");
       if (!card) return;
       openSheet(card.dataset.product || "");
     });
 
-    // Keyboard open (Enter/Space)
     storeBox.addEventListener("keydown", (e) => {
       const card = e.target.closest(".item.product-open");
       if (!card) return;
@@ -429,7 +323,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Close handlers
     if (closeBtn) closeBtn.addEventListener("click", closeSheet);
     if (backdrop) backdrop.addEventListener("click", closeSheet);
 
@@ -439,101 +332,122 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-});
+  // DARK / LIGHT MODE TOGGLE (single top-right #modeToggle)
+  const modeBtn = document.getElementById('modeToggle');
 
-/* ===========================
-   HOME / small-screen inspector & copy protection
-   - appended at bottom so it loads after DOMContentLoaded handlers above
-   =========================== */
+  function applyMode(mode, save = true) {
+    const isDark = mode === 'dark';
+    document.body.classList.toggle('dark', isDark);
+    document.documentElement.setAttribute('data-color-scheme', isDark ? 'dark' : 'light');
+    if (save) localStorage.setItem('uiMode', isDark ? 'dark' : 'light');
+  }
 
-(function () {
-  // Apply protection after DOMContentLoaded
-  function applyProtection() {
-    // Add no-select class to body to help prevent selection/touch-callout (can be toggled if needed)
-    document.body.classList.add('no-select');
+  // Smooth toggleMode: add a temporary 'color-transition' class so the color change animates both ways
+  let transitionTimeout = null;
+  function toggleMode() {
+    // add transition helper to <html>
+    document.documentElement.classList.add('color-transition');
 
-    // Prevent context menu (right-click)
-    document.addEventListener('contextmenu', function (e) {
-      try { e.preventDefault(); } catch (err) {}
-    }, { capture: true });
+    // force a reflow so the transition class takes effect before we change the theme
+    void document.documentElement.offsetWidth;
 
-    // Prevent copy / cut / paste
-    ['copy','cut','paste'].forEach(evt => {
-      document.addEventListener(evt, function (e) {
+    const current = localStorage.getItem('uiMode') || (document.body.classList.contains('dark') ? 'dark' : 'light');
+    const next = current === 'dark' ? 'light' : 'dark';
+    applyMode(next, true);
+
+    // clear previous timeout if any
+    if (transitionTimeout) clearTimeout(transitionTimeout);
+    // remove the helper class after the animation finishes (match to CSS duration ~360ms)
+    transitionTimeout = setTimeout(() => {
+      document.documentElement.classList.remove('color-transition');
+      transitionTimeout = null;
+    }, 420); // slightly longer than CSS duration to ensure completion
+  }
+
+  // restore saved mode at load (no animation)
+  const saved = localStorage.getItem('uiMode');
+  if (saved === 'dark' || saved === 'light') {
+    applyMode(saved, false);
+  }
+
+  if (modeBtn) {
+    modeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleMode();
+    });
+    modeBtn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleMode();
+      }
+    });
+  }
+
+  // Protection script (unchanged behavior)
+  (function () {
+    function applyProtection() {
+      document.body.classList.add('no-select');
+
+      document.addEventListener('contextmenu', function (e) {
         try { e.preventDefault(); } catch (err) {}
       }, { capture: true });
-    });
 
-    // Prevent selectstart and dragstart
-    document.addEventListener('selectstart', function (e) {
-      try { e.preventDefault(); } catch (err) {}
-    }, { capture: true });
-    document.addEventListener('dragstart', function (e) {
-      try { e.preventDefault(); } catch (err) {}
-    }, { capture: true });
+      ['copy','cut','paste'].forEach(evt => {
+        document.addEventListener(evt, function (e) {
+          try { e.preventDefault(); } catch (err) {}
+        }, { capture: true });
+      });
 
-    // Keydown handler to block common DevTools shortcuts
-    function keyHandler(e) {
-      // F12
-      if (e.key === 'F12' || e.keyCode === 123) {
-        e.preventDefault && e.preventDefault();
-        triggerBlock('F12 detected');
-        return false;
+      document.addEventListener('selectstart', function (e) {
+        try { e.preventDefault(); } catch (err) {}
+      }, { capture: true });
+      document.addEventListener('dragstart', function (e) {
+        try { e.preventDefault(); } catch (err) {}
+      }, { capture: true });
+
+      function keyHandler(e) {
+        if (e.key === 'F12' || e.keyCode === 123) {
+          e.preventDefault && e.preventDefault();
+          triggerBlock('F12 detected');
+          return false;
+        }
+        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C' || e.key === 'i' || e.key === 'j' || e.key === 'c')) {
+          e.preventDefault && e.preventDefault();
+          triggerBlock('DevTools shortcut detected');
+          return false;
+        }
+        if (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.key === 'S' || e.key === 's')) {
+          e.preventDefault && e.preventDefault();
+          triggerBlock('Source/save shortcut detected');
+          return false;
+        }
       }
 
-      // Ctrl+Shift+I / Ctrl+Shift+J / Ctrl+Shift+C
-      if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C' || e.key === 'i' || e.key === 'j' || e.key === 'c')) {
-        e.preventDefault && e.preventDefault();
-        triggerBlock('DevTools shortcut detected');
-        return false;
-      }
+      document.addEventListener('keydown', keyHandler, { capture: true });
 
-      // Ctrl+U (view source), Ctrl+S (save), Ctrl+Shift+S
-      if (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.key === 'S' || e.key === 's')) {
-        e.preventDefault && e.preventDefault();
-        triggerBlock('Source/save shortcut detected');
-        return false;
+      let lastOuterHeight = window.outerHeight;
+      window.addEventListener('resize', function () {
+        if (Math.abs(window.outerHeight - lastOuterHeight) > 150) {
+          triggerBlock('Window resized (possible devtools)');
+        }
+        lastOuterHeight = window.outerHeight;
+      });
+
+      function triggerBlock(reason) {
+        try { console.warn('Protection triggered:', reason); } catch (e) {}
+        try {
+          document.documentElement.innerHTML = '<head><meta charset="utf-8"><title>Blocked</title></head><body style="display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#111;color:#fff;font-family:system-ui,Arial;"><div style="max-width:680px;padding:24px;text-align:center;"><h1 style="margin:0 0 12px;font-size:22px;">ការចូលដំណើរការ ត្រូវបានបិទ</h1><p style="margin:0 0 18px;color:#ccc">យើងបានរកឃើញការព្យាយាមបើក Developer Tools / Inspect Element។ សូមទោស — ទំព័រនេះបានបិទសម្រាប់សុវត្ថិភាព។</p></div></body>';
+        } catch (err) {}
+        try { window.location.href = 'about:blank'; } catch (err) {}
+        try { window.close(); } catch (err) {}
       }
     }
 
-    document.addEventListener('keydown', keyHandler, { capture: true });
-
-    // Also detect opening devtools via visibilitychange heuristic or resize (not reliable but extra)
-    let lastOuterHeight = window.outerHeight;
-    window.addEventListener('resize', function () {
-      // If outerHeight decreases significantly it might be devtools opening
-      if (Math.abs(window.outerHeight - lastOuterHeight) > 150) {
-        triggerBlock('Window resized (possible devtools)');
-      }
-      lastOuterHeight = window.outerHeight;
-    });
-
-    // Block action: replace content + attempt to close / redirect
-    function triggerBlock(reason) {
-      try {
-        console.warn('Protection triggered:', reason);
-      } catch (e) {}
-
-      // Replace visible content with a blocked message
-      try {
-        document.documentElement.innerHTML = '<head><meta charset="utf-8"><title>Blocked</title></head><body style="display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#111;color:#fff;font-family:system-ui,Arial;"><div style="max-width:680px;padding:24px;text-align:center;"><h1 style="margin:0 0 12px;font-size:22px;">ការចូលដំណើរការ ត្រូវបានបិទ</h1><p style="margin:0 0 18px;color:#ccc">យើងបានរកឃើញការព្យាយាមបើក Developer Tools / Inspect Element។ សូមទោស — ទំព័រនេះបានបិទសម្រាប់សុវត្ថិភាព។</p></div></body>';
-      } catch (err) {}
-
-      // Try to redirect to about:blank (may be blocked)
-      try {
-        window.location.href = 'about:blank';
-      } catch (err) {}
-
-      // Attempt to close the window (will only work if opened by script)
-      try {
-        window.close();
-      } catch (err) {}
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', applyProtection);
+    } else {
+      applyProtection();
     }
-  }
+  })();
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', applyProtection);
-  } else {
-    applyProtection();
-  }
-})();
+}); // DOMContentLoaded end

@@ -229,19 +229,8 @@ body.dark .item img {
 }
 
 /* Overlay */
-/* #overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background-color: #e4e4e4;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s ease;
-  z-index: 2000;
-}
-#overlay.active {
-  opacity: 1;
-} */
+
+/* ... panelOverlay styles may be added as needed ... */
 
 .text-welcome {
   text-align: center;
@@ -253,27 +242,6 @@ body.dark .item img {
 .panel img {
   width: 100%;
 }
-
-
-
-
-
-/* 
-
-#panelOverlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background-color: #e1e1e1;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-  z-index: 2000;
-}
-#panelOverlay.active {
-  opacity: 1;
-  pointer-events: auto;
-} */
 
 
 
@@ -517,19 +485,6 @@ service-banner img {
     margin-bottom: 20px;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 a { text-decoration: none; }
 
@@ -834,12 +789,6 @@ a { text-decoration: none; }
   .info-grid{ grid-template-columns: 1fr; }
 }
 
-
-
-
-
-
-
 /* =========================
    PRODUCT SHEET (Slide from right + opacity)
    - No background dim/blur
@@ -1054,7 +1003,6 @@ body.dark ::-webkit-scrollbar-thumb:hover {
     font-size: 19px;
   }}
 
-
 /*តារាងតម្លៃ*/
 /* table (modern clean style) */
 .simple-info-table {
@@ -1108,208 +1056,6 @@ body.dark .simple-info-table td:last-child {
   color: #cfcfcf;
 }
 
-
-
-
-
-
-
-
-/* --- existing stylesheet above unchanged --- */
-
-/* (existing stylesheet unchanged at top) */
-/* ... paste your existing CSS here up to the product-sheet styles ... */
-
-/* --- additions / overrides for home hero --- */
-
-.home-hero {
-  margin-top: 22px;
-  padding: 24px 16px;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  box-sizing: border-box;
-}
-
-.home-hero-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px;
-  align-items: center;
-}
-
-.hero-left {
-  padding: 8px 12px;
-}
-.hero-title {
-  font-family: 'Khala Mid', sans-serif;
-  font-size: 36px;
-  margin: 0 0 8px;
-  color: #111;
-}
-.hero-sub {
-  color: #444;
-  font-size: 16px;
-  margin: 0 0 18px;
-  line-height: 1.5;
-}
-
-.hero-controls {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
-}
-
-.upload-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #111827;
-  color: #fff;
-  padding: 8px 12px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 700;
-}
-.upload-btn input[type="file"]{
-  display: none;
-}
-
-.color-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 10px;
-  border-radius: 8px;
-  background: #fff;
-  border: 1px solid rgba(15,23,42,0.06);
-}
-.color-label input[type="color"]{
-  width: 36px;
-  height: 28px;
-  border: none;
-  padding: 0;
-  background: transparent;
-  cursor: pointer;
-}
-
-.thumbs {
-  margin-top: 16px;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.thumb {
-  border: 1px solid rgba(15,23,42,0.08);
-  width: 86px;
-  height: 86px;
-  border-radius: 8px;
-  padding: 6px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: #fff;
-  cursor: pointer;
-}
-.thumb img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  display: block;
-}
-.thumb.warn{
-  width: auto;
-  padding: 8px 10px;
-  font-size: 13px;
-  color: #a00;
-  background: #fff4f4;
-  border-color: #f8d7da;
-}
-
-/* Hero preview (right column) */
-.hero-right {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.hero-preview{
-  width: 100%;
-  max-width: 560px;
-  height: 420px;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  box-shadow: 0 18px 40px rgba(12, 20, 40, 0.08);
-  background-color: #f5f5f7; /* default */
-  position: relative;
-}
-.hero-preview img{
-  max-width: 85%;
-  max-height: 85%;
-  object-fit: contain;
-  display: block;
-  pointer-events: none;
-}
-
-/* caption under hero */
-.hero-caption {
-  margin-top: 12px;
-  color: #333;
-  font-size: 14px;
-}
-
-/* responsive */
-@media (max-width: 900px) {
-  .home-hero-inner { grid-template-columns: 1fr; }
-  .hero-preview { height: 320px; max-width: 100%; }
-  .hero-title { font-size: 28px; }
-}
-
-/* keep rest of your stylesheet below unchanged */
-/* (you already have the rest in your file) */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*home css*/
 @font-face {
   font-family: 'Khala Bold';
@@ -1322,139 +1068,10 @@ body.dark .simple-info-table td:last-child {
   font-style: normal;
 }
 
-/* =========================== Home Promo Layout =========================== */
-.home-promos {
-  max-width: 2000px;       /* expand until 2000px */
-  width: 100%;             /* full width */
-  margin: 40px auto;
-  padding: 0;              /* no side padding → full bleed */
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;               /* spacing between sections */
-}
-
-/* Top Promo (Hero full bleed) */
-.promo-top {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 8px;               /* spacing between boxes */
-  padding: 0 0px;         /* keep side padding for lower boxes */
-  display: flex;
-  justify-content: center;
-}
-.promo-top .promo-card {
-  width: 100%;
-  max-width: 2000px;       /* limit hero box to 2000px */
-  padding: 40px 0 20px 0;  /* remove left/right padding */
-}
-
-.promo-top1 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;               /* spacing between boxes */
-  padding: 0 8px;         /* keep side padding for lower boxes */
-  display: flex;
-  justify-content: center;
-}
-.promo-top1 .promo-card {
-  width: 100%;
-  max-width: 2000px;       /* limit hero box to 2000px */
-  padding: 40px 0 20px 0;  /* remove left/right padding */
-}
-
-/* Bottom Row (Fitness+ & MacBook Pro) */
-.promo-bottom {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;               /* spacing between boxes */
-  padding: 0 8px;         /* keep side padding for lower boxes */
-}
-
-/* =========================== Promo Card Styling =========================== */
-.promo-card {
-  position: relative;
-  box-sizing: border-box;
-  min-height: 500px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  border-radius: 0;
-}
-.promo-card h2{
-    font-size: 50px;
-    color: #000;
-    font-family: 'Khala Bold', sans-serif;
-}
-.promo-card p{
-    font-size: 25px;
-    color: #000;
-    font-family: 'Khala Regular', sans-serif;
-}
-.promo-title {
-  font-size: 32px;
-  margin: 0;
-}
-.promo-desc {
-  font-size: 14px;
-  color: rgba(0,0,0,0.65);
-  line-height: 1.5;
-  margin: 10px 0;
-  max-width: 640px;        /* wider content text */
-}
-
-/* =========================== Buttons =========================== */
-.promo-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-.promo-btn {
-  padding: 8px 16px;
-  border-radius: 999px;
-  font-size: 13px;
-  text-decoration: none;
-  border: 1px solid rgba(0,0,0,0.1);
-  transition: background 0.2s ease, opacity 0.2s ease;
-}
-.promo-btn.primary {
-  background: #007aff;
-  color: #fff;
-  border: none;
-}
-.promo-btn.ghost {
-  background: transparent;
-  color: #111;
-}
-.promo-btn:hover {
-  opacity: 0.8;
-}
-
-/* =========================== Image Area =========================== */
-.promo-media {
-  margin-top: 20px;
-}
-.promo-media img {
-    margin-top: 20px;
-  max-width: 70%;
-  height: auto;
-  object-fit: contain;
-  background: transparent;
-}
-
-/* =========================== Background Variants =========================== */
-.bg-light1 {
-  /* fallback solid color for very old browsers */
-  background-color: #007aff;
-  background-image: linear-gradient(to bottom, #ADDCEF 0%, #F5F5F7 100%);
-  color: #fff;
-}
-.bg-light { background: #F3F4F6; }
-.bg-dark { background: #000; color: #fff; }
-.bg-dark .promo-desc,
-.bg-dark .promo-btn.ghost { color: #eee; }
-.bg-dark .promo-btn.primary { background: #0b74ff; }
+/* =========================== Home Promo Layout (removed home panel-related layout from CSS)
+   Note: All home-specific layout blocks were removed to fully strip the home section.
+   The rest of the stylesheet (store/service/product sheet) remains intact.
+*/
 
 /* =========================== Footer (Dark Mode Default) =========================== */
 .site-footer {
@@ -1546,123 +1163,54 @@ body.dark .simple-info-table td:last-child {
 .bg-card-gray { background: #f9f9f9; }
 .bg-card-black { background: #000; color: #fff; }
 
-/* ========================
 
 
-=
-   HOME-SPECIFIC: Mobile-only overrides
-   Only targets elements inside the Home panel (#home).
-   This block ensures the home panel shows one product/card per row on phones
-   and adjusts typography for better readability on small screens.
-   It does NOT change the store panel or global .box behavior.
-*/
+/* Mode icon sizing — replace or place near the existing .mode-toggle rules in style.css */
+.mode-toggle {
+  width: 48px;    /* outer button size */
+  height: 48px;
+  padding: 6px;   /* space around the icon */
+  border-radius: 10px;
+}
+
+.mode-toggle img {
+  width: 28px;    /* actual icon (svg/png) size */
+  height: 28px;
+  display: block;
+  object-fit: contain;
+}
+
+/* Mobile tweak: slightly smaller on small screens */
 @media (max-width: 480px) {
-  /* Make any .box inside the #home panel a single-column layout (1 item per row) */
-  #home .box {
-    grid-template-columns: 1fr !important;
-    gap: 10px;
-    padding: 8px;
-    margin: 0 auto;
-  }
-
-  /* If home has items that reuse .item class, make them taller and images consistent */
-  #home .item {
-    border-radius: 10px;
-    overflow: hidden;
-    min-height: 220px;
-    display: flex;
-    flex-direction: column;
-    background-color: #ffffffec;
-  }
-
-  #home .item img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
+  .mode-toggle {
+    width: 40px;
+    height: 40px;
+    padding: 4px;
     border-radius: 8px;
-    display: block;
   }
-
-  /* Larger, clearer text for home panel */
-  #home .info h3,
-  #home .hp-item .info h3,
-  #home .item .info h3 {
-    font-size: 18px !important;
-    color: #222;
-    line-height: 1.2;
-  }
-
-  #home .info p,
-  #home .hp-item .info p,
-  #home .item .info p {
-    font-size: 14px !important;
-    color: #444;
-  }
-
-  #home .info span,
-  #home .hp-item .info span,
-  #home .item .info span {
-    font-size: 14px !important;
-    font-weight: 600;
-    color: #007bff;
-  }
-
-  /* Adjust promo cards inside home to be more compact and legible on phones */
-  #home .promo-card {
-    padding: 18px;
-    min-height: auto;
-    align-items: flex-start;
-    text-align: left;
-  }
-  #home .promo-card h2,
-  #home .promo-title {
-    font-size: 20px;
-    line-height: 1.15;
-    margin-bottom: 8px;
-  }
-  #home .promo-card p,
-  #home .promo-desc {
-    font-size: 14px;
-    margin-bottom: 10px;
-    max-width: 100%;
-  }
-  #home .promo-media img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 12px;
-  }
-
-  /* Hero preview adjustments inside home */
-  #home .home-hero-inner {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  #home .hero-preview {
-    height: 300px;
-    max-width: 100%;
-    border-radius: 14px;
-  }
-  #home .hero-title {
-    font-size: 26px;
-  }
-  #home .hero-sub {
-    font-size: 14px;
-  }
-
-  /* Slightly increase tappable area for buttons in home */
-  #home .promo-btn,
-  #home .btn,
-  #home .upload-btn,
-  #home .btn-store-info {
-    padding: 12px 14px;
-    font-size: 15px;
-  }
-
-  /* Footer text size within home (if present) */
-  #home .footer-legal,
-  #home .footer-bottom p {
-    font-size: 13px;
+  .mode-toggle img {
+    width: 22px;
+    height: 22px;
   }
 }
 
-/* End of file */
+
+
+
+
+
+/* Smooth theme transition helper
+   Paste this near the top of style.css (e.g., after :root or next to .mode-toggle rules) */
+html.color-transition,
+html.color-transition * {
+  transition:
+    background-color 420ms ease,
+    color 420ms ease,
+    border-color 420ms ease,
+    box-shadow 420ms ease,
+    fill 420ms ease,
+    stroke 420ms ease,
+    opacity 360ms ease;
+  transition-delay: 0s;
+  /* limit to properties commonly changed by theme to avoid jank */
+}
