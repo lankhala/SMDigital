@@ -1169,14 +1169,18 @@ body.dark .simple-info-table td:last-child {
 .mode-toggle {
   width: 48px;    /* outer button size */
   height: 48px;
-  padding: 6px;   /* space around the icon */
+  padding: 0px;   /* space around the icon */
   border-radius: 10px;
+  border: none;
+  background-color: #04785700;
+  margin-right: 10px;
 }
 
 .mode-toggle img {
   width: 28px;    /* actual icon (svg/png) size */
   height: 28px;
   display: block;
+  border: none;
   object-fit: contain;
 }
 
