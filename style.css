@@ -327,13 +327,13 @@ service-banner img {
 /* ✅ Masonry layout */
 .works-grid {
   column-count: 3;      /* desktop: 4 columns */
-  column-gap: 5px;    /* spacing between columns */
+  column-gap: 15px;    /* spacing between columns */
 }
 
 .works-grid img {
   width: 100%;
   height: auto;         /* natural height */
-  margin-bottom: 5px;  /* spacing between images vertically */
+  margin-bottom: 15px;  /* spacing between images vertically */
   display: block;
   border-radius: 6px;
 }
@@ -341,15 +341,15 @@ service-banner img {
 /* ✅ Responsive for phone */
 @media (max-width: 490px){
   .works-grid {
-    column-count: 1;    /* mobile: 2 columns */
-    column-gap: 0px;
+    column-count: 2;    /* mobile: 2 columns */
+    column-gap: 5px;
   }
   .last-works {
   max-width: 99%;
   margin: 7px -10px;
 }
 .works-grid img {
-  margin-bottom: 5px;  /* spacing between images vertically */
+  margin-bottom: 10px;  /* spacing between images vertically */
   width: 100%;
   height: auto;
 }
