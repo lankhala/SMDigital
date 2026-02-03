@@ -1,10 +1,7 @@
-/* app.js — single top-right mode toggle; home removed behavior preserved.
-   Includes product sheet logic, random banner, persistence for last panel and UI mode,
-   smooth color-transition when toggling theme, and the protection script at the end.
-*/
+/* app.js — adds Home panel behavior + keeps existing store/service/product sheet + theme + protection */
 
 document.addEventListener("DOMContentLoaded", () => {
-  // PANEL SWITCHING (Store / Service)
+  // PANEL SWITCHING (Home / Store / Service)
   const buttons = document.querySelectorAll(".tool-btn");
   const panels = document.querySelectorAll(".panel");
   const panelOverlay = document.getElementById("panelOverlay");
@@ -21,15 +18,20 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       buttons.forEach((btn) => {
-        btn.classList.toggle("active", btn.dataset.panel === panelId);
+        // only highlight buttons that actually map to a panel
+        const id = btn.dataset.panel;
+        btn.classList.toggle("active", id === panelId);
       });
 
       if (panelOverlay) panelOverlay.classList.remove("active");
 
-      localStorage.setItem("lastPanel", panelId);
-      localStorage.setItem("lastScroll", window.scrollY);
+      sessionStorage.setItem("lastPanel", panelId);
+      sessionStorage.setItem("lastScroll", window.scrollY);
     }, 0);
   }
+
+  // ✅ make accessible for Home internal buttons
+  window.showPanel = showPanel;
 
   // Attach click only to buttons that have a data-panel
   buttons.forEach((btn) => {
@@ -38,9 +40,39 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", () => showPanel(panelId));
   });
 
+  // ✅ Home "quick actions" buttons: data-go-panel="store|service|home"
+  
+document.querySelectorAll("[data-go-panel]").forEach((el) => {
+  el.addEventListener("click", () => {
+    const target = el.getAttribute("data-go-panel");
+    const scrollSel = el.getAttribute("data-scroll");
+
+    showPanel(target);
+    window.scrollTo(0, 0);
+
+    // optional: scroll to a section inside the target panel
+    if (scrollSel) {
+      setTimeout(() => {
+        const node = document.querySelector(scrollSel);
+        if (node) node.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 120);
+    }
+  });
+});
+
+// allow "Enter/Space" for home cards (keyboard)
+document.querySelectorAll(".home-card-link[role='button']").forEach((card) => {
+  card.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      card.click();
+    }
+  });
+});
+
   // Restore last panel + scroll position
-  const lastPanel = localStorage.getItem("lastPanel");
-  const lastScroll = localStorage.getItem("lastScroll");
+  const lastPanel = sessionStorage.getItem("lastPanel");
+  const lastScroll = sessionStorage.getItem("lastScroll");
 
   if (lastPanel && document.getElementById(lastPanel)) {
     showPanel(lastPanel);
@@ -50,7 +82,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 100);
     }
   } else {
-    showPanel("store");
+    // ✅ Default to Home (instead of Store)
+    showPanel("home");
   }
 
   // RANDOM BANNER (service)
@@ -342,29 +375,22 @@ document.addEventListener("DOMContentLoaded", () => {
     if (save) localStorage.setItem('uiMode', isDark ? 'dark' : 'light');
   }
 
-  // Smooth toggleMode: add a temporary 'color-transition' class so the color change animates both ways
   let transitionTimeout = null;
   function toggleMode() {
-    // add transition helper to <html>
     document.documentElement.classList.add('color-transition');
-
-    // force a reflow so the transition class takes effect before we change the theme
     void document.documentElement.offsetWidth;
 
     const current = localStorage.getItem('uiMode') || (document.body.classList.contains('dark') ? 'dark' : 'light');
     const next = current === 'dark' ? 'light' : 'dark';
     applyMode(next, true);
 
-    // clear previous timeout if any
     if (transitionTimeout) clearTimeout(transitionTimeout);
-    // remove the helper class after the animation finishes (match to CSS duration ~360ms)
     transitionTimeout = setTimeout(() => {
       document.documentElement.classList.remove('color-transition');
       transitionTimeout = null;
-    }, 420); // slightly longer than CSS duration to ensure completion
+    }, 420);
   }
 
-  // restore saved mode at load (no animation)
   const saved = localStorage.getItem('uiMode');
   if (saved === 'dark' || saved === 'light') {
     applyMode(saved, false);
@@ -450,4 +476,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })();
 
-}); // DOMContentLoaded end
+});

@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Khala Regular Khmer';
-  src: url('KantumruyPro-Medium.ttf') format('truetype');
+  src: url('Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,8 +14,8 @@
   src: url('SF-Pro-Text-Regular.otf') format('truetype');
 }
 @font-face {
-  font-family: 'Khala Mid Khmer';
-  src: url('KantumruyPro-Medium.ttf') format('truetype');
+  font-family: 'Khala Bold';
+  src: url('Krasar-Black.ttf') format('truetype');
   font-style: normal;
 }
 @font-face {
@@ -35,7 +35,7 @@
 }
 @font-face {
   font-family: 'Khala Battambang';
-  src: url('Khmer\ OS\ Battambang\ Regular.ttf') format('truetype');
+  src: url('Regular.ttf') format('truetype');
   font-style: normal;
 }
 
@@ -407,7 +407,7 @@ service-banner img {
 
   .header-center {
     margin-left: 0;
-    gap: 8px;
+    gap: 0px;
   }
 
   .tool-btn {
@@ -876,7 +876,7 @@ body.sheet-open{ overflow: hidden; }
 .content-store{
   max-width: 600px;
   margin: 0 auto;
-  font-family: 'Khala Regular Khmer', system-ui, sans-serif;
+  font-family: 'khala battambang', sans-serif;
 }
 .content-store .cover{
   width: 100%;
@@ -884,6 +884,7 @@ body.sheet-open{ overflow: hidden; }
   border-radius: 14px;
   display: block;
   margin: 8px auto 14px;
+  
 }
 
 .content-store p{
@@ -895,7 +896,7 @@ body.sheet-open{ overflow: hidden; }
   word-break: break-word;
   overflow-wrap: break-word;
   margin-top: 10px;
-  font-family: 'Khala SemiBold Khmer', sans-serif;
+  font-family: 'khala battambang', sans-serif;
 }
 body.dark .content-store p{
   color: #e6e6e6;
@@ -911,6 +912,7 @@ body.dark .content-store p{
   margin: 8px 0;
   line-height: 1.3;
   color: #666666;
+  
 }
 
 /* buy button */
@@ -923,7 +925,7 @@ body.dark .content-store p{
   color: #fff;
   border: none;
   margin: 18px 0 10px;
-  font-family: 'Khala Mid Khmer', system-ui, sans-serif;
+  font-family: 'khala battambang', sans-serif;
   cursor: pointer;
 }
 .btn-store-info:hover{ opacity: .92; }
@@ -993,7 +995,7 @@ body.dark ::-webkit-scrollbar-thumb:hover {
 /* Tab3 */
 .text-tab3 p{
   margin: 16px 0 10px;
-  font-family: 'Khala Battambang', sans-serif;
+  font-family: 'khala battambang', sans-serif;
   font-size: 24px;
   text-align: center;
   color: #8e8e8e;
@@ -1001,6 +1003,7 @@ body.dark ::-webkit-scrollbar-thumb:hover {
 @media (max-width: 480px){
   .text-tab3 p{
     font-size: 19px;
+    
   }}
 
 /*តារាងតម្លៃ*/
@@ -1009,7 +1012,7 @@ body.dark ::-webkit-scrollbar-thumb:hover {
   width: 100%;
   max-width: 640px;
   border-collapse: collapse;
-  font-family: 'Khala Regular Khmer', system-ui, sans-serif;
+  font-family: 'khala battambang', system-ui, sans-serif;
   font-size: 15.5px;
   background: #f9fafb;
   border-radius: 14px;
@@ -1034,7 +1037,7 @@ body.dark ::-webkit-scrollbar-thumb:hover {
 .simple-info-table td:last-child {
   width: 60%;
   color: #111827;
-  font-family: 'Khala SemiBold Khmer';
+  font-family: 'Khala battambang';
 }
 
 /* dark mode */
@@ -1218,3 +1221,629 @@ html.color-transition * {
   transition-delay: 0s;
   /* limit to properties commonly changed by theme to avoid jank */
 }
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   HOME PANEL (Simple + easy to update)
+   ========================= */
+#home .home-wrap{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.home-hero{
+  margin-top: 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.75);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 10px 26px rgba(2, 6, 23, 0.06);
+  overflow: hidden;
+}
+
+.home-hero-inner{
+  display: grid;
+  grid-template-columns: 1.25fr 0.9fr;
+  gap: 16px;
+  padding: 18px;
+}
+
+.home-hero-text h1{
+  margin: 0 0 10px;
+  font-family: 'Khala Mid', system-ui, sans-serif;
+  font-size: 26px;
+  line-height: 1.25;
+  color: #111827;
+}
+
+.home-brand{
+  color: #1877f2;
+}
+
+.home-lead{
+  margin: 0 0 14px;
+  font-family: 'khala battambang', system-ui, sans-serif;
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: #374151;
+}
+
+.home-actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 12px 0 10px;
+}
+
+.home-btn{
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: #fff;
+  color: #111827;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-family: 'Khala Mid Khmer', system-ui, sans-serif;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.home-btn.primary{
+  background: #1877f2;
+  border-color: rgba(24, 119, 242, 0.35);
+  color: #fff;
+}
+
+.home-mini{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.chip{
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  background: rgba(255,255,255,0.85);
+  color: #374151;
+}
+
+.home-hero-card .home-card{
+  background: rgba(249,250,251,0.95);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.home-card h3{
+  margin: 0 0 10px;
+  font-size: 16px;
+  font-family: 'Khala Mid Khmer', system-ui, sans-serif;
+  color: #111827;
+}
+
+.home-steps{
+  margin: 0;
+  padding-left: 18px;
+  color: #374151;
+  line-height: 1.7;
+  font-family: 'khala battambang', system-ui, sans-serif;
+  font-size: 14px;
+}
+
+.home-note{
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px dashed rgba(15, 23, 42, 0.18);
+  color: #374151;
+  font-family: 'khala battambang', system-ui, sans-serif;
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+
+.home-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.home-box{
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.home-box h4{
+  margin: 0 0 8px;
+  font-family: 'Khala Mid', system-ui, sans-serif;
+  color: #111827;
+}
+
+.home-box p{
+  margin: 0 0 12px;
+  font-family: 'khala battambang', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #374151;
+}
+
+.home-link{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: #fff;
+  color: #111827;
+  cursor: pointer;
+  font-weight: 800;
+  font-family: 'Khala Mid Khmer', system-ui, sans-serif;
+}
+
+.home-link.anchor{
+  text-decoration: none;
+}
+
+.home-faq{
+  margin-top: 14px;
+  background: rgba(255,255,255,0.75);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.home-faq h3{
+  margin: 0 0 10px;
+  font-family: 'Khala Mid Khmer', system-ui, sans-serif;
+  color: #111827;
+}
+
+.home-qa{
+  background: rgba(249,250,251,0.95);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin: 10px 0;
+}
+
+.home-qa summary{
+  cursor: pointer;
+  font-weight: 900;
+  font-family: 'Khala Mid Khmer', system-ui, sans-serif;
+  color: #111827;
+}
+
+.home-qa p{
+  margin: 8px 0 0;
+  font-family: 'khala battambang', system-ui, sans-serif;
+  color: #374151;
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.home-bottom-space{ height: 18px; }
+
+/* Dark mode support */
+body.dark #home .home-hero,
+body.dark #home .home-faq,
+body.dark #home .home-box{
+  background: rgba(20,20,20,0.65);
+  border-color: rgba(255,255,255,0.10);
+  box-shadow: none;
+}
+body.dark #home .home-hero-text h1,
+body.dark #home .home-card h3,
+body.dark #home .home-box h4,
+body.dark #home .home-faq h3,
+body.dark #
+
+
+
+/* =========================
+   HOME (Service Cards - Fullscreen Desktop)
+   ========================= */
+#home .home-wrap.home-full{
+  max-width: none;
+  margin: 0;
+  padding: 18px 18px 26px;
+  min-height: calc(100vh - var(--header-h));
+  display: flex;
+  align-items: center;
+}
+
+.home-services{
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.home-services-head h1{
+  margin: 0 0 8px;
+  font-family: 'Khala Bold', sans-serif;
+  font-size: 34px;
+  color: #111827;
+  letter-spacing: .2px;
+}
+.home-services-head p{
+  margin: 0 0 16px;
+  font-family: 'khala battambang', system-ui, sans-serif;
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: #374151;
+  max-width: 900px;
+}
+
+.home-cards{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.home-card-link{
+  background: rgba(255,255,255,0.86);
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  display: grid;
+  grid-template-rows: 170px 1fr;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.home-card-link:focus{
+  outline: 2px solid rgba(24, 119, 242, 0.45);
+  outline-offset: 2px;
+}
+.home-card-link:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(2, 6, 23, 0.10);
+  border-color: rgba(24, 119, 242, 0.20);
+}
+
+.home-card-media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.home-card-body{
+  padding: 14px 14px 16px;
+}
+.home-card-body h3{
+  margin: 0 0 8px;
+  font-family: 'Khala Mid', system-ui, sans-serif;
+  font-size: 18px;
+  color: #111827;
+}
+.home-card-body p{
+  margin: 0 0 12px;
+  font-family: 'khala battambang', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #374151;
+}
+.home-card-cta{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  background: rgba(24, 119, 242, 0.10);
+  color: #1d4ed8;
+  font-family: 'Khala Mid Khmer', system-ui, sans-serif;
+  font-weight: 800;
+}
+
+.home-tip{
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px dashed rgba(15, 23, 42, 0.22);
+  background: rgba(255,255,255,0.72);
+  color: #374151;
+  font-family: 'khala battambang', system-ui, sans-serif;
+  line-height: 1.7;
+}
+
+/* Dark mode */
+body.dark #home .home-wrap.home-full,
+body.dark .home-card-link,
+body.dark .home-tip{
+  background: rgba(20,20,20,0.60);
+  border-color: rgba(255,255,255,0.10);
+  box-shadow: none;
+}
+body.dark .home-services-head h1,
+body.dark .home-card-body h3{ color: #e5e7eb; }
+body.dark .home-services-head p,
+body.dark .home-card-body p,
+body.dark .home-tip{ color: #cbd5e1; }
+body.dark .home-card-cta{
+  background: rgba(37, 99, 235, 0.22);
+  color: #93c5fd;
+}
+
+/* Responsive */
+@media (max-width: 900px){
+  #home .home-wrap.home-full{ align-items: flex-start; }
+  .home-cards{ grid-template-columns: 1fr; }
+  .home-card-link{ grid-template-rows: 200px 1fr; }
+  .home-services-head h1{ font-size: 28px; }
+}
+
+/* =========================
+   SERVICE anchors (Design / Video)
+   ========================= */
+.service-section-head{
+  max-width: 1100px;
+  margin: 10px auto 0;
+  padding: 0 10px;
+}
+.service-section-head h3{
+  margin: 16px 0 6px;
+  font-family: 'Khala Mid Khmer', system-ui, sans-serif;
+  font-size: 20px;
+  color: #111827;
+}
+.service-section-head p{
+  margin: 0 0 10px;
+  font-family: 'khala battambang', system-ui, sans-serif;
+  color: #6b7280;
+  line-height: 1.7;
+  font-size: 14px;
+}
+body.dark .service-section-head h3{ color: #e5e7eb; }
+body.dark .service-section-head p{ color: #9ca3af; }
+
+.video-sample{
+  margin: 12px 0 10px;
+}
+.video-card{
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.86);
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  max-width: 1100px;
+}
+.video-card img{
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+.video-card-body h4{
+  margin: 0 0 6px;
+  font-family: 'Khala Mid', system-ui, sans-serif;
+  color: #111827;
+}
+.video-card-body p{
+  margin: 0;
+  font-family: 'khala battambang', system-ui, sans-serif;
+  color: #374151;
+  line-height: 1.7;
+  font-size: 14px;
+}
+body.dark .video-card{
+  background: rgba(20,20,20,0.60);
+  border-color: rgba(255,255,255,0.10);
+}
+body.dark .video-card-body h4{ color: #e5e7eb; }
+body.dark .video-card-body p{ color: #cbd5e1; }
+
+@media (max-width: 600px){
+  .video-card{ grid-template-columns: 1fr; }
+  .video-card img{ height: 190px; }
+}
+
+/* =========================
+   WEB PANEL
+   ========================= */
+#web .web-wrap{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 18px;
+}
+.web-hero{
+  margin-top: 12px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.80);
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  overflow: hidden;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 16px;
+}
+.web-hero h1{
+  margin: 0 0 10px;
+  font-family: 'Khala Mid', system-ui, sans-serif;
+  font-size: 28px;
+  color: #111827;
+}
+.web-hero p{
+  margin: 0 0 12px;
+  font-family: 'khala battambang', system-ui, sans-serif;
+  line-height: 1.75;
+  color: #374151;
+  font-size: 15px;
+}
+.web-actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 8px;
+}
+.web-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: #fff;
+  color: #111827;
+  font-family: 'Khala Mid Khmer', system-ui, sans-serif;
+  font-weight: 800;
+  cursor: pointer;
+}
+.web-btn.primary{
+  background: #1877f2;
+  color: #fff;
+  border-color: rgba(24, 119, 242, 0.35);
+}
+.web-badges{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.w-badge{
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  background: rgba(255,255,255,0.85);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12.5px;
+  color: #374151;
+  font-family: 'khala battambang', system-ui, sans-serif;
+}
+
+.web-card{
+  background: rgba(249,250,251,0.95);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 14px;
+  padding: 14px;
+}
+.web-card h3{
+  margin: 0 0 10px;
+  font-family: 'Khala Mid Khmer', system-ui, sans-serif;
+  color: #111827;
+}
+.web-card ul{
+  margin: 0;
+  padding-left: 18px;
+  color: #374151;
+  line-height: 1.7;
+  font-family: 'khala battambang', system-ui, sans-serif;
+}
+
+.web-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+}
+.web-box{
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  border-radius: 16px;
+  padding: 14px;
+}
+.web-box h4{
+  margin: 0 0 8px;
+  font-family: 'Khala Mid', system-ui, sans-serif;
+  color: #111827;
+}
+.web-box p{
+  margin: 0 0 10px;
+  font-family: 'khala battambang', system-ui, sans-serif;
+  color: #374151;
+  line-height: 1.7;
+  font-size: 14px;
+}
+.web-tags{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.web-tags span{
+  font-size: 12.5px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  background: rgba(24, 119, 242, 0.08);
+  color: #1d4ed8;
+  font-family: 'khala battambang', system-ui, sans-serif;
+}
+
+.web-process{
+  margin-top: 14px;
+  border-radius: 16px;
+  padding: 14px;
+  background: rgba(255,255,255,0.80);
+  border: 1px solid rgba(15, 23, 42, 0.10);
+}
+.web-process h3{
+  margin: 0 0 10px;
+  font-family: 'Khala Mid Khmer', system-ui, sans-serif;
+  color: #111827;
+}
+.web-process ol{
+  margin: 0;
+  padding-left: 18px;
+  color: #374151;
+  line-height: 1.8;
+  font-family: 'khala battambang', system-ui, sans-serif;
+}
+.web-space{ height: 18px; }
+
+/* Dark mode */
+body.dark #web .web-hero,
+body.dark .web-box,
+body.dark .web-process{
+  background: rgba(20,20,20,0.60);
+  border-color: rgba(255,255,255,0.10);
+}
+body.dark .web-hero h1,
+body.dark .web-card h3,
+body.dark .web-box h4,
+body.dark .web-process h3{ color: #e5e7eb; }
+body.dark .web-hero p,
+body.dark .web-card ul,
+body.dark .web-box p,
+body.dark .web-process ol{ color: #cbd5e1; }
+body.dark .w-badge{ background: rgba(20,20,20,0.55); border-color: rgba(255,255,255,0.10); color: #cbd5e1; }
+body.dark .web-card{ background: rgba(20,20,20,0.55); border-color: rgba(255,255,255,0.10); }
+body.dark .web-tags span{ background: rgba(37, 99, 235, 0.22); border-color: rgba(255,255,255,0.10); color: #93c5fd; }
+
+@media (max-width: 900px){
+  .web-hero{ grid-template-columns: 1fr; }
+  .web-grid{ grid-template-columns: 1fr; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -15,27 +15,26 @@
       <img src="logo.png" alt="Logo" />
     </div>
 
-    <div class="header-center">
-      <button class="tool-btn" data-panel="store" aria-label="store">
-        <img src="store.png" alt="store" />
-      </button>
+    
+<div class="header-center">
+  <!-- ✅ Home first -->
+  <button class="tool-btn" data-panel="home" aria-label="home">
+    <img src="home.png" alt="home" />
+  </button>
 
-      <!-- Home visual button (no panel behind it) -->
-      <button class="tool-btn" aria-label="home">
-        <img src="home.png" alt="home" />
-      </button>
+  <button class="tool-btn" data-panel="store" aria-label="store">
+    <img src="websiteicon.png" alt="store" />
+  </button>
 
-      <button class="tool-btn" data-panel="service" aria-label="service">
-        <img src="service.png" alt="service" />
-      </button>
-    </div>
+  <button class="tool-btn" data-panel="service" aria-label="service">
+    <img src="service.png" alt="service" />
+  </button>
 
-    <!-- Top-right: single mode toggle icon -->
-    <div class="header-right">
-      <button id="modeToggle" class="mode-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
-        <img src="mode.png" alt="mode" />
-      </button>
-    </div>
+  <!-- ✅ Web -->
+  <button class="tool-btn" data-panel="web" aria-label="web">
+    <img src="store.png" alt="web" />
+  </button>
+</div>
   </header>
 
   <div id="panelOverlay"></div>
@@ -43,7 +42,65 @@
   <div class="panel-container">
     <div id="overlay"></div>
 
-    <!-- Panel 1: Store (default) -->
+    
+<!-- ✅ Panel: Home (new) -->
+<div class="panel" id="home">
+  <div class="home-wrap home-full">
+    <section class="home-services">
+      <div class="home-services-head">
+        <h1>សេវាកម្ម <span class="home-brand">SM Digital</span></h1>
+        <p>យើងផ្តល់សេវាកម្មដើម្បីជួយបង្កើន Branding ល្អបំផុត</p>
+      </div>
+
+      <div class="home-cards">
+        <!-- Design -->
+        <article class="home-card-link" role="button" tabindex="0"
+                 data-go-panel="service" data-scroll="#designSection"
+                 aria-label="ទៅកាន់សេវាកម្ម Design">
+          <div class="home-card-media">
+            <img src="design.png" alt="Design Service" loading="lazy">
+          </div>
+          <div class="home-card-body">
+            <h3>Graphic Design</h3>
+            <p>Logo, Poster, Banner, Social Media, UI/UX និង Design សម្រាប់ brand/business។</p>
+            <span class="home-card-cta">ចូលមើល</span>
+          </div>
+        </article>
+
+        <!-- Video -->
+        <article class="home-card-link" role="button" tabindex="0"
+                 data-go-panel="service" data-scroll="#videoSection"
+                 aria-label="ទៅកាន់សេវាកម្ម Video Editing">
+          <div class="home-card-media">
+            <img src="video.png" alt="Video Editing Service" loading="lazy">
+          </div>
+          <div class="home-card-body">
+            <h3>Video Editing</h3>
+            <p>កាត់តវីដេអូ សម្រាប់ផ្សព្វផ្សាយជំរុញអាជីវកម្មរបស់អ្នក ដើម្បីបង្កើនអតិថិជនចំគោលដៅ។</p>
+            <span class="home-card-cta">ចូលមើល</span>
+          </div>
+        </article>
+
+        <!-- Web -->
+        <article class="home-card-link" role="button" tabindex="0"
+                 data-go-panel="web"
+                 aria-label="ទៅកាន់សេវាកម្ម Software License">
+          <div class="home-card-media">
+            <img src="license.png" alt="Software License Service" loading="lazy">
+          </div>
+          <div class="home-card-body">
+            <h3>Software License</h3>
+            <p>យើងផ្គត់ផ្គង់កម្មវិធីលំដាប់ខ្ពស់ តម្លៃសមរម្យ និងងាយស្រួលប្រើ រួមទាំង ChatGPT, Freepik Premium និងច្រើនទៀត។</p>
+            <span class="home-card-cta">ចូលមើល</span>
+          </div>
+        </article>
+      </div>
+
+    </section>
+  </div>
+</div>
+
+    <!-- Panel 1: Store (existing) -->
     <div class="panel" id="store">
       <div class="banner-top"></div>
       <div class="box">
@@ -97,13 +154,11 @@
           <img src="p10.jpg" alt="Microsoft Office 365">
           <div class="info"><h3>Express VPN</h3><p><span>$20.00</span> | គម្រោងមួយឆ្នាំ</p></div>
         </div>
-        
 
-        <!-- more items if needed -->
       </div>
     </div>
 
-    <!-- Panel 2: Service -->
+    <!-- Panel 2: Service (existing) -->
     <div class="panel" id="service">
 
       <div class="service-banner">
@@ -145,12 +200,87 @@
           <img src="Design (22).jpg" alt="Work 18" loading="lazy">
           <img src="Design (23).jpg" alt="Work 19" loading="lazy">
           <img src="Design (24).jpg" alt="Work 20" loading="lazy">
-          
-          <!-- add more images as needed -->
         </div>
       </section>
 
     </div>
+
+<!-- Panel 3: Web (new) -->
+<div class="panel" id="web">
+  <div class="web-wrap">
+    <section class="web-hero">
+      <div class="web-hero-text">
+        <h1>Website Development</h1>
+        <p>
+          យើងអភិវឌ្ឍគេហទំព័រ <b>Responsive</b> (Mobile/PC), ល្បឿនលឿន និងងាយអាប់ដេត។
+          សាកល្បងមើលមាតិកាឧទាហរណ៍ខាងក្រោម (អ្នកអាចកែបន្ថែមថ្ងៃក្រោយបានងាយ)។
+        </p>
+
+        <div class="web-actions">
+          <a class="web-btn primary" href="https://t.me/smservicekh" target="_blank" rel="noopener">ទាក់ទង Telegram</a>
+          <button class="web-btn" type="button" data-go-panel="home">ត្រឡប់ទៅ Home</button>
+        </div>
+
+        <div class="web-badges">
+          <span class="w-badge">✅ Responsive</span>
+          <span class="w-badge">✅ SEO Basic</span>
+          <span class="w-badge">✅ Fast Load</span>
+          <span class="w-badge">✅ Easy Update</span>
+        </div>
+      </div>
+
+      <div class="web-hero-card">
+        <div class="web-card">
+          <h3>អ្វីដែលយើងអាចធ្វើបាន</h3>
+          <ul>
+            <li>Landing Page / Portfolio / Company Website</li>
+            <li>Service/Store Page + Product Detail</li>
+            <li>Web App UI (Dashboard / Admin)</li>
+            <li>Custom UI/UX + Dark/Light Mode</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="web-grid">
+      <article class="web-box">
+        <h4>Package A — Landing Page</h4>
+        <p>សម្រាប់ promote brand / product, 1-3 sections, responsive, contact button (Telegram/Phone)។</p>
+        <div class="web-tags">
+          <span>1-2 days</span><span>SEO basic</span><span>Fast</span>
+        </div>
+      </article>
+
+      <article class="web-box">
+        <h4>Package B — Company Website</h4>
+        <p>About, Services, Portfolio, Contact, Gallery, responsive, domain & hosting guide។</p>
+        <div class="web-tags">
+          <span>3-7 days</span><span>Multi pages</span><span>Clean UI</span>
+        </div>
+      </article>
+
+      <article class="web-box">
+        <h4>Package C — Custom Web App</h4>
+        <p>Dashboard/Admin, form, CRUD, API connect (អាស្រ័យលើ requirement)។</p>
+        <div class="web-tags">
+          <span>7+ days</span><span>Custom</span><span>Scale</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="web-process">
+      <h3>ដំណើរការការងារ</h3>
+      <ol>
+        <li>ពិភាក្សា requirement + style (color/font/layout)</li>
+        <li>Mockup/Prototype (optional)</li>
+        <li>Develop + Responsive + Test</li>
+        <li>Deploy + Guide អាប់ដេត</li>
+      </ol>
+    </section>
+
+    <div class="web-space"></div>
+  </div>
+</div>
 
   </div>
 
