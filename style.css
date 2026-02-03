@@ -406,12 +406,12 @@ service-banner img {
   }
 
   .header-center {
-    margin-left: 0;
+    margin-right: 30px;
     gap: 0px;
   }
 
   .tool-btn {
-    padding: 0 20px;
+    padding: 0 22px;
   }
 
   .tool-btn img {
