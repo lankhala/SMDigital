@@ -3,14 +3,14 @@
 document.addEventListener("DOMContentLoaded", () => {
   // FEATURED APPS DATA
   const FEATURED_APPS = [
-    { URL: "https://t.me/SMdigitalkh", logo: "SMdigital.jpg" },
+    { id: "capcut_pro", name: "SM Digital", logo: "SMdigital.jpg", category: "video" },
     { id: "capcut_pro", name: "Design", logo: "pixkh.jpg", category: "video" },
     { id: "adobe_creative", name: "PNG Stock", logo: "pngstock.jpg", category: "design" },
-    { id: "chatgpt_plus", name: "Khmer Developer", logo: "khmerdeveloper.jpg", category: "ai" },
-    { id: "windows_11_pro", name: "Khmer Software", logo: "khmersoftware.jpg", category: "software" },
+    { id: "chatgpt_plus", name: "Developer", logo: "khmerdeveloper.jpg", category: "ai" },
+    { id: "windows_11_pro", name: "Software", logo: "khmersoftware.jpg", category: "software" },
     { id: "windows_11_pro", name: "Lan Khala", logo: "lankhala.jpg", category: "software" },
-    { id: "windows_11_pro", name: "បណ្ណាល័យឌីជីថល", logo: "digitallibrary.jpg", category: "software" },
-    { id: "", name: "Font Download", logo: "fontdownload.jpg", category: "" },
+    { id: "windows_11_pro", name: "បណ្ណាល័យ", logo: "digitallibrary.jpg", category: "software" },
+    { id: "", name: "Font", logo: "fontdownload.jpg", category: "" },
   ];
 
   // PANEL SWITCHING (Home / Store / Service)
