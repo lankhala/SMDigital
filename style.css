@@ -38,6 +38,10 @@
   src: url('Regular.ttf') format('truetype');
   font-style: normal;
 }
+@font-face {
+  font-family: 'SM Simple';
+  src: url('MiSansKhmer-Demibold.otf') format('truetype');
+}
 
 /* Hide scrollbar */
 body::-webkit-scrollbar {
@@ -48,7 +52,7 @@ body::-webkit-scrollbar {
 body {
   margin: 0;
   font-family: 'Khala Regular', sans-serif;
-  background-color: #D9D9D9;
+  background-color: #F4F4F4;
 }
 
 /* Header */
@@ -57,9 +61,9 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  height: 50px;
+  height: 45px;
   background-color: #ffffff;
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(25px);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -90,7 +94,7 @@ header {
   background: none;
   border: none;
   cursor: pointer;
-  height: 50px;
+  height: 45px;
   padding: 0 25px;           /* ✅ balanced padding */
   position: relative;
 }
@@ -406,12 +410,12 @@ service-banner img {
   }
 
   .header-center {
-    margin-right: 30px;
+    margin-left: 0;
     gap: 0px;
   }
 
   .tool-btn {
-    padding: 0 22px;
+    padding: 0 25px;
   }
 
   .tool-btn img {
@@ -721,8 +725,10 @@ a { text-decoration: none; }
 .tab-panel h3{
   margin: 6px 0 10px;
   font-size: 18px;
+  
 }
 .tab-panel p{ color: #374151; line-height: 1.75; }
+
 
 .info-grid{
   display: grid;
@@ -1473,19 +1479,12 @@ body.dark #
   margin: 0 auto;
 }
 
-.home-services-head h1{
-  margin: 0 0 8px;
-  font-family: 'Khala Bold', sans-serif;
-  font-size: 34px;
-  color: #111827;
-  letter-spacing: .2px;
-}
 .home-services-head p{
   margin: 0 0 16px;
   font-family: 'khala battambang', system-ui, sans-serif;
   font-size: 15.5px;
   line-height: 1.75;
-  color: #374151;
+  color: #ffffff;
   max-width: 900px;
 }
 
@@ -1493,26 +1492,8 @@ body.dark #
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 14px;
-}
+  margin-top: 10px;
 
-.home-card-link{
-  background: rgba(255,255,255,0.86);
-  border: 1px solid rgba(15, 23, 42, 0.10);
-  border-radius: 16px;
-  overflow: hidden;
-  cursor: pointer;
-  display: grid;
-  grid-template-rows: 170px 1fr;
-  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-}
-.home-card-link:focus{
-  outline: 2px solid rgba(24, 119, 242, 0.45);
-  outline-offset: 2px;
-}
-.home-card-link:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 16px 34px rgba(2, 6, 23, 0.10);
-  border-color: rgba(24, 119, 242, 0.20);
 }
 
 .home-card-media img{
@@ -1520,33 +1501,16 @@ body.dark #
   height: 100%;
   object-fit: cover;
   display: block;
+  border-radius: 15px;
 }
 .home-card-body{
   padding: 14px 14px 16px;
 }
-.home-card-body h3{
-  margin: 0 0 8px;
-  font-family: 'Khala Mid', system-ui, sans-serif;
-  font-size: 18px;
-  color: #111827;
-}
 .home-card-body p{
   margin: 0 0 12px;
-  font-family: 'khala battambang', system-ui, sans-serif;
-  font-size: 14px;
-  line-height: 1.7;
-  color: #374151;
-}
-.home-card-cta{
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 12px;
-  border-radius: 999px;
-  background: rgba(24, 119, 242, 0.10);
-  color: #1d4ed8;
-  font-family: 'Khala Mid Khmer', system-ui, sans-serif;
-  font-weight: 800;
+  font-family: 'SM Simple', sans-serif;
+  font-size: 16px;
+  color: #008aca;
 }
 
 .home-tip{
@@ -1839,10 +1803,262 @@ body.dark .web-tags span{ background: rgba(37, 99, 235, 0.22); border-color: rgb
 
 
 
+/* === SEARCH SECTION (HOME) === */
+.home-search-section {
+  max-width: 750px;
+  margin: 0 auto 20px;
+  padding: 0 16px;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 50px;
+  /* border: 1px solid rgba(15, 23, 42, 0.10); */
+  background:#e6e6e6;
+  padding: 8px 20px;
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); */
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: 'khala battambang', system-ui, sans-serif;
+  font-size: 16px;
+  padding: 4px 0;
+  outline: none;
+  color: #5b5b5b;
+}
+
+.search-input::placeholder {
+  color: #919191;
+}
+
+.search-btn {
+  background: none;
+  border: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50px;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.search-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+}
+
+.search-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+body.dark .search-container {
+  background: rgba(30, 30, 30, 0.90);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+
+body.dark .search-input {
+  color: #e0e0e0;
+}
+
+body.dark .search-input::placeholder {
+  color: #666;
+}
+
+/* === FEATURED BANNER === */
+.home-banner-featured {
+  margin-top: 1000px;
+  max-width: 400px;
+  margin: 30px auto 20px;
+  padding: 0 16px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.home-banner-featured img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 6;
+  object-fit: cover;
+  display: block;
+  border-radius: 20px;
+}
 
 
 
 
+
+/* === FEATURED APPS SECTION === */
+.home-featured-apps {
+  max-width: auto;
+  margin: 0 auto 2px;
+  padding: 0 0px;
+}
+
+.featured-apps-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 0px;
+  background-color: #00000000;
+}
+
+.featured-app-card {
+  background: rgba(92, 80, 80, 0);
+  border-radius: 14px;
+  padding: 12px;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.featured-app-card:hover {
+  background-color: #e6e6e6;
+}
+
+.featured-app-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.featured-app-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.featured-app-card h4 {
+  margin: 0;
+  font-family: 'Khala regular', system-ui, sans-serif;
+  font-size: 13px;
+  color: #000000;
+  line-height: 1.4;
+  font-weight: 100;
+}
+
+body.dark .featured-app-card {
+  background: rgba(30, 30, 30, 0.90);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+
+body.dark .featured-app-card h4 {
+  color: #e0e0e0;
+}
+
+body.dark .featured-app-logo {
+  background: #1a1a1a;
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #999;
+  padding: 20px;
+  font-family: 'khala battambang', system-ui, sans-serif;
+}
+
+body.dark .no-results {
+  color: #666;
+}
+
+/* === SCROLL TO TOP BUTTON === */
+.scroll-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e6e6e6;
+  border: none;
+  cursor: pointer;
+  z-index: 2000;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s;
+}
+
+.scroll-to-top:hover {
+  background-color: #0095ff;
+  transition: 0.5s;
+}
+
+.scroll-to-top img {
+  width: 20px;
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+
+body.dark .scroll-to-top {
+  background: #1877f2;
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.5);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 900px) {
+  .featured-apps-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .featured-apps-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .featured-app-card {
+    padding: 10px;
+  }
+
+  .featured-app-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .featured-app-card h4 {
+    font-size: 12px;
+  }
+
+  .search-container {
+    padding: 6px 10px;
+  }
+
+  .search-input {
+    font-size: 14px;
+  }
+
+  .scroll-to-top {
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+  }
+
+  .scroll-to-top img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Add rest of your existing style.css content below */
 
 
 

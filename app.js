@@ -1,6 +1,18 @@
-/* app.js — adds Home panel behavior + keeps existing store/service/product sheet + theme + protection */
+/* app.js — adds Home panel behavior + search + scroll-to-top + keeps existing store/service/product sheet + theme + protection */
 
 document.addEventListener("DOMContentLoaded", () => {
+  // FEATURED APPS DATA
+  const FEATURED_APPS = [
+    { URL: "https://t.me/SMdigitalkh", logo: "SMdigital.jpg" },
+    { id: "capcut_pro", name: "Design", logo: "pixkh.jpg", category: "video" },
+    { id: "adobe_creative", name: "PNG Stock", logo: "pngstock.jpg", category: "design" },
+    { id: "chatgpt_plus", name: "Khmer Developer", logo: "khmerdeveloper.jpg", category: "ai" },
+    { id: "windows_11_pro", name: "Khmer Software", logo: "khmersoftware.jpg", category: "software" },
+    { id: "windows_11_pro", name: "Lan Khala", logo: "lankhala.jpg", category: "software" },
+    { id: "windows_11_pro", name: "បណ្ណាល័យឌីជីថល", logo: "digitallibrary.jpg", category: "software" },
+    { id: "", name: "Font Download", logo: "fontdownload.jpg", category: "" },
+  ];
+
   // PANEL SWITCHING (Home / Store / Service)
   const buttons = document.querySelectorAll(".tool-btn");
   const panels = document.querySelectorAll(".panel");
@@ -18,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       buttons.forEach((btn) => {
-        // only highlight buttons that actually map to a panel
         const id = btn.dataset.panel;
         btn.classList.toggle("active", id === panelId);
       });
@@ -30,45 +41,39 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 0);
   }
 
-  // ✅ make accessible for Home internal buttons
   window.showPanel = showPanel;
 
-  // Attach click only to buttons that have a data-panel
   buttons.forEach((btn) => {
     const panelId = btn.dataset.panel;
     if (!panelId) return;
     btn.addEventListener("click", () => showPanel(panelId));
   });
 
-  // ✅ Home "quick actions" buttons: data-go-panel="store|service|home"
-  
-document.querySelectorAll("[data-go-panel]").forEach((el) => {
-  el.addEventListener("click", () => {
-    const target = el.getAttribute("data-go-panel");
-    const scrollSel = el.getAttribute("data-scroll");
+  document.querySelectorAll("[data-go-panel]").forEach((el) => {
+    el.addEventListener("click", () => {
+      const target = el.getAttribute("data-go-panel");
+      const scrollSel = el.getAttribute("data-scroll");
 
-    showPanel(target);
-    window.scrollTo(0, 0);
+      showPanel(target);
+      window.scrollTo(0, 0);
 
-    // optional: scroll to a section inside the target panel
-    if (scrollSel) {
-      setTimeout(() => {
-        const node = document.querySelector(scrollSel);
-        if (node) node.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 120);
-    }
+      if (scrollSel) {
+        setTimeout(() => {
+          const node = document.querySelector(scrollSel);
+          if (node) node.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 120);
+      }
+    });
   });
-});
 
-// allow "Enter/Space" for home cards (keyboard)
-document.querySelectorAll(".home-card-link[role='button']").forEach((card) => {
-  card.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      card.click();
-    }
+  document.querySelectorAll(".home-card-link[role='button']").forEach((card) => {
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        card.click();
+      }
+    });
   });
-});
 
   // Restore last panel + scroll position
   const lastPanel = sessionStorage.getItem("lastPanel");
@@ -82,8 +87,112 @@ document.querySelectorAll(".home-card-link[role='button']").forEach((card) => {
       }, 100);
     }
   } else {
-    // ✅ Default to Home (instead of Store)
     showPanel("home");
+  }
+
+  // ✅ FEATURED APPS RENDERING
+  function renderFeaturedApps() {
+    const grid = document.getElementById("featuredAppsGrid");
+    if (!grid) return;
+
+    grid.innerHTML = FEATURED_APPS.map(app => `
+      <div class="featured-app-card" data-app-id="${app.id}" role="button" tabindex="0">
+        <div class="featured-app-logo">
+          <img src="${app.logo}" alt="${app.name}" loading="lazy">
+        </div>
+        <h4>${app.name}</h4>
+      </div>
+    `).join("");
+
+    // Add click listeners to featured apps
+    grid.querySelectorAll(".featured-app-card").forEach(card => {
+      card.addEventListener("click", () => {
+        const appId = card.dataset.appId;
+        showPanel("store");
+        setTimeout(() => {
+          openSheet(appId);
+        }, 150);
+      });
+
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          card.click();
+        }
+      });
+    });
+  }
+
+  renderFeaturedApps();
+
+  // ✅ SEARCH FUNCTIONALITY
+  function performSearch(query) {
+    if (!query.trim()) {
+      renderFeaturedApps();
+      return;
+    }
+
+    const grid = document.getElementById("featuredAppsGrid");
+    if (!grid) return;
+
+    const filteredApps = FEATURED_APPS.filter(app => 
+      app.name.toLowerCase().includes(query.toLowerCase()) ||
+      app.category.toLowerCase().includes(query.toLowerCase())
+    );
+
+    if (filteredApps.length === 0) {
+      grid.innerHTML = '<p class="no-results">មិនមានលទ្ធផលដែលត្រូវគ្នា</p>';
+      return;
+    }
+
+    grid.innerHTML = filteredApps.map(app => `
+      <div class="featured-app-card" data-app-id="${app.id}" role="button" tabindex="0">
+        <div class="featured-app-logo">
+          <img src="${app.logo}" alt="${app.name}" loading="lazy">
+        </div>
+        <h4>${app.name}</h4>
+      </div>
+    `).join("");
+
+    // Re-attach listeners
+    grid.querySelectorAll(".featured-app-card").forEach(card => {
+      card.addEventListener("click", () => {
+        const appId = card.dataset.appId;
+        showPanel("store");
+        setTimeout(() => {
+          openSheet(appId);
+        }, 150);
+      });
+
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          card.click();
+        }
+      });
+    });
+  }
+
+  const searchInput = document.getElementById("homeSearchInput");
+  const searchBtn = document.getElementById("homeSearchBtn");
+
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      performSearch(e.target.value);
+    });
+
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        performSearch(searchInput.value);
+      }
+    });
+  }
+
+  if (searchBtn) {
+    searchBtn.addEventListener("click", () => {
+      performSearch(searchInput.value);
+    });
   }
 
   // RANDOM BANNER (service)
@@ -98,12 +207,12 @@ document.querySelectorAll(".home-card-link[role='button']").forEach((card) => {
   const PRODUCTS = {
     "capcut_pro": {
       "name_km": "CapCut Pro",
-      "price": "$5.00",
-      "access": "1 ឧបករណ៍",
+      "price": "$2.99",
+      "access": "3 ឧបករណ៍",
       "connect": "5-10 នាទី+",
       "plan": "1 ខែ",
       "warranty": "មួយខែពេញ",
-      "type": "គណនីផ្តល់ជូន",
+      "type": "គណនីឯកជន",
       "cover": "p9.jpg",
       "benefits": [
         "Template និង Effect ពិសេស (Pro)",
@@ -112,22 +221,22 @@ document.querySelectorAll(".home-card-link[role='button']").forEach((card) => {
         "Transition ស្អាត និង Smooth"
       ],
     },
-    "adobe_creative": {
-      "name_km": "Adobe Creative",
-      "price": "$11.00",
-      "access": "2 Devices",
-      "connect": "10-20 នាទី+",
-      "plan": "4 ខែ",
-      "warranty": "2 សប្តាហ៍",
-      "type": "គណនីផ្ទាល់ខ្លួន",
-      "cover": "p7.jpg",
-      "benefits": [
-        "Photoshop រួមទាំងកម្មវិធីចាំបាច់សម្រាប់ Designer 20+",
-        "Ai Credit រួមទាំងAdobe Fonts និង Stock",
-        "Cloud Storage 100GB",
-        "ដំណើការរហូតដល់២កុំព្យូទ័រ ក្នុងពេលតែមួយ"
-      ],
-    },
+    // "adobe_creative": {
+    //   "name_km": "Adobe Creative",
+    //   "price": "$11.00",
+    //   "access": "2 Devices",
+    //   "connect": "10-20 នាទី+",
+    //   "plan": "4 ខែ",
+    //   "warranty": "2 សប្តាហ៍",
+    //   "type": "គណនីផ្ទាល់ខ្លួន",
+    //   "cover": "p7.jpg",
+    //   "benefits": [
+    //     "Photoshop រួមទាំងកម្មវិធីចាំបាច់សម្រាប់ Designer 20+",
+    //     "Ai Credit រួមទាំងAdobe Fonts និង Stock",
+    //     "Cloud Storage 100GB",
+    //     "ដំណើការរហូតដល់២កុំព្យូទ័រ ក្នុងពេលតែមួយ"
+    //   ],
+    // },
     "canva_pro": {
       "name_km": "Canva Pro",
       "price": "$5.00",
@@ -194,22 +303,22 @@ document.querySelectorAll(".home-card-link[role='button']").forEach((card) => {
         "Support តាម Telegram"
       ],
     },
-    "google_drive_2tb": {
-      "name_km": "Gemini Ai +2TB",
-      "price": "$9.00",
-      "access": "3 Devices",
-      "connect": "60 នាទី+",
-      "plan": "1 ឆ្នាំ",
-      "warranty": "90 ថ្ងៃ",
-      "type": "គណនីផ្ទាល់ខ្លួន",
-      "cover": "p4.jpg",
-      "benefits": [
-        "Storage 2TB សម្រាប់ Backup ឯកសារ",
-        "ប្រើលើគណនី Gmail ផ្ទាល់ខ្លួន",
-        "គាំទ្រ Google Photos និង Google Docs",
-        "Ai ជំនាន់ថ្មីលំដាប់កំពូលរបស់ Google"
-      ],
-    },
+    // "google_drive_2tb": {
+    //   "name_km": "Gemini Ai +2TB",
+    //   "price": "$9.00",
+    //   "access": "3 Devices",
+    //   "connect": "60 នាទី+",
+    //   "plan": "1 ឆ្នាំ",
+    //   "warranty": "90 ថ្ងៃ",
+    //   "type": "គណនីផ្ទាល់ខ្លួន",
+    //   "cover": "p4.jpg",
+    //   "benefits": [
+    //     "Storage 2TB សម្រាប់ Backup ឯកសារ",
+    //     "ប្រើលើគណនី Gmail ផ្ទាល់ខ្លួន",
+    //     "គាំទ្រ Google Photos និង Google Docs",
+    //     "Ai ជំនាន់ថ្មីលំដាប់កំពូលរបស់ Google"
+    //   ],
+    // },
     "youtube_premium": {
       "name_km": "YouTube Premium",
       "price": "$20.00",
@@ -365,7 +474,7 @@ document.querySelectorAll(".home-card-link[role='button']").forEach((card) => {
     });
   }
 
-  // DARK / LIGHT MODE TOGGLE (single top-right #modeToggle)
+  // DARK / LIGHT MODE TOGGLE
   const modeBtn = document.getElementById('modeToggle');
 
   function applyMode(mode, save = true) {
@@ -409,71 +518,71 @@ document.querySelectorAll(".home-card-link[role='button']").forEach((card) => {
     });
   }
 
-  // Protection script (unchanged behavior)
-  (function () {
-    function applyProtection() {
-      document.body.classList.add('no-select');
+  // // Protection script (unchanged behavior)
+  // (function () {
+  //   function applyProtection() {
+  //     document.body.classList.add('no-select');
 
-      document.addEventListener('contextmenu', function (e) {
-        try { e.preventDefault(); } catch (err) {}
-      }, { capture: true });
+  //     document.addEventListener('contextmenu', function (e) {
+  //       try { e.preventDefault(); } catch (err) {}
+  //     }, { capture: true });
 
-      ['copy','cut','paste'].forEach(evt => {
-        document.addEventListener(evt, function (e) {
-          try { e.preventDefault(); } catch (err) {}
-        }, { capture: true });
-      });
+  //     ['copy','cut','paste'].forEach(evt => {
+  //       document.addEventListener(evt, function (e) {
+  //         try { e.preventDefault(); } catch (err) {}
+  //       }, { capture: true });
+  //     });
 
-      document.addEventListener('selectstart', function (e) {
-        try { e.preventDefault(); } catch (err) {}
-      }, { capture: true });
-      document.addEventListener('dragstart', function (e) {
-        try { e.preventDefault(); } catch (err) {}
-      }, { capture: true });
+  //     document.addEventListener('selectstart', function (e) {
+  //       try { e.preventDefault(); } catch (err) {}
+  //     }, { capture: true });
+  //     document.addEventListener('dragstart', function (e) {
+  //       try { e.preventDefault(); } catch (err) {}
+  //     }, { capture: true });
 
-      function keyHandler(e) {
-        if (e.key === 'F12' || e.keyCode === 123) {
-          e.preventDefault && e.preventDefault();
-          triggerBlock('F12 detected');
-          return false;
-        }
-        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C' || e.key === 'i' || e.key === 'j' || e.key === 'c')) {
-          e.preventDefault && e.preventDefault();
-          triggerBlock('DevTools shortcut detected');
-          return false;
-        }
-        if (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.key === 'S' || e.key === 's')) {
-          e.preventDefault && e.preventDefault();
-          triggerBlock('Source/save shortcut detected');
-          return false;
-        }
-      }
+  //     function keyHandler(e) {
+  //       if (e.key === 'F12' || e.keyCode === 123) {
+  //         e.preventDefault && e.preventDefault();
+  //         triggerBlock('F12 detected');
+  //         return false;
+  //       }
+  //       if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C' || e.key === 'i' || e.key === 'j' || e.key === 'c')) {
+  //         e.preventDefault && e.preventDefault();
+  //         triggerBlock('DevTools shortcut detected');
+  //         return false;
+  //       }
+  //       if (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.key === 'S' || e.key === 's')) {
+  //         e.preventDefault && e.preventDefault();
+  //         triggerBlock('Source/save shortcut detected');
+  //         return false;
+  //       }
+  //     }
 
-      document.addEventListener('keydown', keyHandler, { capture: true });
+  //     document.addEventListener('keydown', keyHandler, { capture: true });
 
-      let lastOuterHeight = window.outerHeight;
-      window.addEventListener('resize', function () {
-        if (Math.abs(window.outerHeight - lastOuterHeight) > 150) {
-          triggerBlock('Window resized (possible devtools)');
-        }
-        lastOuterHeight = window.outerHeight;
-      });
+  //     let lastOuterHeight = window.outerHeight;
+  //     window.addEventListener('resize', function () {
+  //       if (Math.abs(window.outerHeight - lastOuterHeight) > 150) {
+  //         triggerBlock('Window resized (possible devtools)');
+  //       }
+  //       lastOuterHeight = window.outerHeight;
+  //     });
 
-      function triggerBlock(reason) {
-        try { console.warn('Protection triggered:', reason); } catch (e) {}
-        try {
-          document.documentElement.innerHTML = '<head><meta charset="utf-8"><title>Blocked</title></head><body style="display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#111;color:#fff;font-family:system-ui,Arial;"><div style="max-width:680px;padding:24px;text-align:center;"><h1 style="margin:0 0 12px;font-size:22px;">ការចូលដំណើរការ ត្រូវបានបិទ</h1><p style="margin:0 0 18px;color:#ccc">យើងបានរកឃើញការព្យាយាមបើក Developer Tools / Inspect Element។ សូមទោស — ទំព័រនេះបានបិទសម្រាប់សុវត្ថិភាព។</p></div></body>';
-        } catch (err) {}
-        try { window.location.href = 'about:blank'; } catch (err) {}
-        try { window.close(); } catch (err) {}
-      }
-    }
+  //     function triggerBlock(reason) {
+  //       try { console.warn('Protection triggered:', reason); } catch (e) {}
+  //       try {
+  //         document.documentElement.innerHTML = '<head><meta charset="utf-8"><title>Blocked</title></head><body style="display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#111;color:#fff;font-family:system-ui,Arial;"><div style="max-width:680px;padding:24px;text-align:center;"><h1 style="margin:0 0 12px;font-size:22px;">ការចូលដំណើរការ ត្រូវបានបិទ</h1><p style="margin:0 0 18px;color:#ccc">យើងបានរកឃើញការព្យាយាមបើក Developer Tools / Inspect Element។ សូមទោស — ទំព័រនេះបានបិទសម្រាប់សុវត្ថិភាព។</p></div></body>';
+  //       } catch (err) {}
+  //       try { window.location.href = 'about:blank'; } catch (err) {}
+  //       try { window.close(); } catch (err) {}
+  //     }
+  //   }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', applyProtection);
-    } else {
-      applyProtection();
-    }
-  })();
+  //   if (document.readyState === 'loading') {
+  //     document.addEventListener('DOMContentLoaded', applyProtection);
+  //   } else {
+  //     applyProtection();
+  //   }
+  // })();
 
 });
