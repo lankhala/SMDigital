@@ -1805,19 +1805,18 @@ body.dark .web-tags span{ background: rgba(37, 99, 235, 0.22); border-color: rgb
 
 /* === SEARCH SECTION (HOME) === */
 .home-search-section {
-  max-width: 750px;
-  margin: 0 auto 20px;
-  padding: 0 16px;
+  
 }
 
 .search-container {
+  margin-bottom: 5px;
   display: flex;
   align-items: center;
   gap: 8px;
   border-radius: 50px;
   /* border: 1px solid rgba(15, 23, 42, 0.10); */
   background:#e6e6e6;
-  padding: 8px 20px;
+  padding: 8px 10px;
   /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); */
 }
 
@@ -2061,5 +2060,27 @@ body.dark .scroll-to-top {
 /* Add rest of your existing style.css content below */
 
 
+
+
+/* Mobile search bar full width but centered */
+@media (max-width: 480px) {
+  .home-search {
+    display: block;
+    width: 95%;          /* ✅ almost full width */
+    max-width: 95%;      /* ✅ prevent overflow */
+    margin: 0 auto;      /* ✅ keep centered */
+    padding: 10px 12px;  /* ✅ balanced inner spacing */
+    border-radius: 12px; /* ✅ nice rounded corners */
+    box-sizing: border-box;
+  }
+
+  .home-search input {
+    width: 100%;         /* ✅ input stretches inside */
+    font-size: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+}
 
 
