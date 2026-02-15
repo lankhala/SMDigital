@@ -1,21 +1,7 @@
-@font-face {
-  font-family: 'Khala Regular Khmer';
-  src: url('Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+
 @font-face {
   font-family: 'Khala Bold';
   src: url('SF-Pro-Text-Bold.otf') format('truetype');
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Khala Regular';
-  src: url('SF-Pro-Text-Regular.otf') format('truetype');
-}
-@font-face {
-  font-family: 'Khala Bold';
-  src: url('Krasar-Black.ttf') format('truetype');
   font-style: normal;
 }
 @font-face {
@@ -24,22 +10,13 @@
   font-style: normal;
 }
 @font-face {
-  font-family: 'Khala Bold Khmer';
-  src: url('KantumruyPro-Bold.ttf') format('truetype');
+  font-family: 'SM Simplesmall';
+  src: url('MiSansKhmer-Normal.otf') format('truetype');
   font-style: normal;
 }
+
 @font-face {
-  font-family: 'Khala SemiBold Khmer';
-  src: url('KantumruyPro-SemiBold.ttf') format('truetype');
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Khala Battambang';
-  src: url('Regular.ttf') format('truetype');
-  font-style: normal;
-}
-@font-face {
-  font-family: 'SM Simple';
+  font-family: 'simple';
   src: url('MiSansKhmer-Demibold.otf') format('truetype');
 }
 
@@ -51,7 +28,7 @@ body::-webkit-scrollbar {
 /* Base */
 body {
   margin: 0;
-  font-family: 'Khala Regular', sans-serif;
+  font-family: 'simple', sans-serif;
   background-color: #F4F4F4;
 }
 
@@ -188,16 +165,6 @@ tool-btn:hover {
   object-fit: cover;
   border-radius: 8px;                      /* ✅ rounded image corners */
 }
-body.dark .item {
-  background-color: #1e1e1e;
-  border-color: #333;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-}
-body.dark .item img {
-  border-color: #444;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-}
-
 
 .info {
   padding: 10px;
@@ -207,12 +174,12 @@ body.dark .item img {
   font-weight: 500;
   font-size: 15px;
   margin: 0 0 5px;
-  color: #666;
+  color: #000000;
 }
 .info p {
-  font-size: 14px;
-  font-family: 'Khala battambang';
-  color: #666;
+  font-size: 15px;
+  font-family: 'simple', sans-serif;
+  color: #000000;
   margin: 0 0 5px;
 }
 .span {
@@ -1247,6 +1214,14 @@ html.color-transition * {
   padding: 16px;
 }
 
+.home-wrap img{
+  width: 50%;
+  height: auto;
+  border-radius: 14px;
+  object-fit: cover;
+  display: block;
+}
+
 .home-hero{
   margin-top: 12px;
   border-radius: 14px;
@@ -1510,7 +1485,7 @@ body.dark #
   margin: 0 0 12px;
   font-family: 'SM Simple', sans-serif;
   font-size: 16px;
-  color: #008aca;
+  color: #000000;
 }
 
 .home-tip{
@@ -1983,7 +1958,7 @@ body.dark .no-results {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #e6e6e6;
+  background: #32a6ff;
   border: none;
   cursor: pointer;
   z-index: 2000;
@@ -1994,7 +1969,7 @@ body.dark .no-results {
 }
 
 .scroll-to-top:hover {
-  background-color: #0095ff;
+  background-color: #006aff;
   transition: 0.5s;
 }
 

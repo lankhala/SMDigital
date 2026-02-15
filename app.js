@@ -1,7 +1,7 @@
-/* app.js — adds Home panel behavior + search + scroll-to-top + keeps existing store/service/product sheet + theme + protection */
-
 document.addEventListener("DOMContentLoaded", () => {
+  // ============================================
   // FEATURED APPS DATA
+  // ============================================
   const FEATURED_APPS = [
     { id: "capcut_pro", name: "SM Digital", logo: "SMdigital.jpg", category: "video" },
     { id: "capcut_pro", name: "Design", logo: "pixkh.jpg", category: "video" },
@@ -10,200 +10,12 @@ document.addEventListener("DOMContentLoaded", () => {
     { id: "windows_11_pro", name: "Software", logo: "khmersoftware.jpg", category: "software" },
     { id: "windows_11_pro", name: "Lan Khala", logo: "lankhala.jpg", category: "software" },
     { id: "windows_11_pro", name: "បណ្ណាល័យ", logo: "digitallibrary.jpg", category: "software" },
-    { id: "", name: "Font", logo: "fontdownload.jpg", category: "" },
+    { id: "font_download", name: "Font", logo: "fontdownload.jpg", category: "font" },
   ];
 
-  // PANEL SWITCHING (Home / Store / Service)
-  const buttons = document.querySelectorAll(".tool-btn");
-  const panels = document.querySelectorAll(".panel");
-  const panelOverlay = document.getElementById("panelOverlay");
-
-  function showPanel(panelId) {
-    if (!panelId) return;
-    if (!document.getElementById(panelId)) return;
-
-    if (panelOverlay) panelOverlay.classList.add("active");
-
-    setTimeout(() => {
-      panels.forEach((panel) => {
-        panel.classList.toggle("active", panel.id === panelId);
-      });
-
-      buttons.forEach((btn) => {
-        const id = btn.dataset.panel;
-        btn.classList.toggle("active", id === panelId);
-      });
-
-      if (panelOverlay) panelOverlay.classList.remove("active");
-
-      sessionStorage.setItem("lastPanel", panelId);
-      sessionStorage.setItem("lastScroll", window.scrollY);
-    }, 0);
-  }
-
-  window.showPanel = showPanel;
-
-  buttons.forEach((btn) => {
-    const panelId = btn.dataset.panel;
-    if (!panelId) return;
-    btn.addEventListener("click", () => showPanel(panelId));
-  });
-
-  document.querySelectorAll("[data-go-panel]").forEach((el) => {
-    el.addEventListener("click", () => {
-      const target = el.getAttribute("data-go-panel");
-      const scrollSel = el.getAttribute("data-scroll");
-
-      showPanel(target);
-      window.scrollTo(0, 0);
-
-      if (scrollSel) {
-        setTimeout(() => {
-          const node = document.querySelector(scrollSel);
-          if (node) node.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 120);
-      }
-    });
-  });
-
-  document.querySelectorAll(".home-card-link[role='button']").forEach((card) => {
-    card.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        card.click();
-      }
-    });
-  });
-
-  // Restore last panel + scroll position
-  const lastPanel = sessionStorage.getItem("lastPanel");
-  const lastScroll = sessionStorage.getItem("lastScroll");
-
-  if (lastPanel && document.getElementById(lastPanel)) {
-    showPanel(lastPanel);
-    if (lastScroll) {
-      setTimeout(() => {
-        window.scrollTo(0, parseInt(lastScroll, 10));
-      }, 100);
-    }
-  } else {
-    showPanel("home");
-  }
-
-  // ✅ FEATURED APPS RENDERING
-  function renderFeaturedApps() {
-    const grid = document.getElementById("featuredAppsGrid");
-    if (!grid) return;
-
-    grid.innerHTML = FEATURED_APPS.map(app => `
-      <div class="featured-app-card" data-app-id="${app.id}" role="button" tabindex="0">
-        <div class="featured-app-logo">
-          <img src="${app.logo}" alt="${app.name}" loading="lazy">
-        </div>
-        <h4>${app.name}</h4>
-      </div>
-    `).join("");
-
-    // Add click listeners to featured apps
-    grid.querySelectorAll(".featured-app-card").forEach(card => {
-      card.addEventListener("click", () => {
-        const appId = card.dataset.appId;
-        showPanel("store");
-        setTimeout(() => {
-          openSheet(appId);
-        }, 150);
-      });
-
-      card.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          card.click();
-        }
-      });
-    });
-  }
-
-  renderFeaturedApps();
-
-  // ✅ SEARCH FUNCTIONALITY
-  function performSearch(query) {
-    if (!query.trim()) {
-      renderFeaturedApps();
-      return;
-    }
-
-    const grid = document.getElementById("featuredAppsGrid");
-    if (!grid) return;
-
-    const filteredApps = FEATURED_APPS.filter(app => 
-      app.name.toLowerCase().includes(query.toLowerCase()) ||
-      app.category.toLowerCase().includes(query.toLowerCase())
-    );
-
-    if (filteredApps.length === 0) {
-      grid.innerHTML = '<p class="no-results">មិនមានលទ្ធផលដែលត្រូវគ្នា</p>';
-      return;
-    }
-
-    grid.innerHTML = filteredApps.map(app => `
-      <div class="featured-app-card" data-app-id="${app.id}" role="button" tabindex="0">
-        <div class="featured-app-logo">
-          <img src="${app.logo}" alt="${app.name}" loading="lazy">
-        </div>
-        <h4>${app.name}</h4>
-      </div>
-    `).join("");
-
-    // Re-attach listeners
-    grid.querySelectorAll(".featured-app-card").forEach(card => {
-      card.addEventListener("click", () => {
-        const appId = card.dataset.appId;
-        showPanel("store");
-        setTimeout(() => {
-          openSheet(appId);
-        }, 150);
-      });
-
-      card.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          card.click();
-        }
-      });
-    });
-  }
-
-  const searchInput = document.getElementById("homeSearchInput");
-  const searchBtn = document.getElementById("homeSearchBtn");
-
-  if (searchInput) {
-    searchInput.addEventListener("input", (e) => {
-      performSearch(e.target.value);
-    });
-
-    searchInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        performSearch(searchInput.value);
-      }
-    });
-  }
-
-  if (searchBtn) {
-    searchBtn.addEventListener("click", () => {
-      performSearch(searchInput.value);
-    });
-  }
-
-  // RANDOM BANNER (service)
-  const bannerImg = document.getElementById("randomBanner");
-  if (bannerImg) {
-    const bannerList = ["banner1.jpg", "banner2.jpg", "banner3.jpg"];
-    const randomIndex = Math.floor(Math.random() * bannerList.length);
-    bannerImg.src = bannerList[randomIndex];
-  }
-
-  // PRODUCTS DATA (used by product sheet)
+  // ============================================
+  // PRODUCTS DATA
+  // ============================================
   const PRODUCTS = {
     "capcut_pro": {
       "name_km": "CapCut Pro",
@@ -221,22 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
         "Transition ស្អាត និង Smooth"
       ],
     },
-    // "adobe_creative": {
-    //   "name_km": "Adobe Creative",
-    //   "price": "$11.00",
-    //   "access": "2 Devices",
-    //   "connect": "10-20 នាទី+",
-    //   "plan": "4 ខែ",
-    //   "warranty": "2 សប្តាហ៍",
-    //   "type": "គណនីផ្ទាល់ខ្លួន",
-    //   "cover": "p7.jpg",
-    //   "benefits": [
-    //     "Photoshop រួមទាំងកម្មវិធីចាំបាច់សម្រាប់ Designer 20+",
-    //     "Ai Credit រួមទាំងAdobe Fonts និង Stock",
-    //     "Cloud Storage 100GB",
-    //     "ដំណើការរហូតដល់២កុំព្យូទ័រ ក្នុងពេលតែមួយ"
-    //   ],
-    // },
     "canva_pro": {
       "name_km": "Canva Pro",
       "price": "$5.00",
@@ -252,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "ប្រើក្នុង Pro Affinity Plan",
         "៥ឧបករណ៍ក្នុងពេលតែមួយ",
         "ប្រើពុម្ពអក្សរខ្មែរច្រើនជាង 500+",
-        "គម្រូមកស្រាប់រាប់លាន។"
+        "គម្រូមកស្រាប់រាប់លាន"
       ],
     },
     "chatgpt_plus": {
@@ -270,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "Ai GPTs គ្រប់ Model",
         "GPT-5 (thinking, fast, auto)",
         "ល្បឿនធ្វើការលឿនជាងធម្មតា x3ដង",
-        "ប្រើលើទូរស័ព្ទ ឬកុំព្យូទ័រ(ជាជម្រើស)"
+        "ប្រើលើទូរស័ព្ទ ឬកុំព្យូទ័រ"
       ],
     },
     "windows_11_pro": {
@@ -303,22 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
         "Support តាម Telegram"
       ],
     },
-    // "google_drive_2tb": {
-    //   "name_km": "Gemini Ai +2TB",
-    //   "price": "$9.00",
-    //   "access": "3 Devices",
-    //   "connect": "60 នាទី+",
-    //   "plan": "1 ឆ្នាំ",
-    //   "warranty": "90 ថ្ងៃ",
-    //   "type": "គណនីផ្ទាល់ខ្លួន",
-    //   "cover": "p4.jpg",
-    //   "benefits": [
-    //     "Storage 2TB សម្រាប់ Backup ឯកសារ",
-    //     "ប្រើលើគណនី Gmail ផ្ទាល់ខ្លួន",
-    //     "គាំទ្រ Google Photos និង Google Docs",
-    //     "Ai ជំនាន់ថ្មីលំដាប់កំពូលរបស់ Google"
-    //   ],
-    // },
     "youtube_premium": {
       "name_km": "YouTube Premium",
       "price": "$20.00",
@@ -341,38 +121,245 @@ document.addEventListener("DOMContentLoaded", () => {
       "connect": "10-20 នាទី+",
       "plan": "1 ឆ្នាំ",
       "warranty": "1 ឆ្នាំ",
-      "type": "Offcial Account",
+      "type": "Official Account",
       "cover": "p8.jpg",
       "benefits": [
         "Word / Excel / PowerPoint",
-        "សម្រាប់ការងារក្រុមហ៊ុន និងសាលា",
+        "សម្រាប់ការងារក្រុមហ៊ុន និងសាលា"
+      ],
+    },
+    "express_vpn": {
+      "name_km": "Express VPN",
+      "price": "$20.00",
+      "access": "Unlimited",
+      "connect": "5-10 នាទី+",
+      "plan": "1 ឆ្នាំ",
+      "warranty": "1 ឆ្នាំ",
+      "type": "VPN Service",
+      "cover": "p10.jpg",
+      "benefits": [
+        "ល្បឿនលឿន និងស្ថេរ",
+        "ការការពារលម្អិត",
+        "គាំទ្រលើឧបករណ៍ច្រើន"
       ],
     }
   };
 
-  // PRODUCT MODAL (sheet)
+  // ============================================
+  // PANEL SWITCHING LOGIC
+  // ============================================
+  const buttons = document.querySelectorAll(".tool-btn");
+  const panels = document.querySelectorAll(".panel");
+  const panelOverlay = document.getElementById("panelOverlay");
+
+  function showPanel(panelId) {
+    if (!panelId) return;
+    if (!document.getElementById(panelId)) return;
+
+    if (panelOverlay) panelOverlay.classList.add("active");
+
+    setTimeout(() => {
+      panels.forEach((panel) => {
+        panel.classList.toggle("active", panel.id === panelId);
+      });
+
+      buttons.forEach((btn) => {
+        const id = btn.dataset.panel;
+        btn.classList.toggle("active", id === panelId);
+      });
+
+      if (panelOverlay) panelOverlay.classList.remove("active");
+
+      sessionStorage.setItem("lastPanel", panelId);
+      sessionStorage.setItem("lastScroll", window.scrollY);
+    }, 0);
+  }
+
+  window.showPanel = showPanel;
+
+  // Button click listeners
+  buttons.forEach((btn) => {
+    const panelId = btn.dataset.panel;
+    if (!panelId) return;
+    btn.addEventListener("click", () => showPanel(panelId));
+  });
+
+  // Data-go-panel links
+  document.querySelectorAll("[data-go-panel]").forEach((el) => {
+    el.addEventListener("click", () => {
+      const target = el.getAttribute("data-go-panel");
+      const scrollSel = el.getAttribute("data-scroll");
+
+      showPanel(target);
+      window.scrollTo(0, 0);
+
+      if (scrollSel) {
+        setTimeout(() => {
+          const node = document.querySelector(scrollSel);
+          if (node) node.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 120);
+      }
+    });
+  });
+
+  // Keyboard navigation for home cards
+  document.querySelectorAll(".home-card-link[role='button']").forEach((card) => {
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        card.click();
+      }
+    });
+  });
+
+  // Restore last panel + scroll position
+  const lastPanel = sessionStorage.getItem("lastPanel");
+  const lastScroll = sessionStorage.getItem("lastScroll");
+
+  if (lastPanel && document.getElementById(lastPanel)) {
+    showPanel(lastPanel);
+    if (lastScroll) {
+      setTimeout(() => {
+        window.scrollTo(0, parseInt(lastScroll, 10));
+      }, 100);
+    }
+  } else {
+    showPanel("home");
+  }
+
+  // ============================================
+  // FEATURED APPS RENDERING
+  // ============================================
+  function renderFeaturedApps() {
+    const grid = document.getElementById("featuredAppsGrid");
+    if (!grid) return;
+
+    grid.innerHTML = FEATURED_APPS.map(app => `
+      <div class="featured-app-card" data-app-id="${app.id}" role="button" tabindex="0">
+        <div class="featured-app-logo">
+          <img src="${app.logo}" alt="${app.name}" loading="lazy">
+        </div>
+        <h4>${app.name}</h4>
+      </div>
+    `).join("");
+
+    attachFeaturedAppListeners();
+  }
+
+  function attachFeaturedAppListeners() {
+    const grid = document.getElementById("featuredAppsGrid");
+    if (!grid) return;
+
+    grid.querySelectorAll(".featured-app-card").forEach(card => {
+      card.addEventListener("click", () => {
+        const appId = card.dataset.appId;
+        showPanel("store");
+        setTimeout(() => {
+          openSheet(appId);
+        }, 150);
+      });
+
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          card.click();
+        }
+      });
+    });
+  }
+
+  renderFeaturedApps();
+
+  // ============================================
+  // SEARCH FUNCTIONALITY
+  // ============================================
+  function performSearch(query) {
+    if (!query.trim()) {
+      renderFeaturedApps();
+      return;
+    }
+
+    const grid = document.getElementById("featuredAppsGrid");
+    if (!grid) return;
+
+    const filteredApps = FEATURED_APPS.filter(app => 
+      app.name.toLowerCase().includes(query.toLowerCase()) ||
+      app.category.toLowerCase().includes(query.toLowerCase())
+    );
+
+    if (filteredApps.length === 0) {
+      grid.innerHTML = '<p class="no-results">មិនមានលទ្ធផលដែលត្រូវគ្នា</p>';
+      return;
+    }
+
+    grid.innerHTML = filteredApps.map(app => `
+      <div class="featured-app-card" data-app-id="${app.id}" role="button" tabindex="0">
+        <div class="featured-app-logo">
+          <img src="${app.logo}" alt="${app.name}" loading="lazy">
+        </div>
+        <h4>${app.name}</h4>
+      </div>
+    `).join("");
+
+    attachFeaturedAppListeners();
+  }
+
+  const searchInput = document.getElementById("homeSearchInput");
+  const searchBtn = document.getElementById("homeSearchBtn");
+
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      performSearch(e.target.value);
+    });
+
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        performSearch(searchInput.value);
+      }
+    });
+  }
+
+  if (searchBtn) {
+    searchBtn.addEventListener("click", () => {
+      performSearch(searchInput.value);
+    });
+  }
+
+  // ============================================
+  // RANDOM BANNER (SERVICE PANEL)
+  // ============================================
+  const bannerImg = document.getElementById("randomBanner");
+  if (bannerImg) {
+    const bannerList = ["banner1.jpg", "banner2.jpg", "banner3.jpg"];
+    const randomIndex = Math.floor(Math.random() * bannerList.length);
+    bannerImg.src = bannerList[randomIndex];
+  }
+
+  // ============================================
+  // PRODUCT MODAL (SHEET)
+  // ============================================
   const productModal = document.getElementById("productModal");
   const pmContent = document.getElementById("pmContent");
   const storeBox = document.querySelector("#store .box");
   const headerEl = document.querySelector("header");
 
-  function setHeaderH(){
+  function setHeaderH() {
     const h = headerEl ? headerEl.offsetHeight : 50;
     document.documentElement.style.setProperty("--header-h", `${h}px`);
   }
   setHeaderH();
   window.addEventListener("resize", setHeaderH);
 
-  function renderProduct(productId){
+  function renderProduct(productId) {
     const p = PRODUCTS[productId] || PRODUCTS["capcut_pro"];
     if (!pmContent || !p) return;
 
     const benefits = (p.benefits || []).map(li => `<li>${li}</li>`).join("");
-    const gallery = (p.gallery || []).map(src => `<img src="${src}" alt="">`).join("");
 
     pmContent.innerHTML = `
       <img class="cover" src="${p.cover}" alt="${p.name_km}">
-      <p>1. អំពីកម្មវិធី</p>
+      <p>១. អំពីកម្មវិធី</p>
 
       <table class="simple-info-table">
         <tr><td>ឈ្មោះកម្មវិធី</td><td>${p.name_km}</td></tr>
@@ -384,16 +371,12 @@ document.addEventListener("DOMContentLoaded", () => {
         <tr><td>ប្រភេទ</td><td>${p.type}</td></tr>
       </table>
 
-      <p>2. អត្ថប្រយោជន៍</p>
+      <p>២. អត្ថប្រយោជន៍</p>
       <ul class="fix-list">
         ${benefits}
       </ul>
 
       <button class="btn-store-info" type="button" id="pmBuyBtn">ទិញឥឡូវនេះ</button>
-
-      <div class="gallery">
-        ${gallery}
-      </div>
     `;
 
     const buyBtn = document.getElementById("pmBuyBtn");
@@ -440,7 +423,10 @@ document.addEventListener("DOMContentLoaded", () => {
         isClosing = false;
       };
 
-      if (!dialog) { finish(); return; }
+      if (!dialog) {
+        finish();
+        return;
+      }
 
       const onEnd = (e) => {
         if (e && e.target === dialog) finish();
@@ -474,7 +460,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // ============================================
   // DARK / LIGHT MODE TOGGLE
+  // ============================================
   const modeBtn = document.getElementById('modeToggle');
 
   function applyMode(mode, save = true) {
@@ -518,71 +506,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // // Protection script (unchanged behavior)
-  // (function () {
-  //   function applyProtection() {
-  //     document.body.classList.add('no-select');
+  // ============================================
+  // SCROLL TO TOP BUTTON VISIBILITY
+  // ============================================
+  const scrollBtn = document.querySelector(".scroll-to-top");
+  if (scrollBtn) {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        scrollBtn.style.display = "flex";
+      } else {
+        scrollBtn.style.display = "none";
+      }
+    });
 
-  //     document.addEventListener('contextmenu', function (e) {
-  //       try { e.preventDefault(); } catch (err) {}
-  //     }, { capture: true });
-
-  //     ['copy','cut','paste'].forEach(evt => {
-  //       document.addEventListener(evt, function (e) {
-  //         try { e.preventDefault(); } catch (err) {}
-  //       }, { capture: true });
-  //     });
-
-  //     document.addEventListener('selectstart', function (e) {
-  //       try { e.preventDefault(); } catch (err) {}
-  //     }, { capture: true });
-  //     document.addEventListener('dragstart', function (e) {
-  //       try { e.preventDefault(); } catch (err) {}
-  //     }, { capture: true });
-
-  //     function keyHandler(e) {
-  //       if (e.key === 'F12' || e.keyCode === 123) {
-  //         e.preventDefault && e.preventDefault();
-  //         triggerBlock('F12 detected');
-  //         return false;
-  //       }
-  //       if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C' || e.key === 'i' || e.key === 'j' || e.key === 'c')) {
-  //         e.preventDefault && e.preventDefault();
-  //         triggerBlock('DevTools shortcut detected');
-  //         return false;
-  //       }
-  //       if (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.key === 'S' || e.key === 's')) {
-  //         e.preventDefault && e.preventDefault();
-  //         triggerBlock('Source/save shortcut detected');
-  //         return false;
-  //       }
-  //     }
-
-  //     document.addEventListener('keydown', keyHandler, { capture: true });
-
-  //     let lastOuterHeight = window.outerHeight;
-  //     window.addEventListener('resize', function () {
-  //       if (Math.abs(window.outerHeight - lastOuterHeight) > 150) {
-  //         triggerBlock('Window resized (possible devtools)');
-  //       }
-  //       lastOuterHeight = window.outerHeight;
-  //     });
-
-  //     function triggerBlock(reason) {
-  //       try { console.warn('Protection triggered:', reason); } catch (e) {}
-  //       try {
-  //         document.documentElement.innerHTML = '<head><meta charset="utf-8"><title>Blocked</title></head><body style="display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#111;color:#fff;font-family:system-ui,Arial;"><div style="max-width:680px;padding:24px;text-align:center;"><h1 style="margin:0 0 12px;font-size:22px;">ការចូលដំណើរការ ត្រូវបានបិទ</h1><p style="margin:0 0 18px;color:#ccc">យើងបានរកឃើញការព្យាយាមបើក Developer Tools / Inspect Element។ សូមទោស — ទំព័រនេះបានបិទសម្រាប់សុវត្ថិភាព។</p></div></body>';
-  //       } catch (err) {}
-  //       try { window.location.href = 'about:blank'; } catch (err) {}
-  //       try { window.close(); } catch (err) {}
-  //     }
-  //   }
-
-  //   if (document.readyState === 'loading') {
-  //     document.addEventListener('DOMContentLoaded', applyProtection);
-  //   } else {
-  //     applyProtection();
-  //   }
-  // })();
-
+    scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
 });
