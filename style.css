@@ -383,6 +383,7 @@ service-banner img {
 
   .tool-btn {
     padding: 0 25px;
+    margin-top: 5px;
   }
 
   .tool-btn img {
@@ -849,7 +850,7 @@ body.sheet-open{ overflow: hidden; }
 .content-store{
   max-width: 600px;
   margin: 0 auto;
-  font-family: 'khala battambang', sans-serif;
+  font-family: 'simple', sans-serif;
 }
 .content-store .cover{
   width: 100%;
@@ -869,7 +870,7 @@ body.sheet-open{ overflow: hidden; }
   word-break: break-word;
   overflow-wrap: break-word;
   margin-top: 10px;
-  font-family: 'khala battambang', sans-serif;
+  font-family: 'simple', sans-serif;
 }
 body.dark .content-store p{
   color: #e6e6e6;
@@ -898,10 +899,11 @@ body.dark .content-store p{
   color: #fff;
   border: none;
   margin: 18px 0 10px;
-  font-family: 'khala battambang', sans-serif;
+  font-family: 'simple', sans-serif;
   cursor: pointer;
+  transition: 0.3s;
 }
-.btn-store-info:hover{ opacity: .92; }
+.btn-store-info:hover{ background-color: #0061d8; transition: 0.3s;}
 
 /* gallery images */
 .content-store .gallery img{
@@ -912,72 +914,29 @@ body.dark .content-store p{
   margin: 10px auto 0;
 }
 
-/* dark mode */
-body.dark .pm-dialog{ background: #1f1f1f; color: #eee; }
-body.dark .pm-close{
-  background: rgb(48, 48, 48);
-  color: #eee;
-  border-color: rgba(255,255,255,0.12);
-}
-
-body.dark .content-store h3{
-  color: #ddd;
-}
-body.dark .fix-list li{
-  color: #bbb;
-}
-
-/* Scrollbar ទាំងមូល */
-body.dark ::-webkit-scrollbar {
-  width: 8px;
-}
-
-/* ផ្ទៃខាងក្រោយ scrollbar */
-body.dark ::-webkit-scrollbar-track {
-  background: #ffffff00;
-}
-
-/* ដំបងអូស (thumb) */
-body.dark ::-webkit-scrollbar-thumb {
-  background: #464646;
-  border-radius: 10px;
-}
-
-/* ពេល hover */
-body.dark ::-webkit-scrollbar-thumb:hover {
-  background: #333333;
-}
-
-/* Scrollbar width */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-/* Track (background) */
-::-webkit-scrollbar-track {
-  background: #ffffff00;   /* ប្តូរពណ៍ផ្ទៃក្រោយ */
-}
-
 /* Thumb (the scroll handle) */
 ::-webkit-scrollbar-thumb {
   background: #b9b9b9;      /* ពណ៍ scrollbar */
   border-radius: 10px;
 }
 
-
-/* Tab3 */
+/* Tab3//////////////////////////////////////////////////////////////////////////////////////////////// */
 .text-tab3 p{
   margin: 16px 0 10px;
-  font-family: 'khala battambang', sans-serif;
+  font-family: 'simple', sans-serif;
   font-size: 24px;
   text-align: center;
-  color: #8e8e8e;
+  color: #000000;
 }
 @media (max-width: 480px){
   .text-tab3 p{
     font-size: 19px;
+    font-family: 'simple', sans-serif;
     
-  }}
+  }
+  
+
+}
 
 /*តារាងតម្លៃ*/
 /* table (modern clean style) */
@@ -985,7 +944,7 @@ body.dark ::-webkit-scrollbar-thumb:hover {
   width: 100%;
   max-width: 640px;
   border-collapse: collapse;
-  font-family: 'khala battambang', system-ui, sans-serif;
+  font-family: 'simple', sans-serif;
   font-size: 15.5px;
   background: #f9fafb;
   border-radius: 14px;
@@ -1010,44 +969,8 @@ body.dark ::-webkit-scrollbar-thumb:hover {
 .simple-info-table td:last-child {
   width: 60%;
   color: #111827;
-  font-family: 'Khala battambang';
+  font-family: 'simple', sans-serif;
 }
-
-/* dark mode */
-body.dark .simple-info-table {
-  background: #1f1f1f;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
-}
-body.dark .simple-info-table tr {
-  border-bottom-color: rgba(255,255,255,0.08);
-}
-body.dark .simple-info-table tr:hover {
-  background: #2a2a2a;
-}
-body.dark .simple-info-table td:first-child {
-  background: #151515;
-  color: #eaeaea;
-}
-body.dark .simple-info-table td:last-child {
-  color: #cfcfcf;
-}
-
-/*home css*/
-@font-face {
-  font-family: 'Khala Bold';
-  src: url('SF-Pro-Text-Bold.otf') format('true-type');
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Khala Regular';
-  src: url('SF-Pro-Text-Regular.otf') format('true-type');
-  font-style: normal;
-}
-
-/* =========================== Home Promo Layout (removed home panel-related layout from CSS)
-   Note: All home-specific layout blocks were removed to fully strip the home section.
-   The rest of the stylesheet (store/service/product sheet) remains intact.
-*/
 
 /* =========================== Footer (Dark Mode Default) =========================== */
 .site-footer {
@@ -1160,6 +1083,11 @@ body.dark .simple-info-table td:last-child {
   object-fit: contain;
 }
 
+.Home-content img{
+    width: 40%;
+    border-radius: 15px;
+  }
+
 /* Mobile tweak: slightly smaller on small screens */
 @media (max-width: 480px) {
   .mode-toggle {
@@ -1171,6 +1099,11 @@ body.dark .simple-info-table td:last-child {
   .mode-toggle img {
     width: 22px;
     height: 22px;
+  }
+
+  .Home-content img{
+    width: 100%;
+    border-radius: 15px;
   }
 }
 
@@ -1208,19 +1141,6 @@ html.color-transition * {
 /* =========================
    HOME PANEL (Simple + easy to update)
    ========================= */
-#home .home-wrap{
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 16px;
-}
-
-.home-wrap img{
-  width: 50%;
-  height: auto;
-  border-radius: 14px;
-  object-fit: cover;
-  display: block;
-}
 
 .home-hero{
   margin-top: 12px;
@@ -1252,7 +1172,7 @@ html.color-transition * {
 
 .home-lead{
   margin: 0 0 14px;
-  font-family: 'khala battambang', system-ui, sans-serif;
+  font-family: 'simple', sans-serif;
   font-size: 15.5px;
   line-height: 1.75;
   color: #374151;
@@ -1420,22 +1340,6 @@ html.color-transition * {
 
 .home-bottom-space{ height: 18px; }
 
-/* Dark mode support */
-body.dark #home .home-hero,
-body.dark #home .home-faq,
-body.dark #home .home-box{
-  background: rgba(20,20,20,0.65);
-  border-color: rgba(255,255,255,0.10);
-  box-shadow: none;
-}
-body.dark #home .home-hero-text h1,
-body.dark #home .home-card h3,
-body.dark #home .home-box h4,
-body.dark #home .home-faq h3,
-body.dark #
-
-
-
 /* =========================
    HOME (Service Cards - Fullscreen Desktop)
    ========================= */
@@ -1499,23 +1403,6 @@ body.dark #
   line-height: 1.7;
 }
 
-/* Dark mode */
-body.dark #home .home-wrap.home-full,
-body.dark .home-card-link,
-body.dark .home-tip{
-  background: rgba(20,20,20,0.60);
-  border-color: rgba(255,255,255,0.10);
-  box-shadow: none;
-}
-body.dark .home-services-head h1,
-body.dark .home-card-body h3{ color: #e5e7eb; }
-body.dark .home-services-head p,
-body.dark .home-card-body p,
-body.dark .home-tip{ color: #cbd5e1; }
-body.dark .home-card-cta{
-  background: rgba(37, 99, 235, 0.22);
-  color: #93c5fd;
-}
 
 /* Responsive */
 @media (max-width: 900px){
@@ -1523,6 +1410,7 @@ body.dark .home-card-cta{
   .home-cards{ grid-template-columns: 1fr; }
   .home-card-link{ grid-template-rows: 200px 1fr; }
   .home-services-head h1{ font-size: 28px; }
+
 }
 
 /* =========================
@@ -1779,9 +1667,6 @@ body.dark .web-tags span{ background: rgba(37, 99, 235, 0.22); border-color: rgb
 
 
 /* === SEARCH SECTION (HOME) === */
-.home-search-section {
-  
-}
 
 .search-container {
   margin-bottom: 5px;
