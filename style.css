@@ -177,7 +177,7 @@ tool-btn:hover {
   color: #6e6e6e;
 }
 .info p {
-  font-size: 17px;
+  font-size: 16px;
   font-family: 'simple', sans-serif;
   color: #6e6e6e;
   margin: 0 0 5px;
@@ -422,7 +422,7 @@ service-banner img {
   }
 
   .info p {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .info span {
