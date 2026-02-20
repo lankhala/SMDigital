@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "Ai GPTs គ្រប់ Model",
         "GPT-5 (thinking, fast, auto)",
         "ល្បឿនធ្វើការលឿនជាងធម្មតា x3ដង",
-        "ប្រើលើទូរស័ព្ទ ឬកុំព្យូទ័រ"
+        "ប្រើលើទូ��ស័ព្ទ ឬកុំព្យូទ័រ"
       ],
     },
     "windows_11_pro": {
@@ -146,33 +146,28 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // ============================================
-  // PANEL SWITCHING LOGIC
+  // PANEL SWITCHING (ប្តូរភ្លាមៗ រហ័សបំផុត)
   // ============================================
   const buttons = document.querySelectorAll(".tool-btn");
   const panels = document.querySelectorAll(".panel");
-  const panelOverlay = document.getElementById("panelOverlay");
 
   function showPanel(panelId) {
-    if (!panelId) return;
-    if (!document.getElementById(panelId)) return;
+    if (!panelId || !document.getElementById(panelId)) return;
 
-    if (panelOverlay) panelOverlay.classList.add("active");
+    const currentPanel = document.querySelector(".panel.active");
+    if (currentPanel && currentPanel.id === panelId) return;
 
-    setTimeout(() => {
-      panels.forEach((panel) => {
-        panel.classList.toggle("active", panel.id === panelId);
-      });
+    // ប្តូរភ្លាមៗ (ស្វាប់ + បង្ហាញ)
+    panels.forEach((panel) => {
+      panel.classList.toggle("active", panel.id === panelId);
+    });
 
-      buttons.forEach((btn) => {
-        const id = btn.dataset.panel;
-        btn.classList.toggle("active", id === panelId);
-      });
+    buttons.forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.panel === panelId);
+    });
 
-      if (panelOverlay) panelOverlay.classList.remove("active");
-
-      sessionStorage.setItem("lastPanel", panelId);
-      sessionStorage.setItem("lastScroll", window.scrollY);
-    }, 0);
+    sessionStorage.setItem("lastPanel", panelId);
+    sessionStorage.setItem("lastScroll", window.scrollY);
   }
 
   window.showPanel = showPanel;
@@ -202,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Keyboard navigation for home cards
+  // Keyboard navigation
   document.querySelectorAll(".home-card-link[role='button']").forEach((card) => {
     card.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
@@ -212,7 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Restore last panel + scroll position
+  // Restore last panel
   const lastPanel = sessionStorage.getItem("lastPanel");
   const lastScroll = sessionStorage.getItem("lastScroll");
 
@@ -256,7 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showPanel("store");
         setTimeout(() => {
           openSheet(appId);
-        }, 150);
+        }, 50);
       });
 
       card.addEventListener("keydown", (e) => {
@@ -327,7 +322,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ============================================
-  // RANDOM BANNER (SERVICE PANEL)
+  // RANDOM BANNER
   // ============================================
   const bannerImg = document.getElementById("randomBanner");
   if (bannerImg) {
@@ -337,7 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ============================================
-  // PRODUCT MODAL (SHEET)
+  // PRODUCT MODAL
   // ============================================
   const productModal = document.getElementById("productModal");
   const pmContent = document.getElementById("pmContent");
@@ -348,6 +343,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const h = headerEl ? headerEl.offsetHeight : 50;
     document.documentElement.style.setProperty("--header-h", `${h}px`);
   }
+
   setHeaderH();
   window.addEventListener("resize", setHeaderH);
 
@@ -461,7 +457,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ============================================
-  // DARK / LIGHT MODE TOGGLE
+  // DARK / LIGHT MODE
   // ============================================
   const modeBtn = document.getElementById('modeToggle');
 
@@ -507,16 +503,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ============================================
-  // SCROLL TO TOP BUTTON VISIBILITY
+  // SCROLL TO TOP
   // ============================================
   const scrollBtn = document.querySelector(".scroll-to-top");
   if (scrollBtn) {
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
-        scrollBtn.style.display = "flex";
-      } else {
-        scrollBtn.style.display = "none";
-      }
+      scrollBtn.style.display = window.scrollY > 300 ? "flex" : "none";
     });
 
     scrollBtn.addEventListener("click", () => {
