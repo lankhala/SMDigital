@@ -76,7 +76,7 @@ header {
   position: relative;
 }
 tool-btn:hover {
-   filter: brightness(0) saturate(100%) invert(32%) sepia(90%) saturate(600%) hue-rotate(190deg) brightness(105%) contrast(95%);
+   filter: brightness(0) saturate(100%) invert(32%) sepia(100%) saturate(1300%) hue-rotate(190deg) brightness(105%) contrast(195%);
 }
 
 .tool-btn img {
@@ -87,7 +87,7 @@ tool-btn:hover {
 }
 
 .tool-btn.active img {
-  filter: brightness(0) saturate(100%) invert(32%) sepia(90%) saturate(600%) hue-rotate(190deg) brightness(105%) contrast(95%);
+  filter: brightness(0) saturate(100%) invert(32%) sepia(100%) saturate(1300%) hue-rotate(190deg) brightness(105%) contrast(195%);
 }
 
 .tool-btn::after {
@@ -97,7 +97,7 @@ tool-btn:hover {
   left: 50%;
   width: 0;
   height: 3px;
-  background-color: #1877f2;
+  background-color:#009dff;
   border-radius: 2px;
   transition: all 0.3s ease;
   transform: translateX(-50%);
@@ -1085,10 +1085,17 @@ body.dark .content-store p{
   border: none;
   object-fit: contain;
 }
-
+.Home-content {
+    margin-top: 55px;
+  }
 .Home-content img{
     width: 40%;
     border-radius: 15px;
+  }
+
+  .Home-content p{
+    font-family: 'khala mid', sans-serif;
+    color: #6e6e6e;
   }
 
 /* Mobile tweak: slightly smaller on small screens */
